@@ -1,0 +1,72 @@
+This is BibTeX, Version 0.99d
+Capacity: max_strings=200000, hash_size=200000, hash_prime=170003
+The top-level auxiliary file: main.aux
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+The style file: biblatex.bst
+Reallocating 'name_of_file' (item size: 1) to 9 items.
+Reallocating 'name_of_file' (item size: 1) to 7 items.
+Reallocating 'glb_str_end' (item size: 4) to 20 items.
+Reallocating 'glb_str_ptr' (item size: 4) to 20 items.
+Reallocating 'global_strs' (item size: 1) to 4000000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'wiz_functions' (item size: 4) to 6000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+Database file #1: main-blx.bib
+Database file #2: biblio.bib
+Warning--I didn't find a database entry for "bib:paszke2019pytorch"
+Warning--I didn't find a database entry for "paszke2019pytorch"
+Warning--I didn't find a database entry for "redmon2016yolo"
+Biblatex version: 3.19
+Reallocating 'wiz_functions' (item size: 4) to 9000 items.
+Reallocating 'singl_function' (item size: 4) to 100 items.
+You've used 3 entries,
+            6399 wiz_defined-function locations,
+            1221 strings with 9598 characters,
+and the built_in function-call counts, 22450 in all, are:
+= -- 1821
+> -- 359
+< -- 69
++ -- 681
+- -- 167
+* -- 1705
+:= -- 2876
+add.period$ -- 0
+call.type$ -- 3
+change.case$ -- 19
+chr.to.int$ -- 44
+cite$ -- 4
+duplicate$ -- 2076
+empty$ -- 1860
+format.name$ -- 179
+if$ -- 4491
+int.to.chr$ -- 0
+int.to.str$ -- 4
+missing$ -- 0
+newline$ -- 100
+num.names$ -- 82
+pop$ -- 805
+preamble$ -- 1
+purify$ -- 35
+quote$ -- 0
+skip$ -- 465
+stack$ -- 0
+substring$ -- 3618
+swap$ -- 349
+text.length$ -- 93
+text.prefix$ -- 2
+top$ -- 1
+type$ -- 90
+warning$ -- 0
+while$ -- 353
+width$ -- 0
+write$ -- 98
+(There were 3 warnings)
