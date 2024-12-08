@@ -22,51 +22,47 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Database file #1: main-blx.bib
 Database file #2: biblio.bib
-Warning--I didn't find a database entry for "bib:paszke2019pytorch"
-Warning--I didn't find a database entry for "paszke2019pytorch"
-Warning--I didn't find a database entry for "redmon2016yolo"
 Biblatex version: 3.19
 Reallocating 'wiz_functions' (item size: 4) to 9000 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
-You've used 3 entries,
+You've used 6 entries,
             6399 wiz_defined-function locations,
-            1221 strings with 9598 characters,
-and the built_in function-call counts, 22450 in all, are:
-= -- 1821
-> -- 359
-< -- 69
-+ -- 681
-- -- 167
-* -- 1705
-:= -- 2876
+            1239 strings with 10161 characters,
+and the built_in function-call counts, 49100 in all, are:
+= -- 3973
+> -- 751
+< -- 173
++ -- 1484
+- -- 336
+* -- 3760
+:= -- 5995
 add.period$ -- 0
-call.type$ -- 3
-change.case$ -- 19
+call.type$ -- 6
+change.case$ -- 52
 chr.to.int$ -- 44
-cite$ -- 4
-duplicate$ -- 2076
-empty$ -- 1860
-format.name$ -- 179
-if$ -- 4491
+cite$ -- 10
+duplicate$ -- 4873
+empty$ -- 4098
+format.name$ -- 426
+if$ -- 9816
 int.to.chr$ -- 0
-int.to.str$ -- 4
+int.to.str$ -- 11
 missing$ -- 0
-newline$ -- 100
-num.names$ -- 82
-pop$ -- 805
+newline$ -- 205
+num.names$ -- 212
+pop$ -- 1916
 preamble$ -- 1
-purify$ -- 35
+purify$ -- 89
 quote$ -- 0
-skip$ -- 465
+skip$ -- 1040
 stack$ -- 0
-substring$ -- 3618
-swap$ -- 349
-text.length$ -- 93
-text.prefix$ -- 2
+substring$ -- 7655
+swap$ -- 843
+text.length$ -- 200
+text.prefix$ -- 6
 top$ -- 1
-type$ -- 90
+type$ -- 192
 warning$ -- 0
-while$ -- 353
+while$ -- 732
 width$ -- 0
-write$ -- 98
-(There were 3 warnings)
+write$ -- 200

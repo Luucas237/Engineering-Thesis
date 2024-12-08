@@ -581,7 +581,7 @@ W ramach niniejszej pracy autor:
 
 
 % TODO
-\chapter{[Analiza tematu]}
+\chapter{Analiza tematu i przegląd literatury}
 
 \label{ch:analiza}
 
@@ -623,15 +623,80 @@ Systemy wizyjne oparte na YOLO są wykorzystywane w projektach przemysłowych i 
 \section{Studia literaturowe i znane rozwiązania}
 W literaturze naukowej można znaleźć liczne prace dotyczące implementacji systemów wizyjnych w robotyce mobilnej. W niniejszym rozdziale przytoczono przykłady wybranych badań.
 
-%\subsection{Przykład naukowy 1}
-%\textbf{Tytuł:} "Deep Learning for Vision-Based Navigation in Mobile Robots".\\
-%\textbf{Streszczenie:} W pracy przedstawiono wykorzystanie algorytmu YOLO do nawigacji robotów mobilnych w środowiskach wewnętrznych. Analizowano skuteczność detekcji obiektów oraz ich śledzenia w czasie rzeczywistym. Wyniki wskazują na wysoką dokładność w stabilnych warunkach oświetleniowych, przy jednoczesnych wyzwaniach związanych z ograniczoną mocą obliczeniową platform.\\
-%\textbf{Cytowanie:} \cite{bib:artykul}
+\subsection{System programowania i sterowania robota mobilnego}
 
-%\subsection{Przykład naukowy 2}
-%\textbf{Tytuł:} "Real-Time Object Detection for Mobile Robots Using Raspberry Pi and OpenCV".\\
-%\textbf{Streszczenie:} W pracy opisano implementację prostego systemu detekcji obiektów na platformie Raspberry Pi z wykorzystaniem OpenCV. Autorzy wskazali, że odpowiednia optymalizacja algorytmów umożliwia osiągnięcie zadowalającej wydajności przy niskiej rozdzielczości obrazu.\\
-%\textbf{Cytowanie:} \cite{bib:konferencja}
+W pracy \cite{bib:mikekus2014system} prof. dr hab. inż. Krzysztof Kozłowski i współautorzy przedstawili koncepcję oraz realizację modułowego robota mobilnego, zaprojektowanego do zastosowań transportowych w zamkniętych środowiskach. Celem projektu było opracowanie systemu programowania i sterowania, uwzględniającego wymogi bezpieczeństwa oraz przyjaznego interfejsu użytkownika.
+
+\textbf{Cel systemu:}
+Robot został zaprojektowany jako urządzenie transportowe o nośności do 120 kg, dedykowane do przewozu ładunków w pomieszczeniach zamkniętych. Wymagania projektowe obejmowały:
+\begin{itemize}
+    \item Modułową budowę, umożliwiającą integrację różnych podsystemów.
+    \item Zapewnienie bezpieczeństwa użytkowania dzięki systemowi zderzaków i czujników.
+    \item Możliwość programowania trasy przejazdu za pomocą przyjaznego interfejsu.
+\end{itemize}
+
+\textbf{Metodologia:}
+Autorzy zastosowali klasyczny model pojazdu dwukołowego z napędem różnicowym oraz pasywnym kołem podporowym. System sterowania oparto na komputerze pokładowym klasy PC oraz dedykowanym oprogramowaniu zbudowanym w architekturze klient-serwer. Wprowadzono język programowania LeoOS Programming Language (LPL), który umożliwia definiowanie trajektorii ruchu robota za pomocą punktów referencyjnych.
+
+\textbf{Wyniki:}
+Robot został wyposażony w zaawansowane systemy sensoryczne, w tym skaner laserowy oraz sieć sensorów ultradźwiękowych i podczerwieni. Wyniki eksperymentalne wskazują na wysoką precyzję sterowania oraz elastyczność w realizacji zadań, takich jak:
+\begin{itemize}
+    \item Dokowanie do źródła zasilania.
+    \item Transport ładunków przy pomocy zautomatyzowanego zaczepu.
+    \item Nawigacja w otoczeniu z przeszkodami.
+\end{itemize}
+
+\textbf{Wnioski:}
+Praca autorów pokazuje potencjał zastosowania modularnych systemów sterowania w robotyce mobilnej, szczególnie w środowiskach o dużych wymaganiach bezpieczeństwa. Implementacja języka LPL oraz architektury modułowej zwiększa elastyczność i efektywność systemu, jednocześnie otwierając drogę do dalszego rozwoju.
+
+\subsection{Aktywny system wizyjny dla robota kroczącego}
+
+W pracy \cite{bib:labkecki2009aktywny} mgr inż. Przemysław Łabęcki i Dr hab. inż. Andrzej Kasiński przedstawili aktywny system wizyjny, zaprojektowany z myślą o implementacji w robotach kroczących. System ten opierał się na połączeniu kamery oraz oświetlacza laserowego, którego zadaniem było rzutowanie światła na otoczenie w celu pozyskania informacji o geometrii przestrzeni.
+
+\textbf{Cel systemu:}
+Głównym celem opisanego systemu było zapewnienie robotowi informacji 3D o przestrzeni znajdującej się bezpośrednio przed nim, co umożliwiało zarówno nawigację, jak i detekcję przeszkód.
+
+\textbf{Metodologia:}
+- Zastosowano arkusz świetlny emitowany przez laser, a jego ślad rejestrowany był przez kamerę.
+- Opracowano matematyczny model układu, definiujący relacje geometryczne między kamerą, oświetlaczem i otoczeniem.
+- Przeprowadzono kalibrację systemu, aby dokładnie określić parametry układu, takie jak kąty widzenia kamery i położenie głównych punktów odniesienia.
+- Do detekcji śladu wiązki lasera na obrazie wykorzystano techniki przetwarzania obrazu w przestrzeni barw HSV.
+
+\textbf{Wyniki:}
+- System pozwalał na odwzorowanie geometrii otoczenia z błędem względnym nieprzekraczającym 5\%.
+- Przeprowadzono eksperymenty z obiektami znajdującymi się w różnych odległościach od kamery, wykazując wysoką dokładność w pomiarach wymiarów geometrycznych.
+- System sprawdził się jako dalmierz i narzędzie do tworzenia mapy przestrzeni 3D, co było szczególnie przydatne w planowaniu ruchu robota kroczącego.
+
+\textbf{Wnioski:}
+Wyniki badań potwierdzają przydatność aktywnych systemów wizyjnych w robotyce mobilnej, szczególnie w warunkach wymagających precyzyjnych pomiarów odległości i analizy przestrzeni. Rozwiązanie to cechuje niski koszt i możliwość integracji z systemami sterowania robotów.
+
+
+\subsection{System wspomagania nawigacji osób niewidomych}
+
+W artykule \cite{bib:parvadhavardhni2023blind} poświęconym konferencji ICAAIC dotyczącej sztucznej inteligencji i rozumowania maszynowego (ang. \textit{Applied Artificial Intelligence and Computing (ICAAIC)}) autorzy przedstawili system wspomagający nawigację osób niewidomych, wykorzystujący platformę Raspberry Pi oraz algorytm YOLO do detekcji obiektów. Głównym celem systemu jest ułatwienie osobom z dysfunkcją wzroku poruszania się w codziennym otoczeniu poprzez identyfikację i lokalizację przeszkód w czasie rzeczywistym.
+
+\textbf{Komponenty systemu:}
+\begin{itemize}
+    \item \textbf{Raspberry Pi:} Platforma obliczeniowa, na której uruchomiono algorytm YOLO i przetwarzanie danych z kamery.
+    \item \textbf{Algorytm YOLO (ang. \textit{You Only Look Once}):} Szybkie i dokładne wykrywanie obiektów w obrazie w czasie rzeczywistym.
+    \item \textbf{Moduł kamery:} Rejestruje obraz otoczenia, który jest analizowany przez system.
+    \item \textbf{Interfejs użytkownika:} Przekazuje informacje zwrotne w formie dźwiękowej lub wibracyjnej, informując użytkownika o wykrytych przeszkodach.
+\end{itemize}
+
+\textbf{Działanie systemu:}
+System analizuje obraz z kamery w czasie rzeczywistym, identyfikuje obiekty znajdujące się na drodze użytkownika i dostarcza odpowiednie informacje zwrotne. Użytkownik jest w ten sposób ostrzegany o przeszkodach, co umożliwia unikanie kolizji i bezpieczne poruszanie się.
+
+\textbf{Zalety rozwiązania:}
+\begin{itemize}
+    \item \textbf{Niski koszt:} Wykorzystanie Raspberry Pi oraz otwartoźródłowego oprogramowania czyni system przystępnym cenowo.
+    \item \textbf{Mobilność:} Kompaktowe komponenty pozwalają na łatwe przenoszenie oraz integrację z akcesoriami, takimi jak laska dla niewidomych.
+    \item \textbf{Skalowalność:} Możliwość rozbudowy systemu o dodatkowe funkcje, np. rozpoznawanie znaków drogowych lub sygnalizacji świetlnej.
+\end{itemize}
+
+\textbf{Wnioski:}
+Przedstawiony system stanowi obiecujące narzędzie wspierające osoby niewidome w samodzielnym poruszaniu się, zwiększając ich bezpieczeństwo i komfort życia. Integracja technologii, takich jak Raspberry Pi oraz algorytmy głębokiego uczenia, umożliwia tworzenie efektywnych i dostępnych rozwiązań wspomagających nawigację.
+
+
 
 %\subsection{Znane rozwiązania praktyczne}
 %\textbf{Przykład:} Autonomiczne wózki AGV w magazynach Amazon.\\
@@ -751,12 +816,12 @@ Proces przygotowania danych w Roboflow składał się z następujących etapów:
 \section{PyTorch}
 PyTorch to jedna z bardziej popularnych bibliotek uczenia maszynowego, opracowanej przez Meta AI i obecnie wspieraną przez PyTorch Foundation. Biblioteka została zaprojektowana z myślą o intuicyjności, wydajności i elastyczności.
 
-\paragraph{Główne cechy PyTorch}
-\begin{itemize}
-    \item \textbf{Dynamiczne grafy obliczeniowe}: Dzięki dynamicznemu budowaniu grafów obliczeniowych, PyTorch pozwala na elastyczne definiowanie i modyfikowanie modeli w trakcie ich działania \cite{bib:paszke2019pytorch}.
-    \item \textbf{Obliczenia tensorowe z akceleracją GPU}: Biblioteka zapewnia wsparcie dla obliczeń tensorowych z wykorzystaniem GPU, co umożliwia szybkie przetwarzanie dużych zbiorów danych \cite{paszke2019pytorch}.
-    \item \textbf{Wsparcie dla głębokich sieci neuronowych}: Moduł \texttt{torch.nn} ułatwia definiowanie i trenowanie złożonych modeli głębokiego uczenia.
-\end{itemize}
+%%\paragraph{Główne cechy PyTorch}
+%%\begin{itemize}
+%%    \item \textbf{Dynamiczne grafy obliczeniowe}: Dzięki dynamicznemu budowaniu grafów obliczeniowych, PyTorch pozwala na elastyczne definiowanie i modyfikowanie modeli w trakcie ich działania \cite{bib:paszke2019pytorch}.
+%%    \item \textbf{Obliczenia tensorowe z akceleracją GPU}: Biblioteka zapewnia wsparcie dla obliczeń tensorowych z wykorzystaniem GPU, co umożliwia szybkie przetwarzanie dużych zbiorów danych \cite{paszke2019pytorch}.
+%%    \item \textbf{Wsparcie dla głębokich sieci neuronowych}: Moduł \texttt{torch.nn} ułatwia definiowanie i trenowanie złożonych modeli głębokiego uczenia.
+%%\end{itemize}
 
 \paragraph{Zastosowania PyTorch}
 PyTorch jest szeroko wykorzystywany zarówno w badaniach naukowych, jak i w przemyśle. Do jego głównych zastosowań należą:
@@ -776,7 +841,7 @@ Dzięki intuicyjności, wszechstronności i wysokiej wydajności, PyTorch stał 
 
 %%%% Algorytm YOLO %%%%%
 \subsection{Algorytm YOLO}
-Algorytm YOLO (\textit{You Only Look Once}) został zaprojektowany jako zintegrowany system detekcji obiektów w czasie rzeczywistym, przekształcając problem detekcji w zadanie regresji. YOLO stosuje jedną sieć neuronową do analizy całego obrazu i równoczesnego przewidywania współrzędnych ramek ograniczających oraz klas obiektów \cite{redmon2016yolo}.
+%%Algorytm YOLO (\textit{You Only Look Once}) został zaprojektowany jako zintegrowany system detekcji obiektów w czasie rzeczywistym, przekształcając problem detekcji w zadanie regresji. YOLO stosuje jedną sieć neuronową do analizy całego obrazu i równoczesnego przewidywania współrzędnych ramek ograniczających oraz klas obiektów \cite{redmon2016yolo}.
 
 \paragraph{Założenia projektowe}
 Model YOLO dzieli obraz na siatkę \( S \times S \), gdzie każda komórka siatki przewiduje:

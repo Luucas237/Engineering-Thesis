@@ -1,10 +1,10 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.5.26)  7 DEC 2024 18:30
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.5.26)  8 DEC 2024 12:06
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**"c:/Users/obiwa/Desktop/Studia/Inzynierka/Inzynierkav2/Praca InÅ¼ynierska/polsl-aei-theses-main/polsl-aei-theses-main/szablony-polskie/szablon-inz-latex/single-file/Engineering-Thesis/main.tex"
-(c:/Users/obiwa/Desktop/Studia/Inzynierka/Inzynierkav2/Praca InÅ¼ynierska/polsl-aei-theses-main/polsl-aei-theses-main/szablony-polskie/szablon-inz-latex/single-file/Engineering-Thesis/main.tex
+**c:/Users/obiwa/Desktop/Studia/Inzynierka/Engineering-Thesis/main.tex
+(c:/Users/obiwa/Desktop/Studia/Inzynierka/Engineering-Thesis/main.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
 (C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex/latex/base\book.cls
@@ -1114,7 +1114,7 @@ LaTeX Font Info:    Trying to load font information for T1+lmss on input line 41
  (C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-<politechnika_sl_logo_bw_pion_pl.pdf, id=130, 179.67125pt x 230.8625pt>
+<politechnika_sl_logo_bw_pion_pl.pdf, id=142, 179.67125pt x 230.8625pt>
 File: politechnika_sl_logo_bw_pion_pl.pdf Graphic file (type pdf)
 <use politechnika_sl_logo_bw_pion_pl.pdf>
 Package pdftex.def Info: politechnika_sl_logo_bw_pion_pl.pdf  used on input line 416.
@@ -1219,7 +1219,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[7{C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
+[7]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1227,37 +1227,53 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[8
+[8]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[9{C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathit.enc}{C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-rm.enc}]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[10
 
 ]
 Rozdzia\l  3.
-[9]
-<Images/Roboflow/mainscreen.png, id=245, 1425.07407pt x 715.92468pt>
+[11]
+<Images/Roboflow/mainscreen.png, id=275, 1425.07407pt x 715.92468pt>
 File: Images/Roboflow/mainscreen.png Graphic file (type png)
 <use Images/Roboflow/mainscreen.png>
-Package pdftex.def Info: Images/Roboflow/mainscreen.png  used on input line 714.
+Package pdftex.def Info: Images/Roboflow/mainscreen.png  used on input line 779.
 (pdftex.def)             Requested size: 455.24411pt x 228.69638pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-<Images/Roboflow/labeling1.png, id=247, 1437.11906pt x 718.93594pt>
+<Images/Roboflow/labeling1.png, id=277, 1437.11906pt x 718.93594pt>
 File: Images/Roboflow/labeling1.png Graphic file (type png)
 <use Images/Roboflow/labeling1.png>
-Package pdftex.def Info: Images/Roboflow/labeling1.png  used on input line 725.
+Package pdftex.def Info: Images/Roboflow/labeling1.png  used on input line 790.
 (pdftex.def)             Requested size: 455.24411pt x 227.73854pt.
-<Images/Roboflow/labeling2.png, id=248, 1437.11906pt x 718.18312pt>
+<Images/Roboflow/labeling2.png, id=278, 1437.11906pt x 718.18312pt>
 File: Images/Roboflow/labeling2.png Graphic file (type png)
 <use Images/Roboflow/labeling2.png>
-Package pdftex.def Info: Images/Roboflow/labeling2.png  used on input line 732.
+Package pdftex.def Info: Images/Roboflow/labeling2.png  used on input line 797.
 (pdftex.def)             Requested size: 455.24411pt x 227.50008pt.
-<Images/Roboflow/labeling3.png, id=249, 1430.34375pt x 715.17188pt>
+<Images/Roboflow/labeling3.png, id=279, 1430.34375pt x 715.17188pt>
 File: Images/Roboflow/labeling3.png Graphic file (type png)
 <use Images/Roboflow/labeling3.png>
-Package pdftex.def Info: Images/Roboflow/labeling3.png  used on input line 739.
+Package pdftex.def Info: Images/Roboflow/labeling3.png  used on input line 804.
 (pdftex.def)             Requested size: 455.24411pt x 227.61563pt.
 
-LaTeX Warning: Float too large for page by 65.37112pt on input line 746.
+LaTeX Warning: Float too large for page by 65.37112pt on input line 811.
 
 
 LaTeX Warning: `!h' float specifier changed to `!ht'.
@@ -1269,17 +1285,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[10]
-
-LaTeX Warning: Citation 'bib:paszke2019pytorch' on page 11 undefined on input line 756.
-
-
-LaTeX Warning: Citation 'paszke2019pytorch' on page 11 undefined on input line 757.
-
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 758.
-(C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
+[12]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1287,15 +1293,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[11 <./Images/Roboflow/mainscreen.png>]
-
-LaTeX Warning: Citation 'redmon2016yolo' on page 12 undefined on input line 779.
-
-
-Overfull \hbox (19.20332pt too wide) in paragraph at lines 779--780
-\T1/lmr/m/n/12 prze-wi-dy-wa-nia wspóª-rz¦d-nych ra-mek ogra-ni-cza-j¡-cych oraz klas obiek-tów [[]]. 
- []
-
+[13 <./Images/Roboflow/mainscreen.png>]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1303,7 +1301,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[12{C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
+[14{C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-mathsy.enc}]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1311,7 +1309,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[13]
+[15 <./Images/Roboflow/labeling1.png> <./Images/Roboflow/labeling2.png> <./Images/Roboflow/labeling3.png>]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1319,23 +1317,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[14 <./Images/Roboflow/labeling1.png> <./Images/Roboflow/labeling2.png> <./Images/Roboflow/labeling3.png>]
+[16
+
+]
 Rozdzia\l  4.
-[15
-
-]
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 14.49998pt, for example:
-(fancyhdr)                \setlength{\headheight}{14.49998pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
-
-[16]
-Rozdzia\l  5.
-[17
-
-]
+[17]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1344,8 +1330,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [18]
-Rozdzia\l  6.
-[19
+Rozdzia\l  5.
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 991.
+(C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+) [19
 
 ]
 
@@ -1356,7 +1345,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [20]
-Rozdzia\l  7.
+Rozdzia\l  6.
 [21
 
 ]
@@ -1367,9 +1356,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[22
-
-] [23
+[22]
+Rozdzia\l  7.
+[23
 
 ]
 
@@ -1381,7 +1370,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [24
 
-] [25] [26] [27
+] [25
 
 ]
 
@@ -1391,9 +1380,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[28
+[26
 
-] [29]
+] [27] [28] [29
+
+]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1403,12 +1394,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [30
 
-]
-Overfull \hbox (2.38579pt too wide) in paragraph at lines 1083--1084
-[]\T1/lmr/m/n/12 film po-ka-zu-j¡cy dzia-ªa-nie opra-co-wa-nego opro-gra-mo-wa-nia lub za-pro-jek-to-wa-nego i wy-
- []
-
-[31]
+] [31]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1418,11 +1404,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [32
 
-] (main.lof)
-\tf@lof=\write7
-\openout7 = `main.lof'.
+]
+Overfull \hbox (2.38579pt too wide) in paragraph at lines 1148--1149
+[]\T1/lmr/m/n/12 film po-ka-zu-j¡cy dzia-ªa-nie opra-co-wa-nego opro-gra-mo-wa-nia lub za-pro-jek-to-wa-nego i wy-
+ []
 
- [33]
+[33]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -1432,42 +1419,47 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 [34
 
+] (main.lof)
+\tf@lof=\write7
+\openout7 = `main.lof'.
+
+ [35]
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 14.49998pt, for example:
+(fancyhdr)                \setlength{\headheight}{14.49998pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+(fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
+
+[36
+
 ] (main.lot)
 \tf@lot=\write8
 \openout8 = `main.lot'.
 
- [35] (main.aux)
+ [37] (main.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
-
-
-LaTeX Warning: There were undefined references.
-
 Package rerunfilecheck Info: File `main.out' has not changed.
-(rerunfilecheck)             Checksum: 61318E730569C496119F118060F9102A;5579.
-
-Package biblatex Warning: Please (re)run BibTeX on the file(s):
-(biblatex)                main
-(biblatex)                and rerun LaTeX afterwards.
-
+(rerunfilecheck)             Checksum: A222E1C08E3CC69EA1E59A44315DCDF6;6620.
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 45550 strings out of 474486
- 1009051 string characters out of 5743755
+ 45576 strings out of 474486
+ 1008371 string characters out of 5743755
  1997542 words of memory out of 5000000
- 67021 multiletter control sequences out of 15000+600000
- 625800 words of font info for 74 fonts, out of 8000000 for 9000
+ 67039 multiletter control sequences out of 15000+600000
+ 630071 words of font info for 75 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 84i,12n,93p,2056b,3492s stack positions out of 10000i,1000n,20000p,200000b,200000s
-<C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on main.pdf (41 pages, 2662762 bytes).
+ 84i,11n,93p,1931b,3492s stack positions out of 10000i,1000n,20000p,200000b,200000s
+<C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on main.pdf (43 pages, 2684863 bytes).
 PDF statistics:
- 504 PDF objects out of 1000 (max. 8388607)
- 117 named destinations out of 1000 (max. 500000)
- 286 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 539 PDF objects out of 1000 (max. 8388607)
+ 124 named destinations out of 1000 (max. 500000)
+ 310 words of extra memory for PDF output out of 10000 (max. 10000000)
 
