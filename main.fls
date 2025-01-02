@@ -496,43 +496,98 @@ INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ts1-lmr12
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-ts1.enc
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr12.tfm
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
-INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbxi10.tfm
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathit.enc
-INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
-INPUT .\Images\Roboflow\mainscreen.png
-INPUT .\Images\Roboflow\mainscreen.png
-INPUT .\Images\Roboflow\mainscreen.png
-INPUT .\Images\Roboflow\mainscreen.png
-INPUT .\Images\Roboflow\mainscreen.png
-INPUT .\Images\Roboflow\mainscreen.png
-INPUT .\Images\Roboflow\mainscreen.png
-INPUT .\Images\Roboflow\labeling1.png
-INPUT .\Images\Roboflow\labeling1.png
-INPUT .\Images\Roboflow\labeling1.png
-INPUT .\Images\Roboflow\labeling1.png
-INPUT .\Images\Roboflow\labeling1.png
-INPUT .\Images\Roboflow\labeling1.png
-INPUT .\Images\Roboflow\labeling1.png
-INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr10.tfm
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling3.png
-INPUT .\Images\Roboflow\labeling3.png
-INPUT .\Images\Roboflow\labeling3.png
-INPUT .\Images\Roboflow\labeling3.png
-INPUT .\Images\Roboflow\labeling3.png
-INPUT .\Images\Roboflow\labeling3.png
-INPUT .\Images\Roboflow\labeling3.png
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-mathsy.enc
+INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\enc\dvips\lm\lm-rm.enc
+INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbxi10.tfm
+INPUT .\Images\Roboflow\mainscreen.png
+INPUT .\Images\Roboflow\mainscreen.png
+INPUT .\Images\Roboflow\mainscreen.png
+INPUT .\Images\Roboflow\mainscreen.png
+INPUT .\Images\Roboflow\mainscreen.png
+INPUT .\Images\Roboflow\mainscreen.png
+INPUT .\Images\Roboflow\mainscreen.png
+INPUT .\Images\Roboflow\labeling1.png
+INPUT .\Images\Roboflow\labeling1.png
+INPUT .\Images\Roboflow\labeling1.png
+INPUT .\Images\Roboflow\labeling1.png
+INPUT .\Images\Roboflow\labeling1.png
+INPUT .\Images\Roboflow\labeling1.png
+INPUT .\Images\Roboflow\labeling1.png
+INPUT .\Images\Roboflow\labeling2.png
+INPUT .\Images\Roboflow\labeling2.png
+INPUT .\Images\Roboflow\labeling2.png
+INPUT .\Images\Roboflow\labeling2.png
+INPUT .\Images\Roboflow\labeling2.png
+INPUT .\Images\Roboflow\labeling2.png
+INPUT .\Images\Roboflow\labeling2.png
+INPUT .\Images\Roboflow\labeling3.png
+INPUT .\Images\Roboflow\labeling3.png
+INPUT .\Images\Roboflow\labeling3.png
+INPUT .\Images\Roboflow\labeling3.png
+INPUT .\Images\Roboflow\labeling3.png
+INPUT .\Images\Roboflow\labeling3.png
+INPUT .\Images\Roboflow\labeling3.png
+INPUT .\Images\Roboflow\poczatek uczenia.png
+INPUT .\Images\Roboflow\poczatek uczenia.png
+INPUT .\Images\Roboflow\poczatek uczenia.png
+INPUT .\Images\Roboflow\poczatek uczenia.png
+INPUT .\Images\Roboflow\poczatek uczenia.png
+INPUT .\Images\Roboflow\poczatek uczenia.png
+INPUT .\Images\Roboflow\poczatek uczenia.png
+INPUT .\Images\Roboflow\wykres2.png
+INPUT .\Images\Roboflow\wykres2.png
+INPUT .\Images\Roboflow\wykres2.png
+INPUT .\Images\Roboflow\wykres2.png
+INPUT .\Images\Roboflow\wykres2.png
+INPUT .\Images\Roboflow\wykres2.png
+INPUT .\Images\Roboflow\wykres2.png
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt12.tfm
+INPUT .\Images\Schemat blokowy\Engineering Thesis.png
+INPUT .\Images\Schemat blokowy\Engineering Thesis.png
+INPUT .\Images\Schemat blokowy\Engineering Thesis.png
+INPUT .\Images\Schemat blokowy\Engineering Thesis.png
+INPUT .\Images\Schemat blokowy\Engineering Thesis.png
+INPUT .\Images\Schemat blokowy\Engineering Thesis.png
+INPUT .\Images\Schemat blokowy\Engineering Thesis.png
+INPUT .\Images\Robot\Robot projekt.png
+INPUT .\Images\Robot\Robot projekt.png
+INPUT .\Images\Robot\Robot projekt.png
+INPUT .\Images\Robot\Robot projekt.png
+INPUT .\Images\Robot\Robot projekt.png
+INPUT .\Images\Robot\Robot projekt.png
+INPUT .\Images\Robot\Robot projekt.png
+INPUT .\Images\Robot\Robot piętra.png
+INPUT .\Images\Robot\Robot piętra.png
+INPUT .\Images\Robot\Robot piętra.png
+INPUT .\Images\Robot\Robot piętra.png
+INPUT .\Images\Robot\Robot piętra.png
+INPUT .\Images\Robot\Robot piętra.png
+INPUT .\Images\Robot\Robot piętra.png
+INPUT .\Images\Robot\Robot dół.png
+INPUT .\Images\Robot\Robot dół.png
+INPUT .\Images\Robot\Robot dół.png
+INPUT .\Images\Robot\Robot dół.png
+INPUT .\Images\Robot\Robot dół.png
+INPUT .\Images\Robot\Robot dół.png
+INPUT .\Images\Robot\Robot dół.png
+INPUT .\Images\Robot\Robot góra.png
+INPUT .\Images\Robot\Robot góra.png
+INPUT .\Images\Robot\Robot góra.png
+INPUT .\Images\Robot\Robot góra.png
+INPUT .\Images\Robot\Robot góra.png
+INPUT .\Images\Robot\Robot góra.png
+INPUT .\Images\Robot\Robot góra.png
+INPUT .\Images\Robot\Robot_gotowy.png
+INPUT .\Images\Robot\Robot_gotowy.png
+INPUT .\Images\Robot\Robot_gotowy.png
+INPUT .\Images\Robot\Robot_gotowy.png
+INPUT .\Images\Robot\Robot_gotowy.png
+INPUT .\Images\Robot\Robot_gotowy.png
+INPUT .\Images\Robot\Robot_gotowy.png
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr6.tfm
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmcsc10.tfm
 INPUT .\main.lof
@@ -556,8 +611,6 @@ INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmcsc10
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmcsc10.pfb
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmmi12.pfb
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmmi12.pfb
-INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr10.pfb
-INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr10.pfb
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr12.pfb
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr12.pfb
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmr6.pfb

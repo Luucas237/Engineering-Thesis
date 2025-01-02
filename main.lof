@@ -8,12 +8,21 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Widok strony głównej witryny Roboflow.}}{13}{figure.caption.8}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Proces użycia witryny Roboflow.}}{15}{figure.caption.9}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Widok strony głównej witryny Roboflow.}}{13}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Etykietowanie obiektów za pomocą witryny Roboflow.}}{13}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Obiekt po zetykietowaniu.}}{14}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Etykietowanie w słabym oświetleniu.}}{14}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Wykres pierwszych epok treningu.}}{15}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Wykres przebiegu treningu z zaistniałym spadkiem mAP.}}{16}{figure.caption.18}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Podpis rysunku po rysunkiem.}}{18}{figure.caption.15}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Schemat blokowy działania algorytmu pracy robota z systemem wizyjnym}}{20}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Projekt konstrukcji robota mobilnego wykonany w programie Autodesk Fusion.}}{23}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Podział konstrukcji na piętra.}}{23}{figure.caption.21}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Widok rzutu górnego na dolne piętro robota.}}{24}{figure.caption.22}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Widok rzutu górnego na górne piętro robota.}}{24}{figure.caption.23}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Gotowa konstrukcja robota mobilnego.}}{25}{figure.caption.24}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Pseudokod w \texttt {listings}.}}{20}{figure.caption.16}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Pseudokod w \texttt {listings}.}}{29}{figure.caption.25}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

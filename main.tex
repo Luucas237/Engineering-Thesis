@@ -612,6 +612,29 @@ Współczesne metody detekcji obiektów można podzielić na:
 \end{itemize}
 YOLO wyróżnia się szybkością działania oraz zdolnością do pracy na urządzeniach z ograniczoną mocą obliczeniową, takich jak Raspberry Pi.
 
+%%%% Algorytm YOLO %%%%%
+\subsection{Algorytm YOLO}
+Algorytm YOLO (\textit{You Only Look Once}) został zaprojektowany jako zintegrowany system detekcji obiektów w czasie rzeczywistym, przekształcając problem detekcji w zadanie regresji. YOLO stosuje jedną sieć neuronową do analizy całego obrazu i równoczesnego przewidywania współrzędnych ramek ograniczających oraz klas obiektów \cite{redmon2016yolo}.
+
+\paragraph{Założenia projektowe}
+Model YOLO dzieli obraz na siatkę \( S \times S \), gdzie każda komórka siatki przewiduje:
+\begin{itemize}
+    \item \( B \) ramek ograniczających (\textit{bounding boxes}) wraz z ich współrzędnymi \((x, y, w, h)\),
+    \item prawdopodobieństwo obecności obiektu w każdej ramce,
+    \item prawdopodobieństwo klasowe dla każdego obiektu.
+\end{itemize}
+Łączne przewidywania są zapisywane jako tensor o wymiarze \( S \times S \times (B \cdot 5 + C) \), gdzie \( C \) to liczba klas \cite{bib:redmon_yolo}.
+
+\paragraph{Architektura sieci YOLO}
+Sieć YOLO opiera się na warstwach konwolucyjnych, w których kluczowe znaczenie ma redukcja wymiarów za pomocą warstw \( 1 \times 1 \) i \( 3 \times 3 \). W wersji YOLOv7 wprowadzono szereg usprawnień, takich jak:
+\begin{itemize}
+    \item użycie modułów re-parametryzowanych (\textit{re-parameterized convolution}) dla poprawy propagacji gradientu,
+    \item lepsza agregacja cech w warstwach za pomocą strategii E-ELAN (\textit{Extended Efficient Layer Aggregation Networks}),
+    \item optymalizacja procesu uczenia poprzez dynamiczne przypisywanie etykiet (\textit{coarse-to-fine label assignment}) \cite{bib:wang_yolov7}.
+\end{itemize}
+
+W ramach tej pracy YOLO zostało wykorzystane do detekcji obiektów w systemie wizyjnym robota mobilnego. Model YOLOv7, dzięki swojej optymalnej architekturze i wydajności, umożliwił realizację systemu wizyjnego z zachowaniem wymagań ograniczonej mocy obliczeniowej platformy Raspberry Pi.
+
 \subsection{Zastosowania w robotyce mobilnej}
 Systemy wizyjne oparte na YOLO są wykorzystywane w projektach przemysłowych i naukowych. Przykłady zastosowań obejmują:
 \begin{itemize}
@@ -728,11 +751,9 @@ jak i pojedyncze symbole $x$ i $y$  składa się w trybie matematycznym.
 
 
 % TODO
-\chapter{Wymagania i narzędzia}
-\label{ch:wymagania-i-narzedzia}
-%%%% Narzedzia głębokiego uczenia %%%%%
-\section{Narzędzia głębokiego uczenia}
-\subsection{Przygotowanie danych wzorcowych}
+\chapter{Przygotowanie i trening modelu detekcji obiektów}
+\label{ch:Przygotowanie-i-trening-modelu}
+\section{Przygotowanie danych wzorcowych}
 Do poprawnego wytrenowania sieci neuronowej, konieczne jest przygotowanie zestawu danych wzorcowych. W przypadku algorytmów głębokiego uczenia kluczowe znaczenie ma jakość i zróżnicowanie danych treningowych, ponieważ sieci neuronowe uczą się rozpoznawania wzorców na podstawie dostarczonych przykładów. 
 
 Dane wzorcowe muszą spełniać pewne istotne wymagania, aby zapewnić odpowiednią skuteczność modelu:
@@ -742,20 +763,19 @@ Dane wzorcowe muszą spełniać pewne istotne wymagania, aby zapewnić odpowiedn
     \item \textbf{Różne odległości od kamery}: Obiekty powinny być widoczne w kadrze zarówno z bliska, jak i z daleka, co ułatwia modelowi detekcję niezależnie od dystansu.
 \end{itemize}
 
-W praktyce przygotowanie takiego zbioru danych wymaga użycia narzędzi do annotacji, które pozwalają na oznaczenie obiektów w obrazach za pomocą ramek ograniczających(ang. \textit{bounding boxes}). Do tego celu często wykorzystuje się narzędzia do annotacji zdjęć, takie jak \textbf{Roboflow}, \textbf{LabelImg}, \textbf{CVAT} czy \textbf{Makesense.ai}, które wspomagają proces zarządzania danymi, ich augmentacji (np. obrót, zmiana jasności, rozmycie) oraz podziału na zbiory treningowe, walidacyjne i testowe. 
-
+W praktyce przygotowanie takiego zbioru danych wymaga użycia narzędzi do annotacji, które pozwalają na oznaczenie obiektów w obrazach za pomocą ramek ograniczających (ang. \textit{bounding boxes}). Do tego celu często wykorzystuje się narzędzia do annotacji zdjęć, takie jak \textbf{Roboflow} czy \textbf{LabelImg}, które wspomagają proces podziału na zbiory treningowe, walidacyjne i testowe.
 
 
 %%%% Platforma Roboflow %%%%%
-\subsection{Platforma Roboflow}
-Aby zrealizować założenia pracy, do przygotowania zbioru uczącego wykorzystano platformę Roboflow. Jest to narzędzie online, które umożliwia zarządzanie danymi, ich etykietowanie oraz konwersję między różnymi formatami. W kontekście tej pracy wykorzystano obrazy przedstawiające czerwoną piłkę w realistycznym środowisku.
+\section{Platforma Roboflow}
+Aby zrealizować założenia pracy, do przygotowania zbioru uczącego wykorzystano platformę Roboflow. Jest to narzędzie dostępne online, które umożliwia zarządzanie danymi, ich etykietowanie oraz konwersję między różnymi formatami. W kontekście tej pracy wykorzystano obrazy przedstawiające czerwoną piłkę w realistycznym środowisku.
 
 Proces przygotowania danych w Roboflow składał się z następujących etapów:
 
 \begin{enumerate}
-	\item \textbf{Zbieranie danych} - zgromadzono zestaw około 100 zdjęć przedstawiających czerwoną piłkę w różnych warunkach oświetleniowych i na różnych tłach.
+	\item \textbf{Zbieranie danych} - zgromadzono zestaw około 400 zdjęć przedstawiających czerwoną piłkę w różnych warunkach oświetleniowych i na różnych tłach.
 	
-	\item \textbf{Annotacja} - każde zdjęcie zostało oznaczone poprzez narysowanie ramki ograniczającej wokół piłki. Roboflow udostępnia intuicyjny interfejs do tego procesu, co znacznie przyspiesza pracę.
+	\item \textbf{Annotacja} - każde zdjęcie zostało oznaczone poprzez narysowanie ramki ograniczającej wokół piłki. Roboflow udostępnia intuicyjny interfejs do tego procesu.
 	
 	\item \textbf{Augmentacja danych} - aby zwiększyć różnorodność zbioru treningowego, zastosowano następujące techniki augmentacji:
 	\begin{itemize}
@@ -771,246 +791,302 @@ Proces przygotowania danych w Roboflow składał się z następujących etapów:
 		\item 10\% - zbiór testowy
 	\end{itemize}
 	
-	\item \textbf{Eksport} - przygotowane dane zostały wyeksportowane w formacie YOLO v7, który jest kompatybilny z wybranym modelem detekcji obiektów.
+	\item \textbf{Eksport} - przygotowane dane zostały wyeksportowane w formacie YOLO v7 Pytorch.
 \end{enumerate}
+
+\newpage
+
+\subsection{Proces użycia witryny Roboflow}
+W celu przygotowania danych treningowych, zarejestrowano konto na platformie Roboflow i przystąpiono do etykietowania obiektów. Na rysunku \ref{fig:roboflow-main} przedstawiono widok strony głównej witryny Roboflow.
 
 \begin{figure}[h]
 	\centering
-	\includegraphics[width=1\textwidth]{Images/Roboflow/mainscreen.png}
+	\includegraphics[width=0.75\textwidth]{Images/Roboflow/mainscreen.png}
 	\caption{Widok strony głównej witryny Roboflow.}
 	\label{fig:roboflow-main}
 \end{figure}
 
+Proces etykietowania można przeprowadzić automatycznie, korzystając z algorytmów detekcji obiektów, lub ręcznie, poprzez zaznaczenie obiektów na obrazie. Korzystając z etykietowania ręcznego istnieje pewność, że obiekty zostaną poprawnie oznaczone w takich przypadkach jak rozmyty obraz bądź słabe oświetlenie. 
 
-\begin{figure}[h!]
-    \centering
 
-    \begin{subfigure}[b]{1\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{Images/Roboflow/labeling1.png}
-        \caption{Etykietowanie obiektów w Roboflow.}
-        \label{fig:labeling1}
-    \end{subfigure}
-    
-    \begin{subfigure}[b]{1\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{Images/Roboflow/labeling2.png}
-        \caption{Obiekt po zetykietowaniu}
-        \label{fig:labeling2}
-    \end{subfigure}
-    
-    \begin{subfigure}[b]{1\textwidth}
-        \centering
-        \includegraphics[width=1\textwidth]{Images/Roboflow/labeling3.png}
-        \caption{Etykietowanie w słabym oświetleniu}
-        \label{fig:labeling3}
-    \end{subfigure}
-    
-    \caption{Proces użycia witryny Roboflow.}
-    \label{fig:roboflow-process}
+\paragraph{Zdjęcie \ref{fig:labeling1}}
+przedstawia interfejs użytkownika podczas etykietowania obiektów. Na obrazie widoczna jest czerwona piłka, która została zaznaczona ramką ograniczającą.
+
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.75\textwidth]{Images/Roboflow/labeling1.png}
+	\caption{Etykietowanie obiektów za pomocą witryny Roboflow.}
+	\label{fig:labeling1}
 \end{figure}
-
 
 \newpage
-%%%% Biblioteka PyTorch %%%%%
-\section{PyTorch}
-PyTorch to jedna z bardziej popularnych bibliotek uczenia maszynowego, opracowanej przez Meta AI i obecnie wspieraną przez PyTorch Foundation. Biblioteka została zaprojektowana z myślą o intuicyjności, wydajności i elastyczności.
+\paragraph{Zdjęcie \ref{fig:labeling2}}
+przedstawia obiekt po zetykietowaniu. Na obrazie widoczna jest czerwona piłka, która została poprawnie oznaczona ramką ograniczającą.
 
-%%\paragraph{Główne cechy PyTorch}
-%%\begin{itemize}
-%%    \item \textbf{Dynamiczne grafy obliczeniowe}: Dzięki dynamicznemu budowaniu grafów obliczeniowych, PyTorch pozwala na elastyczne definiowanie i modyfikowanie modeli w trakcie ich działania \cite{bib:paszke2019pytorch}.
-%%    \item \textbf{Obliczenia tensorowe z akceleracją GPU}: Biblioteka zapewnia wsparcie dla obliczeń tensorowych z wykorzystaniem GPU, co umożliwia szybkie przetwarzanie dużych zbiorów danych \cite{paszke2019pytorch}.
-%%    \item \textbf{Wsparcie dla głębokich sieci neuronowych}: Moduł \texttt{torch.nn} ułatwia definiowanie i trenowanie złożonych modeli głębokiego uczenia.
-%%\end{itemize}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/Roboflow/labeling2.png}
+    \caption{Obiekt po zetykietowaniu.}
+    \label{fig:labeling2}
+\end{figure}
 
-\paragraph{Zastosowania PyTorch}
-PyTorch jest szeroko wykorzystywany zarówno w badaniach naukowych, jak i w przemyśle. Do jego głównych zastosowań należą:
+\paragraph{Zdjęcie \ref{fig:labeling3}}
+pokazuje proces etykietowania w warunkach słabego oświetlenia. Pomimo trudnych warunków, obiekt został poprawnie oznaczony, co świadczy o zalecie ręcznego etykietowania w takich przypadkach.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/Roboflow/labeling3.png}
+    \caption{Etykietowanie w słabym oświetleniu.}
+    \label{fig:labeling3}
+\end{figure}
+
+\newpage
+
+\subsection{Trening zestawu danych}
+Po zakończeniu etykietowania danych, przystąpiono do segmentacji zbioru na zbiór treningowy, walidacyjny i testowy.
+Następnie przeprowadzono trening danych aby można było wyeksportować je w formacie YOLO v7 Pytorch.
+Na wykresie \ref{fig:Wykrespoczatek} przedstawiono przebieg treningu w pierwszych epokach. Widać, że wartość funkcji straty maleje wraz z postępem uczenia, co świadczy o skuteczności procesu.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/Roboflow/poczatek uczenia.png}
+    \caption{Wykres pierwszych epok treningu.}
+    \label{fig:Wykrespoczatek}
+\end{figure}
+
+\newpage
+Natomiast wykres \ref{fig:Wykres2} przedstawia przebieg treningu w kolejnych epokach. Widać, że w momencie 20 epoki wartość wskaźnika mAP maleje. 
+\textbf{mAP (mean Average Precision)} jest miarą jakości modeli detekcji obiektów, uwzględniającą zarówno \textit{precision}, jak i \textit{recall}. Oblicza się go jako średnią precyzji (AP) dla wszystkich klas obiektów.
+
+Podczas treningu mAP może zmaleć, a następnie wzrosnąć z kilku powodów:
 \begin{itemize}
-    \item \textbf{Wizja komputerowa}: PyTorch jest wykorzystywany do trenowania modeli detekcji obiektów, takich jak YOLOv7, oraz innych architektur CNN.
-    \item \textbf{Przetwarzanie języka naturalnego (NLP)}: Biblioteki takie jak Hugging Face Transformers, używane do przetwarzania języka, opierają się na PyTorch.
-    \item \textbf{Autonomiczne systemy}: PyTorch znajduje zastosowanie w systemach autonomicznych, takich jak systemy nawigacji dla robotów mobilnych.
+    \item \textbf{Augmentacja danych:} Trudniejsze przypadki augmentacji danych mogą chwilowo obniżyć mAP, ale poprawiają generalizację modelu.
+    \item \textbf{Dane walidacyjne:} Specyficzne, trudne obrazy w danych walidacyjnych mogą wpłynąć na chwilowe obniżenie wyników.
 \end{itemize}
 
-\paragraph{Społeczność i rozwój}
-PyTorch posiada jedną z najbardziej aktywnych społeczności w obszarze uczenia maszynowego. Dzięki otwartemu modelowi rozwoju, społeczność regularnie wprowadza nowe funkcje, poprawki błędów oraz dedykowane narzędzia, takie jak PyTorch Lightning, które ułatwiają proces trenowania modeli.
+Spadek mAP jest naturalnym zjawiskiem, oznaczającym reakcję modelu na zmiany w procesie treningu. Wzrost mAP po spadku wskazuje na poprawę generalizacji oraz stabilizację procesu optymalizacji.
 
-\paragraph{Podsumowanie}
-Dzięki intuicyjności, wszechstronności i wysokiej wydajności, PyTorch stał się jednym z najważniejszych narzędzi w dziedzinie głębokiego uczenia. W tej pracy PyTorch został wykorzystany jako podstawowa biblioteka do implementacji algorytmu YOLO oraz zarządzania procesami trenowania modeli.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/Roboflow/wykres2.png}
+    \caption{Wykres przebiegu treningu z zaistniałym spadkiem mAP.}
+    \label{fig:Wykres2}
+\end{figure}
 
+\newpage
 
+\section{Trening modelu YOLOv7}
 
-%%%% Algorytm YOLO %%%%%
-\subsection{Algorytm YOLO}
-%%Algorytm YOLO (\textit{You Only Look Once}) został zaprojektowany jako zintegrowany system detekcji obiektów w czasie rzeczywistym, przekształcając problem detekcji w zadanie regresji. YOLO stosuje jedną sieć neuronową do analizy całego obrazu i równoczesnego przewidywania współrzędnych ramek ograniczających oraz klas obiektów \cite{redmon2016yolo}.
+Po przygotowaniu danych treningowych przystąpiono do wytrenowania modelu detekcji obiektów YOLOv7, korzystając z platformy Google Colab. Umożliwia ona wykorzystanie zasobów obliczeniowych w chmurze, w tym akceleracji przez GPU (Graphics Processing Unit), które znacząco przyspiesza przetwarzanie dużych ilości danych dzięki równoległemu wykonywaniu obliczeń. Jest to szczególnie istotne w przypadku modeli uczenia maszynowego, takich jak głębokie sieci neuronowe, które wymagają intensywnych operacji macierzowych. Proces treningu przebiegał zgodnie z następującymi krokami:
 
-\paragraph{Założenia projektowe}
-Model YOLO dzieli obraz na siatkę \( S \times S \), gdzie każda komórka siatki przewiduje:
+\subsection{Przygotowanie środowiska}
+Utworzonie nowego projektu w Google Colab i skonfigurowano środowiska do korzystania z GPU:
+\begin{enumerate}
+    \item Z pasku narzędzi \texttt{Środowisko wykonawcze} wybrano opcję \texttt{Zmień typ środowiska wykonawczego}.
+    \item Jako \texttt{Akcelerator sprzętowy} ustawiono \texttt{GPU}.
+\end{enumerate}
+
+\subsection{Instalacja wymaganych bibliotek}
+Pobranie repozytorium YOLOv7 z platformy GitHub oraz zainstalowano niezbędne zależności:
+\begin{verbatim}
+!git clone https://github.com/WongKinYiu/yolov7
+%cd yolov7
+!pip install -r requirements.txt
+\end{verbatim}
+
+\subsection{Pobranie i przygotowanie danych treningowych}
+Dane treningowe zostały przygotowane na platformie Roboflow, gdzie wygenerowano klucz API, który umożliwił automatyczne pobranie danych do środowiska Google Colab. W notebooku dodano poniższy fragment kodu do zaimportowania danych:
+\begin{verbatim}
+!pip install roboflow
+from roboflow import Roboflow
+rf = Roboflow(api_key="TWÓJ_KLUCZ_API")
+project = rf.workspace().project("nazwa-projektu")
+dataset = project.version(1).download("yolov7")
+\end{verbatim}
+
+\subsection{Przygotowanie modelu}
+Pobranie wstępnie wytrenowanych wag modelu YOLOv7:
+\begin{verbatim}
+!wget https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt
+\end{verbatim}
+
+\subsection{Trening modelu}
+Model wytrenowano, uruchamiając poniższą komendę:
+\begin{verbatim}
+%env WANDB_MODE=disabled
+!python yolov7/train.py --data Ball-Detection-3/data.yaml --cfg yolov7/cfg/training/yolov7.yaml --weights yolov7.pt --epochs 10 --batch-size 16 --device 0
+\end{verbatim}
+Parametry treningu były następujące:
 \begin{itemize}
-    \item \( B \) ramek ograniczających (\textit{bounding boxes}) wraz z ich współrzędnymi \((x, y, w, h)\),
-    \item prawdopodobieństwo obecności obiektu w każdej ramce,
-    \item prawdopodobieństwo klasowe dla każdego obiektu.
+    \item \texttt{--data}: Ścieżka do pliku konfiguracyjnego zestawu danych otrzymanych z Roboflow.
+    \item \texttt{--cfg}: Plik konfiguracyjny architektury modelu.
+    \item \texttt{--weights}: Wstępnie wytrenowane wagi modelu YOLOv7.
+    \item \texttt{--epochs}: Liczba epok (ustawiono na 50).
+    \item \texttt{--batch-size}: Rozmiar grupy treningowej (ustawiono na 16).
+    \item \texttt{--device}: GPU (0 oznacza pierwsze dostępne GPU).
 \end{itemize}
-Łączne przewidywania są zapisywane jako tensor o wymiarze \( S \times S \times (B \cdot 5 + C) \), gdzie \( C \) to liczba klas \cite{bib:redmon_yolo}.
-
-\paragraph{Architektura sieci YOLO}
-Sieć YOLO opiera się na warstwach konwolucyjnych, w których kluczowe znaczenie ma redukcja wymiarów za pomocą warstw \( 1 \times 1 \) i \( 3 \times 3 \). W wersji YOLOv7 wprowadzono szereg usprawnień, takich jak:
-\begin{itemize}
-    \item użycie modułów re-parametryzowanych (\textit{re-parameterized convolution}) dla poprawy propagacji gradientu,
-    \item lepsza agregacja cech w warstwach za pomocą strategii E-ELAN (\textit{Extended Efficient Layer Aggregation Networks}),
-    \item optymalizacja procesu uczenia poprzez dynamiczne przypisywanie etykiet (\textit{coarse-to-fine label assignment}) \cite{bib:wang_yolov7}.
-\end{itemize}
-
-W ramach tej pracy YOLO zostało wykorzystane do detekcji obiektów w systemie wizyjnym robota mobilnego. Model YOLOv7, dzięki swojej optymalnej architekturze i wydajności, umożliwił realizację systemu wizyjnego z zachowaniem wymagań ograniczonej mocy obliczeniowej platformy Raspberry Pi.
-
-
-
-
-
-%%%% Wymagania sprzętowe %%%%%
-\section{specyfikacja techniczna}
+Po zakończeniu treningu najlepsze wagi modelu są zapisywane w pliku \texttt{best.pt}. Plik ten będzie wykorzystywany w programie do detekcji obiektu w czasie rzeczywistym.
 
 % TODO
-\chapter{[Właściwy dla kierunku -- np. Specyfikacja zewnętrzna]}
+\chapter{Proces tworzenia robota mobilnego}
 \label{ch:04}
+W obecnym rozdziale przedstawiony zostanie proces tworzenia robota mobilnego, uwzględniający zarówno założenia logiczne, jak i aspekty techniczne związane z budową oraz implementacją systemów sterowania. W pierwszej części opisane zostaną kluczowe założenia projektowe oraz schemat blokowy algorytmu robota mobilnego opartego na systemie wizyjnym. Następnie zostanie zaprezentowany proces konstrukcji robota, opierając się na modelu 3D stworzonym w programie Autodesk Fusion oraz przedstawienie wykorzystanych modułów i ich sposób podłączenia przedstawionego za pośrednictwem schematu blokowego. Ostatnia część rozdziału dotyczy dostosowania jednostki sterującej w postaci Raspberry Pi, w tym konfiguracji niezbędnych bibliotek umożliwiających integrację podzespołów i realizację funkcjonalności systemu wizyjnego dla robota mobilnego.
 
-Jeśli „Specyfikacja zewnętrzna”:
-\begin{itemize}
-\item  wymagania sprzętowe i programowe
-\item  sposób instalacji
-\item  sposób aktywacji
-\item  kategorie użytkowników
-\item  sposób obsługi
-\item  administracja systemem
-\item  kwestie bezpieczeństwa
-\item  przykład działania
-\item  scenariusze korzystania z systemu (ilustrowane zrzutami z ekranu lub generowanymi dokumentami)
-\end{itemize}
+\section{Założenia logiczne}
+Poniżej przedstawiono diagram blokowy ilustrujący działanie algorytmu detekcji obiektów w czasie rzeczywistym. Proces rozpoczyna się od akwizycji obrazu z kamery, który następnie trafia do modelu detekcji obiektów YOLOv7. Na podstawie wyników detekcji robot dostosowuje kąty serwomechanizmów pionowego i poziomego, aby utrzymać obiekt w centrum kadru. Jeśli obiekt przesunie się poza wyznaczone centrum, program oblicza różnicę w pikselach i przelicza ją na odpowiednie wartości kątowe, umożliwiając sterowanie serwomechanizmami w celu zapewnienia ciągłości śledzenia. Celem algorytmu jest nieustanne utrzymanie obiektu w centrum widoku kamery.
+Program na bieżąco monitoruje wartości kątowe serwomechanizmów, które są wykorzystywane do sterowania pracą silników DC odpowiedzialnych za ruch robota. Ruch w przód wykonywany jest jedynie w przypadku spełnienia następujących warunków: obiekt został wykryty, kąt serwomechanizmu poziomego mieści się w zakresie od -25\textdegree{} do 25\textdegree{}, a kąt serwomechanizmu pionowego przekracza -30\textdegree{}. W przeciwnym razie robot zatrzymuje się lub wykonuje skręt. Jeśli kąt poziomy osiągnie wartość graniczną (25\textdegree{} lub -25\textdegree{}), robot skręca odpowiednio w prawo lub w lewo.
 
-\
+Program można zatrzymać wyłącznie przez interakcję użytkownika, co powoduje zatrzymanie wszystkich systemów i powrót robota do stanu początkowego. Stan początkowy definiuje sytuację, w której serwomechanizmy ustawione są w pozycji centralnej (0\textdegree{} dla obu osi), a silniki DC są wyłączone.
 
-%%%%%%%%%%%%%%%%%%%%%
-%% RYSUNEK Z PLIKU
-%
-%\begin{figure}
-%\centering
-%\includegraphics[width=0.5\textwidth]{./politechnika_sl_logo_bw_pion_pl.pdf}
-%\caption{Podpis rysunku zawsze pod rysunkiem.}
-%\label{fig:etykieta-rysunku}
-%\end{figure}
-%Rys. \ref{fig:etykieta-rysunku} przestawia …
-%%%%%%%%%%%%%%%%%%%%%
-%
-%%%%%%%%%%%%%%%%%%%%%
-%% WIELE RYSUNKÓW 
-%
-%\begin{figure}
-%\centering
-%\begin{subfigure}{0.4\textwidth}
-%    \includegraphics[width=\textwidth]{./politechnika_sl_logo_bw_pion_pl.pdf}
-%    \caption{Lewy górny rysunek.}
-%    \label{fig:lewy-gorny}
-%\end{subfigure}
-%\hfill
-%\begin{subfigure}{0.4\textwidth}
-%    \includegraphics[width=\textwidth]{./politechnika_sl_logo_bw_pion_pl.pdf}
-%    \caption{Prawy górny rysunek.}
-%    \label{fig:prawy-gorny}
-%\end{subfigure}
-%
-%\begin{subfigure}{0.4\textwidth}
-%    \includegraphics[width=\textwidth]{./politechnika_sl_logo_bw_pion_pl.pdf}
-%    \caption{Lewy dolny rysunek.}
-%    \label{fig:lewy-dolny}
-%\end{subfigure}
-%\hfill
-%\begin{subfigure}{0.4\textwidth}
-%    \includegraphics[width=\textwidth]{./politechnika_sl_logo_bw_pion_pl.pdf}
-%    \caption{Prawy dolny rysunek.}
-%    \label{fig:prawy-dolny}
-%\end{subfigure}
-%        
-%\caption{Wspólny podpis kilku rysunków.}
-%\label{fig:wiele-rysunkow}
-%\end{figure}
-%Rys. \ref{fig:wiele-rysunkow} przestawia wiele ważnych informacji, np. rys. \ref{fig:prawy-gorny} jest na prawo u góry.
-%%%%%%%%%%%%%%%%%%%%%
-
-
- 
-\begin{figure}
-\centering
-\begin{tikzpicture}
-\begin{axis}[
-    y tick label style={
-        /pgf/number format/.cd,
-            fixed,   % po zakomentowaniu os rzednych jest indeksowana wykladniczo
-            fixed zerofill, % 1.0 zamiast 1
-            precision=1,
-        /tikz/.cd
-    },
-    x tick label style={
-        /pgf/number format/.cd,
-            fixed,
-            fixed zerofill,
-            precision=2,
-        /tikz/.cd
-    }
-]
-\addplot [domain=0.0:0.1] {rnd};
-\end{axis} 
-\end{tikzpicture}
-\caption{Podpis rysunku po rysunkiem.}
-\label{fig:2}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{Images/Schemat blokowy/Engineering Thesis.png}
+    \caption{Schemat blokowy działania algorytmu pracy robota z systemem wizyjnym}
+    \label{fig:Schemat blokowy}
 \end{figure}
 
+\newpage
+\section{Konstrukcja robota mobilnego}
+Konstrukcja robota mobilnego oparta jest na platformie jezdnej z dwoma silnikami DC o napędzie różnicowym, serwomechanizmem pionowym i poziomym oraz kamerą. Robot wyposażony jest w moduł Raspberry Pi 4B, który pełni rolę jednostki decyzyjnej oraz komunikacyjnej. Poniżej przedstawiono schemat blokowy robota mobilnego z zaznaczonymi podstawowymi elementami składowymi.
 
-
-% TODO
-\chapter{[Właściwy dla kierunku -- np. Specyfikacja wewnętrzna]}
-\label{ch:05}
-
-
-Jeśli „Specyfikacja wewnętrzna”:
+\subsection{Wykorzystane moduły}
+Aby zrealizować założenia projektowe, wykorzystano następujące moduły i komponenty:
 \begin{itemize}
-\item przedstawienie idei
-\item architektura systemu
-\item opis struktur danych (i organizacji baz danych)
-\item komponenty, moduły, biblioteki, przegląd ważniejszych klas (jeśli występują)
-\item przegląd ważniejszych algorytmów (jeśli występują)
-\item szczegóły implementacji wybranych fragmentów, zastosowane wzorce projektowe
-\item diagramy UML
+    \item \textbf{Raspberry Pi:} Raspberry Pi 4B WiFi 8GB RAM - jednostka centralna robota, odpowiedzialna za przetwarzanie obrazu, sterowanie silnikami oraz serwomechanizmami.
+    \item \textbf{Kamera:} Raspberry Pi Camera HD v3 12MPx, służąca do akwizycji obrazu.
+    \item \textbf{Moduł sterownika silników:} Cytron HAT-MDD10 - dwukanałowy sterownik silników DC 24V/10A z funkcją PWM służący jako nakładka na Raspberry Pi.
+    \item \textbf{Silniki DC:} Dwa silniki z przekładnią 37Dx68L 30:1 12V 330RPM + enkoder CPR 64 - Pololu 4752 - napędzające koła robota.
+    \item \textbf{Zasilanie:} Cztery ogniwa 18650 Li-Ion Samsung INR18650-35E 3500mAh 3,6V - zasilanie silników DC.
+    \item \textbf{Serwomechanizm pionowy:} Serwo TowerPro SG-90 micro 180 stopni - odpowiada za regulację kąta nachylenia kamery w pionie.
+    \item \textbf{Serwomechanizm poziomy:} Serwo TowerPro SG-92R micro - odpowiada za regulację kąta obrotu kamery w poziomie.
+    \item \textbf{Uchwyt kamery:} Wykonany z połączenia gotowego uchwytu do serw micro Pan/Tilt oraz dedykowanego uchwytu do kamery Raspberry Pi v2 oraz v3.
+    \item \textbf{Obudowa:} Wykonana przy pomocy drukarki 3D z wytrzymałego filamentu Spectrum PETG 1,75mm.
+    \item \textbf{Koła:} Dwa Koła Polulu 90x10mm - Zapewniające ruch robota po powierzchni.
+    \item \textbf{Zasilanie Raspberry Pi:} Powerbank o parametrach 30000mAh 5V 3A.
+    \item \textbf{Mocowanie silników:} Dwie sztuki mocowań aluminiowych do silników 37D Pololu 1084. 
+    \item \textbf{Huby mocujące:} Dwa aluminiowe huby mocujące 6mm M3 do kół Pololu 1999.
+    \item \textbf{Koło wspornikowe pasywne:} Ball Caster 3/4'' metalowe Pololu 955 - zapewniające stabilność robota.
+    \item \textbf{Taśma do kamery:} Taśma Raspberry Pi kamera 60cm 15 żyłowa raster 1mm - łącząca kamerę z Raspberry Pi.
+    \item \textbf{Przewody:} Zestaw przewodów połączeniowych justPi męsko-męskich, żeńsko-żeńskich, żeńsko-męskich.
+    \item \textbf{Przełącznik:} Przełącznik dźwigniowy ON-OFF KN3(C)-101 250V/6A - służący do ręcznego wyłączania zasilania silników DC.
 \end{itemize}
 
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-% Pakiet minted wymaga importu: \usepackage{minted}                 %
-% i specjalnego kompilowania:                                       %
-% pdflatex -shell-escape main                                       %
-% % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
-
-
-Krótka wstawka kodu w linii tekstu jest możliwa, np.  \lstinline|int a;| (biblioteka \texttt{listings})% lub  \mintinline{C++}|int a;| (biblioteka \texttt{minted})
-. 
-Dłuższe fragmenty lepiej jest umieszczać jako rysunek, np. kod na rys \ref{fig:pseudokod:listings}% i rys. \ref{fig:pseudokod:minted}
-, a naprawdę długie fragmenty – w załączniku.
-
-
-\begin{figure}
-\centering
-\begin{lstlisting}
-class test : public basic
-{
-    public:
-      test (int a);
-      friend std::ostream operator<<(std::ostream & s, 
-                                     const test & t);
-    protected:
-      int _a;  
-      
-};
-\end{lstlisting}
-\caption{Pseudokod w \texttt{listings}.}
-\label{fig:pseudokod:listings}
+\newpage
+\subsection{Schemat elektryczny - dokonczyc}
+\subsection{Projekt robota mobilnego}
+Jednym z założeń projektu było stworzenie kompaktowego robota mobilnego o możliwie prostym i modułowym układzie konstrukcyjnym. Robot składa się z dwóch pięter: dolnego pełniącego funkcję napędową oraz górnego będącego platformą dla modułów sterujących. Dzięki temu podziałowi możliwe jest zachowanie walorów estetycznych oraz funkcjonalnych.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Robot/Robot projekt.png}
+    \caption{Projekt konstrukcji robota mobilnego wykonany w programie Autodesk Fusion.}
+    \label{fig:Robot projekt}
 \end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Robot/Robot piętra.png}
+    \caption{Podział konstrukcji na piętra.}
+    \label{fig:Robot piętra}
+\end{figure}
+
+Obraz \ref{fig:Robot dół} przedstawia dolne piętro robota, na którym zamontowane są silniki DC wraz z kołami oraz zasilaniem w postaci koszyka z czterema ogniwami 18650 Litowo-jonowymi. Dodatkowo umieszczono przełącznik dźwigniowy ON-OFF, który umożliwia ręczne wyłączenie zasilania silników DC.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Robot/Robot dół.png}
+    \caption{Widok rzutu górnego na dolne piętro robota.}
+    \label{fig:Robot dół}
+\end{figure}
+\newpage
+Obraz \ref{fig:Robot góra} przedstawia górne piętro robota, na którym zamontowane są takie moduły jak Raspberry Pi, sterownik silników DC, uchwyt na kamerę wraz z serwomechanizmami oraz zasilaniem. Z powodu dużej wagi powerbanka, konieczne było zastosowanie przeciwwagi w postaci granitowego bloku na przodzie modułu górnego piętra. Zastosowanie to zapewnia stabilność robota oraz równomierny rozkład masy.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Robot/Robot góra.png}
+    \caption{Widok rzutu górnego na górne piętro robota.}
+    \label{fig:Robot góra}
+\end{figure}
+\newpage
+Zdjęcie \ref{fig:Robot_gotowy} przedstawia gotową konstrukcję robota mobilnego wykonanego z tworzywa sztucznego PETG. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Robot/Robot_gotowy.png}
+    \caption{Gotowa konstrukcja robota mobilnego.}
+    \label{fig:Robot_gotowy}
+\end{figure}
+
+\newpage
+
+\section{Dostosowanie RaspberryPi}
+Na Raspberry Pi zainstalowano system operacyjny Debian GNU/Linux 12 (Bookworm), który jest 64-bitową wersją opartą na jądrze Linux 6.6.51, zoptymalizowaną pod architekturę ARM (aarch64). Wybrana wersja systemu jest kompatybilna z bibliotekami istotnymi do poprawnego działania systemu wizyjnego. Aby zoptymalizować pracę programu i zapewnić pełną kontrolę nad jego zależnościami, utworzono dedykowane wirtualne środowisko, w którym przechowywane są wszystkie wymagane biblioteki. Środowisko to zostało stworzone przy użyciu narzędzia \texttt{venv} za pomocą poniższego polecenia w terminalu: \begin{verbatim} python3 -m venv nazwa-env \end{verbatim} Po utworzeniu środowiska wirtualnego należy je aktywować, używając polecenia: \begin{verbatim} source nazwa-env/bin/activate \end{verbatim} Program jest uruchamiany wewnątrz tego środowiska, co pozwala na uniknięcie konfliktów między wersjami bibliotek oraz zapewnia powtarzalność działania systemu na różnych urządzeniach. Przykładowe polecenie uruchamiające program w aktywnym środowisku to: \begin{verbatim} python3 program.py \end{verbatim} Takie podejście gwarantuje, że wszystkie zależności programu są odpowiednio załadowane i kompatybilne z systemem operacyjnym oraz sprzętem Raspberry Pi.
+\newpage
+\subsection{Spis wymaganych bibliotek}
+Poniżej przedstawiono listę bibliotek wymaganych do uruchomienia systemu wizyjnego oraz sterowania robotem mobilnym, z podziałem na ich funkcje:
+
+\begin{itemize}
+    \item \textbf{Platformy uczenia maszynowego:}
+    \begin{itemize}
+        \item \textbf{torch} – Podstawowa platforma do trenowania i uruchamiania modeli uczenia maszynowego.
+        \item \textbf{models.experimental} – Obsługa modeli YOLO do detekcji obiektów.
+        \item \textbf{utils.general} – Funkcje wspomagające dla YOLO, takie jak filtrowanie wyników i skalowanie współrzędnych.
+    \end{itemize}
+    
+    \item \textbf{Przetwarzanie obrazu:}
+    \begin{itemize}
+        \item \textbf{opencv-python} (cv2) – Obsługa obrazów i przetwarzanie wizyjne, np. binaryzacja i filtrowanie.
+        \item \textbf{numpy} – Operacje matematyczne i macierzowe, kluczowe dla analizy danych wizualnych.
+        \item \textbf{Picamera2} – Obsługa kamery Raspberry Pi do akwizycji obrazu.
+    \end{itemize}
+    
+    \item \textbf{Sterowanie sprzętem:}
+    \begin{itemize}
+        \item \textbf{RPi.GPIO} – Sterowanie pinami GPIO na Raspberry Pi.
+        \item \textbf{pigpio} – Niskopoziomowe sterowanie GPIO, np. dla serwomechanizmów.
+    \end{itemize}
+    
+    \item \textbf{Regulator PID:}
+    \begin{itemize}
+        \item \textbf{simple\_pid} – Implementacja regulatora PID, używana do precyzyjnego sterowania, np. serwomechanizmami.
+    \end{itemize}
+    
+    \item \textbf{Inne ważne biblioteki:}
+    \begin{itemize}
+        \item \textbf{tqdm} – Pasek postępu przy iteracjach.
+        \item \textbf{PyYAML} – Obsługa plików konfiguracji w formacie YAML.
+    \end{itemize}
+\end{itemize}
+
+Szczegółowy spis wszystkich bibliotek został przedstawiony w pliku Requirements.txt dostarczonym w załączniku do pracy.
+
+
+%\begin{figure}
+%\centering
+%\begin{tikzpicture}
+%\begin{axis}[
+%    y tick label style={
+%        /pgf/number format/.cd,
+%            fixed,   % po zakomentowaniu os rzednych jest indeksowana wykladniczo
+%            fixed zerofill, % 1.0 zamiast 1
+%            precision=1,
+%        /tikz/.cd
+%    },
+%    x tick label style={
+%        /pgf/number format/.cd,
+%            fixed,
+%            fixed zerofill,
+%            precision=2,
+%        /tikz/.cd
+%    }
+%]
+%\addplot [domain=0.0:0.1] {rnd};
+%\end{axis} 
+%\end{tikzpicture}
+%\caption{Podpis rysunku po rysunkiem.}
+%\label{fig:2}
+%\end{figure}
+
+
+
+
+
+
 
 %\begin{figure}
 %\centering
@@ -1031,11 +1107,37 @@ class test : public basic
 %\end{figure}
 
 
+\chapter{Analiza działania systemu wizyjnego}
+\label{ch:05}
+W niniejszym rozdziale przedstawiono analizę działania systemu wizyjnego, który został zaimplementowany w ramach pracy. System ten umożliwia detekcję obiektu na obrazie z kamery Raspberry Pi, a następnie sterowanie serwomechanizmami w celu utrzymania obiektu w centrum kadru. W ramach analizy porównano skuteczność dwóch algorytmów detekcji obiektów: YOLOv7 oraz binaryzację i klasyczne techniki przetwarzania obrazów. W celu oceny skuteczności algorytmów przeprowadzono testy na zestawie danych treningowych, a następnie porównano wyniki. W kolejnych sekcjach przedstawiono opis działania programu, uzyskane rezultaty oraz porównanie skuteczności algorytmów.
+\section{Detekcja obiektu za pomocą narzędzi głębokiego uczenia}
+\subsection{Opis działania programu}
+\begin{figure}
+    \centering
+    \begin{lstlisting}
+    class test : public basic
+    {
+        public:
+          test (int a);
+          friend std::ostream operator<<(std::ostream & s, 
+                                         const test & t);
+        protected:
+          int _a;  
+          
+    };
+    \end{lstlisting}
+    \caption{Pseudokod w \texttt{listings}.}
+    \label{fig:pseudokod:listings}
+    \end{figure}
+\subsection{Uzyskane rezultaty}
+\section{Detekcja obiektu za pomocą binaryzacji i klasycznych technik przetwarzania obrazów}
+\section{Porównanie skuteczności algorytmów}
 
-
-% TODO
-\chapter{Weryfikacja i walidacja}
+\chapter{Problematyka i rozwiązania}
 \label{ch:06}
+% TODO
+\chapter{Podsumowanie i wnioski}
+\label{ch:07}
 \begin{itemize}
 \item sposób testowania w ramach pracy (np. odniesienie do modelu V)
 \item organizacja eksperymentów
@@ -1071,15 +1173,6 @@ class test : public basic
 \end{tabular}
 \end{table}  
 
-
-
-% TODO
-\chapter{Podsumowanie i wnioski}
-\begin{itemize}
-\item uzyskane wyniki w świetle postawionych celów i zdefiniowanych wyżej wymagań
-\item kierunki ewentualnych danych prac (rozbudowa funkcjonalna …)
-\item problemy napotkane w trakcie pracy
-\end{itemize}
 
 
 
