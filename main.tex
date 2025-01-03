@@ -385,6 +385,7 @@ escapeinside={@*}{*@},%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\renewcommand{\lstlistingname}{Kod} % Zmienia "Listing" na "Kod"
 
 \begin{document}
 %\kslistofremarks
@@ -914,7 +915,7 @@ Pobranie wstępnie wytrenowanych wag modelu YOLOv7:
 Model wytrenowano, uruchamiając poniższą komendę:
 \begin{verbatim}
 %env WANDB_MODE=disabled
-!python yolov7/train.py --data Ball-Detection-3/data.yaml --cfg yolov7/cfg/training/yolov7.yaml --weights yolov7.pt --epochs 10 --batch-size 16 --device 0
+!python yolov7/train.py --data Ball-Detection-3/data.yaml --cfg yolov7/cfg/training/yolov7.yaml --weights yolov7.pt --epochs 50 --batch-size 16 --device 0
 \end{verbatim}
 Parametry treningu były następujące:
 \begin{itemize}
@@ -925,7 +926,8 @@ Parametry treningu były następujące:
     \item \texttt{--batch-size}: Rozmiar grupy treningowej (ustawiono na 16).
     \item \texttt{--device}: GPU (0 oznacza pierwsze dostępne GPU).
 \end{itemize}
-Po zakończeniu treningu najlepsze wagi modelu są zapisywane w pliku \texttt{best.pt}. Plik ten będzie wykorzystywany w programie do detekcji obiektu w czasie rzeczywistym.
+Po zakończeniu treningu najlepsze wagi modelu są zapisywane w pliku \texttt{best.pt} w folderze \texttt{runs}. Plik ten będzie wykorzystywany w programie do detekcji obiektu w czasie rzeczywistym.
+Dodatkowo należy pobrać foldery \texttt{models} oraz \texttt{utils} z repozytorium YOLOv7 i umieścić je w folderze z projektem.
 
 % TODO
 \chapter{Proces tworzenia robota mobilnego}
@@ -1015,7 +1017,7 @@ Zdjęcie \ref{fig:Robot_gotowy} przedstawia gotową konstrukcję robota mobilneg
 \newpage
 
 \section{Dostosowanie RaspberryPi}
-Na Raspberry Pi zainstalowano system operacyjny Debian GNU/Linux 12 (Bookworm), który jest 64-bitową wersją opartą na jądrze Linux 6.6.51, zoptymalizowaną pod architekturę ARM (aarch64). Wybrana wersja systemu jest kompatybilna z bibliotekami istotnymi do poprawnego działania systemu wizyjnego. Aby zoptymalizować pracę programu i zapewnić pełną kontrolę nad jego zależnościami, utworzono dedykowane wirtualne środowisko, w którym przechowywane są wszystkie wymagane biblioteki. Środowisko to zostało stworzone przy użyciu narzędzia \texttt{venv} za pomocą poniższego polecenia w terminalu: \begin{verbatim} python3 -m venv nazwa-env \end{verbatim} Po utworzeniu środowiska wirtualnego należy je aktywować, używając polecenia: \begin{verbatim} source nazwa-env/bin/activate \end{verbatim} Program jest uruchamiany wewnątrz tego środowiska, co pozwala na uniknięcie konfliktów między wersjami bibliotek oraz zapewnia powtarzalność działania systemu na różnych urządzeniach. Przykładowe polecenie uruchamiające program w aktywnym środowisku to: \begin{verbatim} python3 program.py \end{verbatim} Takie podejście gwarantuje, że wszystkie zależności programu są odpowiednio załadowane i kompatybilne z systemem operacyjnym oraz sprzętem Raspberry Pi.
+Na Raspberry Pi zainstalowano system operacyjny Debian GNU/Linux 12 (Bookworm), który jest 64-bitową wersją opartą na jądrze Linux 6.6.51, zoptymalizowaną pod architekturę ARM (aarch64). Wybrana wersja systemu jest kompatybilna z bibliotekami istotnymi do poprawnego działania systemu wizyjnego. Aby zoptymalizować pracę programu i zapewnić pełną kontrolę nad jego zależnościami, utworzono dedykowane wirtualne środowisko, w którym przechowywane są wszystkie wymagane biblioteki. Środowisko to zostało stworzone przy użyciu narzędzia \texttt{venv} za pomocą poniższego polecenia w terminalu: \begin{verbatim} python -m venv nazwa-env \end{verbatim} Po utworzeniu środowiska wirtualnego należy je aktywować, używając polecenia: \begin{verbatim} source nazwa-env/bin/activate \end{verbatim} Program jest uruchamiany wewnątrz tego środowiska, co pozwala na uniknięcie konfliktów między wersjami bibliotek oraz zapewnia powtarzalność działania systemu na różnych urządzeniach. Przykładowe polecenie uruchamiające program w aktywnym środowisku to: \begin{verbatim} python program.py \end{verbatim} Takie podejście gwarantuje, że wszystkie zależności programu są odpowiednio załadowane i kompatybilne z systemem operacyjnym oraz sprzętem Raspberry Pi.
 \newpage
 \subsection{Spis wymaganych bibliotek}
 Poniżej przedstawiono listę bibliotek wymaganych do uruchomienia systemu wizyjnego oraz sterowania robotem mobilnym, z podziałem na ich funkcje:
@@ -1039,11 +1041,6 @@ Poniżej przedstawiono listę bibliotek wymaganych do uruchomienia systemu wizyj
     \begin{itemize}
         \item \textbf{RPi.GPIO} – Sterowanie pinami GPIO na Raspberry Pi.
         \item \textbf{pigpio} – Niskopoziomowe sterowanie GPIO, np. dla serwomechanizmów.
-    \end{itemize}
-    
-    \item \textbf{Regulator PID:}
-    \begin{itemize}
-        \item \textbf{simple\_pid} – Implementacja regulatora PID, używana do precyzyjnego sterowania, np. serwomechanizmami.
     \end{itemize}
     
     \item \textbf{Inne ważne biblioteki:}
@@ -1110,28 +1107,293 @@ Szczegółowy spis wszystkich bibliotek został przedstawiony w pliku Requiremen
 \chapter{Analiza działania systemu wizyjnego}
 \label{ch:05}
 W niniejszym rozdziale przedstawiono analizę działania systemu wizyjnego, który został zaimplementowany w ramach pracy. System ten umożliwia detekcję obiektu na obrazie z kamery Raspberry Pi, a następnie sterowanie serwomechanizmami w celu utrzymania obiektu w centrum kadru. W ramach analizy porównano skuteczność dwóch algorytmów detekcji obiektów: YOLOv7 oraz binaryzację i klasyczne techniki przetwarzania obrazów. W celu oceny skuteczności algorytmów przeprowadzono testy na zestawie danych treningowych, a następnie porównano wyniki. W kolejnych sekcjach przedstawiono opis działania programu, uzyskane rezultaty oraz porównanie skuteczności algorytmów.
+
 \section{Detekcja obiektu za pomocą narzędzi głębokiego uczenia}
+\newpage
 \subsection{Opis działania programu}
-\begin{figure}
-    \centering
-    \begin{lstlisting}
-    class test : public basic
-    {
-        public:
-          test (int a);
-          friend std::ostream operator<<(std::ostream & s, 
-                                         const test & t);
-        protected:
-          int _a;  
-          
-    };
-    \end{lstlisting}
-    \caption{Pseudokod w \texttt{listings}.}
-    \label{fig:pseudokod:listings}
-    \end{figure}
+
+System opiera się na detekcji obiektu (piłki) w czasie rzeczywistym z wykorzystaniem modelu YOLO oraz sterowaniu ruchem robota przy pomocy serwomechanizmów i silników DC. Program realizuje funkcjonalność autonomicznego śledzenia piłki oraz reagowania na jej pozycję w kadrze kamery.
+
+\paragraph{Wczytanie modelu}
+Model YOLO, zapisany w pliku \texttt{best.pt}, jest wczytywany z użyciem funkcji \texttt{attempt\_load}. Model jest przełączany w tryb ewaluacyjny (ang. \textit{evaluation mode}), aby umożliwić jego wykorzystanie wyłącznie do predykcji. Kod odpowiedzialny za ładowanie modelu przedstawiono w Kodzie~\ref{lst:model_loading}.
+
+\begin{lstlisting}[language=Python, caption={Ładowanie modelu YOLO do pamięci.}, label={lst:model_loading}, captionpos=b]
+model_path = "/home/lukasgrab/GoodDetection/runs/train/ball_detection6/weights/best.pt"
+device = torch.device('cpu')
+model = attempt_load(model_path, map_location=device)
+model.eval()
+\end{lstlisting}
+
+\paragraph{Detekcja piłki}
+Podstawowa logika detekcji polega na przetwarzaniu obrazu z kamery, który jest skalowany i przetwarzany przez model YOLO. Wyniki predykcji są filtrowane za pomocą mechanizmu \textit{non-max suppression} w celu eliminacji zbędnych ramek detekcji. Po wykryciu piłki jej pozycja jest obliczana względem środka obrazu. Fragment kodu odpowiedzialny za tę funkcję przedstawiono w Kodzie~\ref{lst:ball_detection}.
+
+\begin{lstlisting}[language=Python, caption={Logika detekcji piłki przy użyciu modelu YOLO.}, label={lst:ball_detection}, captionpos=b]
+predictions = model(img)[0]
+predictions = non_max_suppression(predictions, conf_thres=0.10, iou_thres=0.45)
+
+for det in predictions:
+    if det is not None and len(det):
+        for *xyxy, conf, cls in det:
+            x1, x2 = int(xyxy[0]), int(xyxy[2])
+            y1, y2 = int(xyxy[1]), int(xyxy[3])
+            ball_center_x = (x1 + x2) / 2
+            ball_center_y = (y1 + y2) / 2
+\end{lstlisting}
+
+\newpage
+\paragraph{Logika kwadratu w centrum obrazu}
+W centrum obrazu rysowany jest kwadrat, który definiuje obszar uznawany za "środek obrazu". Rozmiar kwadratu został dobrany w taki sposób, aby stworzyć większy obszar stabilności dla kamery. Gdyby centrum zostało zdefiniowane jako pojedynczy piksel, nawet niewielkie ruchy obiektu wynikające z drgań kamery, zmieniających się warunków oświetleniowych lub naturalnego ruchu piłki powodowałyby ciągłą próbę korekcji pozycji przez serwomechanizmy. Taka sytuacja skutkowałaby niestabilnością układu.
+
+Kwadrat pozwala na bardziej stabilne śledzenie, ponieważ robot uznaje piłkę za "wycentrowaną", gdy znajduje się w tym obszarze, nawet jeśli nie jest dokładnie w punkcie środkowym.
+
+\paragraph{Definiowanie ograniczeń kątowych}
+Sterowanie serwomechanizmami w programie wymagało zdefiniowania zakresów ruchu, aby uniknąć uszkodzenia mechanicznego urządzeń. Dla serwomechanizmu odpowiedzialnego za ruch poziomy (ang. \textit{pan}) przyjęto ograniczenia w zakresie od $-45^{\circ}$ do $45^{\circ}$. Z kolei serwomechanizm odpowiedzialny za ruch pionowy (ang. \textit{tilt}) może zmieniać kąt w zakresie od $-30^{\circ}$ do $30^{\circ}$. Te wartości są podyktowane fizycznymi możliwościami serwomechanizmów oraz potrzebą zapewnienia odpowiedniej elastyczności ruchu robota.
+
+\paragraph{Przeliczanie kąta na szerokość impulsu}
+Sterowanie serwomechanizmami wymaga przekształcenia kąta (w stopniach) na szerokość impulsu (ang. \textit{pulse width}) w mikrosekundach, co odpowiada wymaganiom sterownika serwomechanizmu. Proces ten realizuje funkcja przedstawiona w Kodzie~\ref{lst:set_servo_angle}.
+
+\begin{lstlisting}[language=Python, caption={Przeliczanie kąta na szerokość impulsu.}, label={lst:set_servo_angle}, captionpos=b]
+def set_servo_angle(pin, angle):
+    pulse_width = 500 + (angle + 90) * 2000 / 180
+    pi.set_servo_pulsewidth(pin, pulse_width)
+\end{lstlisting}
+
+\newpage
+Funkcja \texttt{set\_servo\_angle} realizuje następujące kroki:
+\begin{itemize}
+    \item \texttt{angle} — kąt w stopniach, przekazywany do funkcji. Może przyjmować wartości od $-90^{\circ}$ do $90^{\circ}$.
+    \item \texttt{pulse\_width} — szerokość impulsu w mikrosekundach, obliczana na podstawie wzoru:
+    \begin{align}
+    \texttt{pulse\_width} = 500 + \frac{(\texttt{angle} + 90) \cdot 2000}{180}
+    \end{align}
+    gdzie:
+    \begin{itemize}
+        \item $500$ — minimalna szerokość impulsu w mikrosekundach, odpowiadająca kątowi $-90^{\circ}$,
+        \item $2000$ — maksymalna różnica szerokości impulsu, odpowiadająca zakresowi $180^{\circ}$,
+        \item $180$ — zakres pełnych kątów ruchu serwomechanizmu ($-90^{\circ}$ do $90^{\circ}$),
+        \item $\texttt{angle} + 90$ — przesunięcie kąta, aby obliczenia obejmowały pełny zakres od $0^{\circ}$ do $180^{\circ}$.
+    \end{itemize}
+    \item Funkcja wywołuje \texttt{pi.set\_servo\_pulsewidth}, aby ustawić odpowiednią szerokość impulsu na wybranym pinie GPIO (\texttt{pin}).
+\end{itemize}
+
+\paragraph{Sterowanie serwomechanizmami}
+Sterowanie serwomechanizmami realizuje dynamiczne dostosowanie kątów nachylenia w celu śledzenia pozycji piłki. Pozycja piłki w kadrze obrazu jest przekształcana na współrzędne w pikselach, a następnie na kąty dla serwomechanizmów. Kluczowy fragment kodu odpowiedzialny za sterowanie serwomechanizmami przedstawiono w Kodzie~\ref{lst:servo_control}.
+
+\begin{lstlisting}[language=Python, caption={Algorytm sterowania serwomechanizmami.}, label={lst:servo_control}, captionpos=b]
+new_pan_angle = current_pan_angle + (normalized_dx * 5)
+new_tilt_angle = current_tilt_angle - (normalized_dy * 5)
+
+new_pan_angle = max(MIN_ANGLE_PAN, min(MAX_ANGLE_PAN, new_pan_angle))
+new_tilt_angle = max(MIN_ANGLE_TILT, min(MAX_ANGLE_TILT, new_tilt_angle))
+
+set_servo_angle(servo_pin_pan, new_pan_angle)
+set_servo_angle(servo_pin_tilt, new_tilt_angle)
+\end{lstlisting}
+
+\paragraph{Logika sterowania ruchem}
+Robot realizuje ruch do przodu, gdy piłka jest wykryta i znajduje się w granicach zadanych kątów serwomechanizmów. W przypadku, gdy kąt poziomy (pan) przekroczy wartość graniczną, robot wykonuje skręt w odpowiednią stronę. Logikę sterowania ruchem przedstawiono w Kodzie~\ref{lst:motion_logic}.
+
+\begin{lstlisting}[language=Python, caption={Logika sterowania ruchem robota.}, label={lst:motion_logic}, captionpos=b]
+if abs(current_tilt_angle) < TILT_STOP_THRESHOLD:
+    move_forward()
+else:
+    stop_motors()
+
+if abs(current_pan_angle) >= PAN_TURN_THRESHOLD:
+    stop_motors()
+    if current_pan_angle > 0:
+        turn_left()
+    else:
+        turn_right()
+\end{lstlisting}
+
+\paragraph{Zgubienie piłki}
+Jeśli piłka nie zostanie wykryta przez określony czas, robot przechodzi w tryb szukania. W tym trybie serwomechanizmy wykonują w przestrzeni ruchy eliptyczne w celu ponownego odnalezienia obiektu. Ruch ten opiera się na funkcjach trygonometrycznych \texttt{sin} i \texttt{cos}, które generują odpowiednie kąty dla serwomechanizmów. Kluczowy fragment kodu realizujący ten mechanizm przedstawiono w Kodzie~\ref{lst:lost_ball}.
+
+\begin{lstlisting}[language=Python, caption={Logika zgubienia piłki i ruchu eliptycznego.}, label={lst:lost_ball}, captionpos=b]
+if time.time() - last_detected_time > 1:
+    search_time += 0.1
+    new_pan_angle = PAN_AMPLITUDE * math.cos(search_time)
+    new_tilt_angle = TILT_AMPLITUDE * math.sin(search_time) + TILT_OFFSET
+    new_pan_angle = max(MIN_ANGLE_PAN, min(MAX_ANGLE_PAN, new_pan_angle))
+    new_tilt_angle = max(MIN_ANGLE_TILT, min(MAX_ANGLE_TILT, new_tilt_angle))
+
+    set_servo_angle(servo_pin_pan, new_pan_angle)
+    set_servo_angle(servo_pin_tilt, new_tilt_angle)
+    current_pan_angle = new_pan_angle
+    current_tilt_angle = new_tilt_angle
+\end{lstlisting}
+
+W powyższym kodzie:
+\begin{itemize}
+    \item \texttt{search\_time} — zmienna czasu, która jest inkrementowana w każdej iteracji, aby generować płynne zmiany kąta.
+    \item \texttt{math.cos(search\_time)} — generuje wartości dla poziomego ruchu serwomechanizmu (\texttt{pan}), symulując eliptyczny ruch.
+    \item \texttt{math.sin(search\_time)} — generuje wartości dla pionowego ruchu serwomechanizmu (\texttt{tilt}).
+    \item \texttt{PAN\_AMPLITUDE} i \texttt{TILT\_AMPLITUDE} — amplitudy ruchu poziomego i pionowego, które kontrolują zakres ruchu serwomechanizmów.
+    \item \texttt{TILT\_OFFSET} — przesunięcie pionowe, aby tilt oscylował wokół ustalonej wartości.
+\end{itemize}
+
+\newpage
 \subsection{Uzyskane rezultaty}
+W ramach testów systemu wizyjnego przeprowadzono analizę skuteczności detekcji piłki w różnych warunkach oświetleniowych oraz w obecności obiektów potencjalnie zakłócających prawidłowe działanie algorytmu. Celem testów było zweryfikowanie odporności systemu na zmienne warunki środowiskowe oraz jego zdolności do ignorowania obiektów o zbliżonym kształcie lub barwie do śledzonej piłki.
+
+Na Rysunku~\ref{fig:Wykrycie piłki1} przedstawiono sytuację przy dobrym oświetleniu, gdzie system poprawnie wykrył piłkę czerwoną, jednocześnie ignorując inne obiekty znajdujące się w polu widzenia kamery. Natomiast na Rysunku~\ref{fig:Wykrycie piłki2} zaprezentowano scenariusz przy gorszych warunkach oświetleniowych, w którym system nadal poprawnie wykrył piłkę czerwoną, jednak błędnie sklasyfikował obiekt o innej barwie jako piłkę.
+
+\begin{figure}[!hb]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194147.png}
+    \caption{Sytuacja przy dobrym oświetleniu — poprawne wykrycie piłki czerwonej oraz zignorowanie piłki o innych barwach.}
+    \label{fig:Wykrycie_piłki1}
+\end{figure}
+
+\begin{figure}[!hb]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194208.png}
+    \caption{Sytuacja przy złym oświetleniu — poprawne wykrycie piłki czerwonej oraz błędne wskazanie piłki o innych barwach.}
+    \label{fig:Wykrycie_piłki2}
+\end{figure}
+
+\newpage
+Analiza wyników wykazała, że system wizyjny działa poprawnie w warunkach dobrego oświetlenia, precyzyjnie identyfikując piłkę czerwoną oraz ignorując inne obiekty. W takich warunkach algorytm wykazuje wysoką precyzję i skuteczność w wykrywaniu obiektu zgodnego z jego charakterystyką. 
+
+W przypadku słabego oświetlenia zauważono spadek skuteczności systemu. Algorytm błędnie klasyfikuje obiekt o podobnym kształcie jako piłkę, co może wynikać z ograniczeń modelu detekcji lub niewystarczającej jakości danych treningowych dla scen o niskim poziomie światła. Mimo to system nadal rozpoznaje piłkę czerwoną, co świadczy o jego częściowej odporności na zmienne warunki oświetleniowe.
+
+\begin{figure}[!hb]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo7 robot/Para pilek ciemno poprawnie wskazal czerwona.png}
+    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej}
+    \label{fig:TerminalOutput}
+\end{figure}
+
+Rysunek~\ref{fig:TerminalOutput} przedstawia widok terminala programu uruchomionego na Raspberry Pi. Jest to widok sytuacji, w której otoczenie jest dobrze oświetlone a program poprawnie wskazał czerwoną piłkę. W sytuacji gorszego oświetlenia i błędnej detekcji dwóch obiektów, program utrzymuje współrzędne serwomechanizmów dla pierwszego zidentyfikowanego obiektu. Ze względu na ograniczone zasoby mocy obliczeniowej Raspberry Pi, zdecydowano się na rezygnację z wyświetlania obrazu bezpośrednio na urządzeniu. Informacje o detekcji, takie jak status wykrycia obiektu (\texttt{DETECTED/SEARCHING}), wartości kątów serwomechanizmów (\texttt{Pan/Tilt}) oraz liczba klatek na sekundę (\texttt{FPS}), są przesyłane do terminala komputera połączonego z Raspberry Pi przez SSH.
+
+Warto zauważyć, że Rysunki~\ref{fig:Wykrycie_piłki1} i~\ref{fig:Wykrycie_piłki2} ilustrują działanie tego samego programu, lecz uruchomionego na komputerze w celu wizualizacji. Na obrazach widoczny jest niebieski kwadrat w centrum kadru, który wyznacza obszar uznawany za środek obrazu. Dzięki jego zastosowaniu program jest w stanie bardziej stabilnie śledzić pozycję obiektu. 
+
+
+
+\newpage
+W celu oceny skuteczności zaprojektowanego systemu wizyjnego przeprowadzono testy w różnych warunkach oświetleniowych oraz w obecności obiektów potencjalnie zakłócających detekcję piłki. Analiza wyników opierała się na obserwacji działania programu w scenariuszach symulujących rzeczywiste sytuacje. Na Rysunku \ref{fig:Wykrycie piłki3} przedstawiono sytuację, w której system działał w warunkach dobrego oświetlenia. Detekcja piłki czerwonej została przeprowadzona prawidłowo, a inne obiekty, takie jak czerwona poduszka znajdująca się w kadrze, zostały skutecznie zignorowane. Wynik ten potwierdza, że mechanizm filtrowania wyników detekcji, oparty na \textit{non-max suppression}, skutecznie eliminuje zbędne ramki detekcji.
+
+Rysunek \ref{fig:Wykrycie piłki4} prezentuje wyniki systemu w trudniejszych warunkach oświetleniowych, w których detekcja piłki czerwonej została przeprowadzona poprawnie, mimo ograniczonej widoczności. Co więcej, system zignorował obiekt o zbliżonym kolorze (czerwoną poduszkę), co świadczy o zdolności modelu do rozróżniania kluczowych cech obiektów.
+
+\begin{figure}[!hb]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194354.png}
+    \caption{Sytuacja przy dobrym oświetleniu - poprawne wykrycie piłki czerwonej oraz zignorowanie czerwonego obiektu.}
+    \label{fig:Wykrycie piłki3}
+\end{figure}
+
+\begin{figure}[!hb]
+    \centering
+    \includegraphics[width=0.5\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194641.png}
+    \caption{Sytuacja przy złym oświetleniu - poprawne wykrycie piłki czerwonej oraz poprawne zignorowanie czerwonego obiektu.}
+    \label{fig:Wykrycie piłki4}
+\end{figure}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo7 robot/pilka i poduszka zgaszone swiatlo dalej wykrywa.png}
+    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
+    \label{fig:Wykrycie piłki5}
+\end{figure}
+
+Rysunek \ref{fig:Wykrycie piłki5} przedstawia widok terminala programu uruchomionego na Raspberry Pi. Jest to widok sytuacji, w której otoczenie jest dobrze oświetlone a program poprawnie wskazał czerwoną piłkę. Jednakże można zauważyć, iż program w pewnych momentach działania nie wykrywał modelu wcale i rozpoczął sekwencję poszukiwania.
+
+\newpage
+
 \section{Detekcja obiektu za pomocą binaryzacji i klasycznych technik przetwarzania obrazów}
+
+W podrozdziale tym przedstawiono podejście do detekcji obiektu (piłki czerwonej) z wykorzystaniem klasycznych technik przetwarzania obrazów, takich jak binaryzacja i analiza konturów. W przeciwieństwie do metod opartych na zaawansowanych modelach uczenia maszynowego, zastosowane rozwiązanie opiera się na transformacjach kolorystycznych i filtracji, co pozwala na efektywną detekcję przy ograniczonych zasobach obliczeniowych dostępnych na platformie Raspberry Pi.
+
+\subsection{Opis działania programu}
+
+Program rozpoczyna swoje działanie od pobrania obrazu z kamery w czasie rzeczywistym, który następnie jest przetwarzany w celu wykrycia piłki czerwonej. Proces ten opiera się na kilku kluczowych krokach:
+
+\paragraph{Konwersja przestrzeni barw}
+Pierwszym krokiem jest konwersja obrazu z przestrzeni barw RGB na przestrzeń HSV (ang. \textit{Hue, Saturation, Value}). Przestrzeń HSV umożliwia łatwiejszą separację kolorów, co jest szczególnie przydatne przy detekcji obiektów o specyficznej barwie, takich jak piłka czerwona. Konwersję realizuje funkcja \texttt{cv2.cvtColor}, której działanie przedstawiono w Kodzie~\ref{lst:hsv_conversion}.
+
+\begin{lstlisting}[language=Python, caption={Konwersja obrazu z przestrzeni RGB do HSV.}, label={lst:hsv_conversion}, captionpos=b]
+hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+\end{lstlisting}
+
+\paragraph{Binaryzacja obrazu}
+W celu wyodrębnienia obszarów odpowiadających kolorowi czerwonej piłki zastosowano binaryzację z użyciem dwóch zakresów wartości HSV. Zakresy te uwzględniają różne odcienie czerwieni występujące w przestrzeni barw HSV, co pozwala na dokładniejsze uchwycenie piłki. Fragment kodu odpowiedzialny za binaryzację przedstawiono w Kodzie~\ref{lst:binaryzation}.
+
+\begin{lstlisting}[language=Python, caption={Binaryzacja obrazu w oparciu o zakresy HSV.}, label={lst:binaryzation}, captionpos=b]
+lower_red1 = np.array([0, 120, 70])
+upper_red1 = np.array([10, 255, 255])
+lower_red2 = np.array([170, 120, 70])
+upper_red2 = np.array([180, 255, 255])
+
+mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
+mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
+mask = cv2.add(mask1, mask2)
+\end{lstlisting}
+
+Binaryzacja generuje maskę, w której piksele należące do zakresów koloru czerwonego mają wartość 1, a pozostałe - 0. Dzięki połączeniu dwóch zakresów (dolnego i górnego), algorytm uwzględnia różnice w odcieniach czerwieni, które mogą występować w różnych warunkach oświetleniowych.
+
+\paragraph{Analiza konturów}
+Na kolejnym etapie program identyfikuje kontury obiektów na binaryzowanej masce. Dla każdego z konturów obliczana jest powierzchnia oraz okrągłość, która pozwala odrzucić obiekty o kształtach znacząco różniących się od idealnego okręgu. Kryterium okrągłości obiektu opiera się na stosunku powierzchni konturu do pola powierzchni okręgu opisanego na konturze. Kod odpowiedzialny za analizę konturów przedstawiono w Kodzie~\ref{lst:contour_analysis}.
+
+\begin{lstlisting}[language=Python, caption={Analiza konturów w celu identyfikacji piłki.}, label={lst:contour_analysis}, captionpos=b]
+contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+
+for contour in contours:
+    area = cv2.contourArea(contour)
+    if area > 300:
+        ((x, y), radius) = cv2.minEnclosingCircle(contour)
+        circle_area = np.pi * (radius ** 2)
+        if 0.6 < area / circle_area < 1.4:
+            ball_center_x = int(x)
+            ball_center_y = int(y)
+            detected = True
+\end{lstlisting}
+
+
+\subsection{Uzyskane rezultaty}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193719.png}
+    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
+    \label{fig:Wykrycie piłki5}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193549.png}
+    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
+    \label{fig:Wykrycie piłki5}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193840.png}
+    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
+    \label{fig:Wykrycie piłki5}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193858.png}
+    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
+    \label{fig:Wykrycie piłki5}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193817.png}
+    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
+    \label{fig:Wykrycie piłki5}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193917.png}
+    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
+    \label{fig:Wykrycie piłki5}
+\end{figure}
 \section{Porównanie skuteczności algorytmów}
+sss
+
+
 
 \chapter{Problematyka i rozwiązania}
 \label{ch:06}

@@ -22,7 +22,18 @@
 \contentsline {figure}{\numberline {4.5}{\ignorespaces Widok rzutu górnego na górne piętro robota.}}{24}{figure.caption.23}%
 \contentsline {figure}{\numberline {4.6}{\ignorespaces Gotowa konstrukcja robota mobilnego.}}{25}{figure.caption.24}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Pseudokod w \texttt {listings}.}}{29}{figure.caption.25}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Sytuacja przy dobrym oświetleniu — poprawne wykrycie piłki czerwonej oraz zignorowanie piłki o innych barwach.}}{35}{figure.caption.33}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Sytuacja przy złym oświetleniu — poprawne wykrycie piłki czerwonej oraz błędne wskazanie piłki o innych barwach.}}{35}{figure.caption.34}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej}}{36}{figure.caption.35}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Sytuacja przy dobrym oświetleniu - poprawne wykrycie piłki czerwonej oraz zignorowanie czerwonego obiektu.}}{37}{figure.caption.36}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Sytuacja przy złym oświetleniu - poprawne wykrycie piłki czerwonej oraz poprawne zignorowanie czerwonego obiektu.}}{37}{figure.caption.37}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}}{38}{figure.caption.38}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}}{41}{figure.caption.42}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}}{41}{figure.caption.43}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}}{41}{figure.caption.44}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}}{42}{figure.caption.45}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}}{42}{figure.caption.46}%
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}}{42}{figure.caption.47}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
