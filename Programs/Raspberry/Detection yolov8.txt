@@ -1,0 +1,145 @@
+import sys
+sys.path.append('/usr/lib/python3/dist-packages')
+import time
+import cv2
+import numpy as np
+from ultralytics import YOLO
+from picamera2 import Picamera2
+import pigpio
+import math
+
+# Ścieżka do modelu YOLOv8
+model_path = "/home/lukasgrab/BetterDetection/best_320.pt"
+model = YOLO(model_path)
+
+# Konfiguracja GPIO dla serwomechanizmów
+servo_pin_pan = 18  # Serwo poziome (pan)
+servo_pin_tilt = 17  # Serwo pionowe (tilt)
+pi = pigpio.pi()
+if not pi.connected:
+    print("Nie udało się połączyć z pigpiod. Upewnij się, że demon jest uruchomiony.")
+    sys.exit(1)
+
+def set_servo_angle(pin, angle):
+    """Ustawienie kąta serwomechanizmu."""
+    pulse_width = 500 + (angle + 90) * 2000 / 180
+    pi.set_servo_pulsewidth(pin, pulse_width)
+
+# Inicjalizacja pozycji serwomechanizmów
+CENTER_ANGLE = 0
+MIN_ANGLE_PAN, MAX_ANGLE_PAN = -45, 45
+MIN_ANGLE_TILT, MAX_ANGLE_TILT = -30, 30
+PAN_AMPLITUDE = 45
+TILT_AMPLITUDE = 20
+TILT_OFFSET = 10
+TILT_STOP_THRESHOLD = 25
+PAN_TURN_THRESHOLD = 25
+current_pan_angle = CENTER_ANGLE
+current_tilt_angle = CENTER_ANGLE
+set_servo_angle(servo_pin_pan, CENTER_ANGLE)
+set_servo_angle(servo_pin_tilt, CENTER_ANGLE)
+
+# Konfiguracja kamery
+picam2 = Picamera2()
+picam2.preview_configuration.main.size = (640, 480)
+picam2.preview_configuration.main.format = "RGB888"
+picam2.preview_configuration.align()
+picam2.configure("preview")
+picam2.start()
+
+# Parametry "kwadratu" w centrum obrazu
+frame_width = 640
+frame_height = 480
+square_size = 150
+square_x1 = int((frame_width / 2) - (square_size / 2))
+square_y1 = int((frame_height / 2) - (square_size / 2))
+square_x2 = int((frame_width / 2) + (square_size / 2))
+square_y2 = int((frame_height / 2) + (square_size / 2))
+
+# Parametry szukania piłki
+prev_time = time.time()
+last_detected_time = time.time()
+search_time = 0
+turning = False
+
+try:
+    while True:
+        # Pobieranie obrazu
+        frame = picam2.capture_array()
+
+        # Detekcja za pomocą YOLOv8
+        results = model(frame, conf=0.3)
+        detected = False
+        largest_box = None
+
+        for result in results:
+            for box in result.boxes:
+                x1, y1, x2, y2 = map(int, box.xyxy[0])
+                confidence = box.conf[0]
+                if confidence > 0.5:
+                    detected = True
+                    last_detected_time = time.time()
+                    box_area = (x2 - x1) * (y2 - y1)
+                    if largest_box is None or box_area > largest_box["area"]:
+                        largest_box = {
+                            "center_x": (x1 + x2) / 2,
+                            "center_y": (y1 + y2) / 2,
+                            "area": box_area
+                        }
+
+        if detected and largest_box:
+            ball_center_x = largest_box["center_x"]
+            ball_center_y = largest_box["center_y"]
+            dx = ball_center_x - (frame_width / 2)
+            dy = ball_center_y - (frame_height / 2)
+
+            normalized_dx = dx / (frame_width / 2)
+            normalized_dy = dy / (frame_height / 2)
+
+            new_pan_angle = current_pan_angle + (normalized_dx * 5)
+            new_tilt_angle = current_tilt_angle - (normalized_dy * 5)
+
+            # Ograniczenie kątów
+            new_pan_angle = max(MIN_ANGLE_PAN, min(MAX_ANGLE_PAN, new_pan_angle))
+            new_tilt_angle = max(MIN_ANGLE_TILT, min(MAX_ANGLE_TILT, new_tilt_angle))
+
+            set_servo_angle(servo_pin_pan, new_pan_angle)
+            set_servo_angle(servo_pin_tilt, new_tilt_angle)
+
+            current_pan_angle = new_pan_angle
+            current_tilt_angle = new_tilt_angle
+
+            if not turning and abs(current_pan_angle) >= PAN_TURN_THRESHOLD:
+                turning = True
+                if current_pan_angle > 0:
+                    print("Turning left")
+                else:
+                    print("Turning right")
+                turning = False
+
+        elif time.time() - last_detected_time > 1:
+            search_time += 0.1
+            new_pan_angle = PAN_AMPLITUDE * math.cos(search_time)
+            new_tilt_angle = TILT_AMPLITUDE * math.sin(search_time) + TILT_OFFSET
+            set_servo_angle(servo_pin_pan, new_pan_angle)
+            set_servo_angle(servo_pin_tilt, new_tilt_angle)
+
+            current_pan_angle = new_pan_angle
+            current_tilt_angle = new_tilt_angle
+
+        # Obliczanie FPS
+        current_time = time.time()
+        fps = 1 / (current_time - prev_time)
+        prev_time = current_time
+
+        if detected:
+            print(f"DETECTED | FPS: {fps:.2f} | Pan: {current_pan_angle:.2f} | Tilt: {current_tilt_angle:.2f}")
+        else:
+            print(f"SEARCHING | FPS: {fps:.2f}")
+
+finally:
+    set_servo_angle(servo_pin_pan, CENTER_ANGLE)
+    set_servo_angle(servo_pin_tilt, CENTER_ANGLE)
+    pi.stop()
+    picam2.stop()
+    print("Program zakończony.")

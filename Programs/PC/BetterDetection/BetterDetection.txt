@@ -1,0 +1,66 @@
+import cv2
+from ultralytics import YOLO
+
+# Wczytanie modelu
+path = r'C:\Users\obiwa\Desktop\Studia\Inzynierka\Inzynierkav2\BetterDetection\best_320.pt'
+
+# Wczytanie modelu
+model = YOLO(path)  # Upewnij się, że ścieżka do pliku jest poprawna
+
+# Funkcja do rysowania prostokątów wokół wykrytych obiektów
+def draw_boxes(frame, results):
+    for result in results:
+        for box in result.boxes:
+            x1, y1, x2, y2 = map(int, box.xyxy[0])  # Współrzędne prostokąta
+            confidence = box.conf[0]  # Pewność predykcji
+            class_id = int(box.cls[0])  # Klasa ID (np. 0 dla piłki)
+            
+            # Dodaj ręczne mapowanie nazw klas, jeśli `result.names` jest puste
+            class_names = {0: "Ball"}  # Zamień na właściwe klasy
+            label = class_names.get(class_id, "Unknown")
+
+            if confidence > 0.5:  # Możesz dostosować próg pewności
+                # Rysowanie prostokąta i etykiety
+                cv2.rectangle(frame, (x1, y1), (x2, y2), (0, 255, 0), 2)
+                cv2.putText(frame, f"{label} {confidence:.2f}", (x1, y1 - 10),
+                            cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 255, 0), 2)
+
+# Uruchomienie kamery
+cap = cv2.VideoCapture(0)  # Możesz zmienić na inną kamerę, np. `cv2.VideoCapture(1)`
+
+if not cap.isOpened():
+    print("Nie udało się otworzyć kamery.")
+    exit()
+
+# Ustaw rozdzielczość kamery na 320x320
+cap.set(cv2.CAP_PROP_FRAME_WIDTH, 320)
+cap.set(cv2.CAP_PROP_FRAME_HEIGHT, 320)
+
+try:
+    while True:
+        ret, frame = cap.read()
+        if not ret:
+            print("Nie można pobrać klatki z kamery.")
+            break
+
+        # Wykonywanie detekcji
+        results = model(frame, conf=0.3)  # Możesz dostosować próg `conf`
+
+        # Debugowanie wyników
+        for result in results:
+            print(f"Detected classes: {[box.cls[0] for box in result.boxes]}")
+            print(f"Class names mapping: {result.names}")
+
+        # Rysowanie wykrytych obiektów
+        draw_boxes(frame, results)
+
+        # Wyświetlanie obrazu
+        cv2.imshow("YOLOv8 - Detekcja Piłki", frame)
+
+        # Przerwanie pętli po naciśnięciu klawisza 'q'
+        if cv2.waitKey(1) & 0xFF == ord('q'):
+            break
+finally:
+    cap.release()
+    cv2.destroyAllWindows()
+

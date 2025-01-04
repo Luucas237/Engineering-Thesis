@@ -1,0 +1,223 @@
+import sys
+sys.path.append('/usr/lib/python3/dist-packages')
+import torch
+import time
+import numpy as np
+import cv2
+import RPi.GPIO as GPIO
+from simple_pid import PID
+from picamera2 import Picamera2
+from models.experimental import attempt_load
+from utils.general import non_max_suppression, scale_coords
+import pigpio
+import math
+
+# Ścieżka do modelu
+model_path = "/home/lukasgrab/GoodDetection/runs/train/ball_detection6/weights/best.pt"
+device = torch.device('cpu')
+model = attempt_load(model_path, map_location=device)
+model.eval()
+
+# Konfiguracja GPIO dla serwomechanizmów
+servo_pin_pan = 18  # Serwo poziome (pan)
+servo_pin_tilt = 17  # Serwo pionowe (tilt)
+pi = pigpio.pi()
+if not pi.connected:
+    print("Nie udało się połączyć z pigpiod. Upewnij się, że demon jest uruchomiony.")
+    sys.exit(1)
+
+def set_servo_angle(pin, angle):
+    """Ustawienie kąta serwomechanizmu."""
+    pulse_width = 500 + (angle + 90) * 2000 / 180
+    pi.set_servo_pulsewidth(pin, pulse_width)
+
+# Inicjalizacja pozycji serwomechanizmów
+CENTER_ANGLE = 0
+MIN_ANGLE_PAN, MAX_ANGLE_PAN = -45, 45
+MIN_ANGLE_TILT, MAX_ANGLE_TILT = -30, 30
+PAN_AMPLITUDE = 45  # Amplituda ruchu eliptycznego dla pan
+TILT_AMPLITUDE = 20  # Amplituda ruchu eliptycznego dla tilt
+TILT_OFFSET = 10  # Tilt będzie oscylować wokół tej wartości
+TILT_STOP_THRESHOLD = 25  # Tilt, przy którym silniki się zatrzymują
+PAN_TURN_THRESHOLD = 25  # Pan, przy którym pojazd skręca
+current_pan_angle = CENTER_ANGLE
+current_tilt_angle = CENTER_ANGLE
+set_servo_angle(servo_pin_pan, CENTER_ANGLE)
+set_servo_angle(servo_pin_tilt, CENTER_ANGLE)
+
+# Konfiguracja GPIO dla sterowania silnikami
+GPIO.setmode(GPIO.BCM)
+IN1, PWM1 = 26, 12  # Piny dla silnika 1
+IN2, PWM2 = 24, 13  # Piny dla silnika 2
+GPIO.setup(IN1, GPIO.OUT)
+GPIO.setup(PWM1, GPIO.OUT)
+GPIO.setup(IN2, GPIO.OUT)
+GPIO.setup(PWM2, GPIO.OUT)
+pwm1 = GPIO.PWM(PWM1, 25)  # PWM dla silnika 1
+pwm2 = GPIO.PWM(PWM2, 25)  # PWM dla silnika 2
+pwm1.start(0)
+pwm2.start(0)
+
+# Konfiguracja kamery
+picam2 = Picamera2()
+picam2.preview_configuration.main.size = (640, 480)
+picam2.preview_configuration.main.format = "RGB888"
+picam2.preview_configuration.align()
+picam2.configure("preview")
+picam2.start()
+
+# Parametry "kwadratu" w centrum obrazu
+frame_width = 640
+frame_height = 480
+square_size = 150  # Rozmiar kwadratu
+square_x1 = int((frame_width / 2) - (square_size / 2))
+square_y1 = int((frame_height / 2) - (square_size / 2))
+square_x2 = int((frame_width / 2) + (square_size / 2))
+square_y2 = int((frame_height / 2) + (square_size / 2))
+
+# Parametry szukania piłki
+prev_time = time.time()
+last_detected_time = time.time()  # Czas ostatniego wykrycia piłki
+search_time = 0  # Parametr czasu dla ruchu eliptycznego
+turning = False  # Flaga wskazująca, czy robot wykonuje skręt
+
+def stop_motors():
+    """Zatrzymanie silników."""
+    pwm1.ChangeDutyCycle(0)
+    pwm2.ChangeDutyCycle(0)
+
+def turn_left():
+    """Obrót w lewo."""
+    GPIO.output(IN1, GPIO.LOW)
+    GPIO.output(IN2, GPIO.LOW)
+    pwm1.ChangeDutyCycle(20)
+    pwm2.ChangeDutyCycle(20)
+
+def turn_right():
+    """Obrót w prawo."""
+    GPIO.output(IN1, GPIO.HIGH)
+    GPIO.output(IN2, GPIO.HIGH)
+    pwm1.ChangeDutyCycle(20)
+    pwm2.ChangeDutyCycle(20)
+
+def move_forward():
+    """Ruch do przodu."""
+    GPIO.output(IN1, GPIO.HIGH)
+    GPIO.output(IN2, GPIO.LOW)
+    pwm1.ChangeDutyCycle(20)
+    pwm2.ChangeDutyCycle(20)
+
+try:
+    while True:
+        frame = picam2.capture_array()
+
+        # Konwersja obrazu do przestrzeni barw HSV
+        hsv_frame = cv2.cvtColor(frame, cv2.COLOR_RGB2HSV)
+
+        # Przeskalowanie obrazu dla modelu
+        # img = cv2.resize(hsv_frame, (320, 320))
+        img = cv2.resize(frame,(320,320))
+        img = torch.from_numpy(img).float().div(255.0).permute(2, 0, 1).unsqueeze(0).to(device)
+
+        # Detekcja za pomocą modelu
+        with torch.no_grad():
+            predictions = model(img)[0]
+
+        predictions = non_max_suppression(predictions, conf_thres=0.10, iou_thres=0.45)
+
+        detected = False
+        ball_center_x, ball_center_y = None, None
+
+        for det in predictions:
+            if det is not None and len(det):
+                detected = True
+                last_detected_time = time.time()  # Aktualizacja czasu wykrycia
+                det[:, :4] = scale_coords(img.shape[2:], det[:, :4], frame.shape).round()
+
+                for *xyxy, conf, cls in det:
+                    x1, x2 = int(xyxy[0]), int(xyxy[2])
+                    y1, y2 = int(xyxy[1]), int(xyxy[3])
+                    ball_center_x = (x1 + x2) / 2
+                    ball_center_y = (y1 + y2) / 2
+
+                    # Obliczanie przesunięcia względem środka kwadratu
+                    square_center_x = (square_x1 + square_x2) / 2
+                    square_center_y = (square_y1 + square_y2) / 2
+                    dx = ball_center_x - square_center_x
+                    dy = ball_center_y - square_center_y
+
+                    normalized_dx = dx / (frame_width / 2)
+                    normalized_dy = dy / (frame_height / 2)
+
+                    new_pan_angle = current_pan_angle + (normalized_dx * 5)
+                    new_tilt_angle = current_tilt_angle - (normalized_dy * 5)
+
+                    # Ograniczenie kątów
+                    new_pan_angle = max(MIN_ANGLE_PAN, min(MAX_ANGLE_PAN, new_pan_angle))
+                    new_tilt_angle = max(MIN_ANGLE_TILT, min(MAX_ANGLE_TILT, new_tilt_angle))
+
+                    set_servo_angle(servo_pin_pan, new_pan_angle)
+                    set_servo_angle(servo_pin_tilt, new_tilt_angle)
+
+                    current_pan_angle = new_pan_angle
+                    current_tilt_angle = new_tilt_angle
+
+                    # Logika skrętu
+                    if not turning and abs(current_pan_angle) >= PAN_TURN_THRESHOLD:
+                        turning = True
+                        stop_motors()
+                        if current_pan_angle > 0:
+                            turn_left()
+                        else:
+                            turn_right()
+                        time.sleep(0.25)
+                        stop_motors()
+                        turning = False
+
+        if detected:
+            # Gdy piłka jest wykryta
+            if abs(current_tilt_angle) < TILT_STOP_THRESHOLD:
+                move_forward()
+            else:
+                stop_motors()
+        elif time.time() - last_detected_time > 1:
+            # Ruch eliptyczny po zgubieniu piłki przez 1 sekundę
+            search_time += 0.1  # Inkrementacja czasu dla elipsy
+
+            # Obliczenie nowych wartości pan i tilt
+            new_pan_angle = PAN_AMPLITUDE * math.cos(search_time)
+            new_tilt_angle = TILT_AMPLITUDE * math.sin(search_time) + TILT_OFFSET
+
+            # Ograniczenie wartości pan i tilt
+            new_pan_angle = max(MIN_ANGLE_PAN, min(MAX_ANGLE_PAN, new_pan_angle))
+            new_tilt_angle = max(MIN_ANGLE_TILT, min(MAX_ANGLE_TILT, new_tilt_angle))
+
+            set_servo_angle(servo_pin_pan, new_pan_angle)
+            set_servo_angle(servo_pin_tilt, new_tilt_angle)
+
+            current_pan_angle = new_pan_angle
+            current_tilt_angle = new_tilt_angle
+
+        else:
+            stop_motors()
+
+        # Obliczanie FPS
+        current_time = time.time()
+        fps = 1 / (current_time - prev_time)
+        prev_time = current_time
+
+        if detected:
+            print(f"DETECTED | FPS: {fps:.2f} | Pan: {current_pan_angle:.2f} | Tilt: {current_tilt_angle:.2f}")
+        else:
+            print(f"SEARCHING | FPS: {fps:.2f}")
+
+finally:
+    # Czyszczenie
+    set_servo_angle(servo_pin_pan, CENTER_ANGLE)
+    set_servo_angle(servo_pin_tilt, CENTER_ANGLE)
+    pwm1.stop()
+    pwm2.stop()
+    GPIO.cleanup()
+    pi.stop()
+    picam2.stop()
+    print("Program zakończony.")

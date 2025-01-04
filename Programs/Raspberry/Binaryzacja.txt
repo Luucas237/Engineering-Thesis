@@ -1,0 +1,219 @@
+import sys
+sys.path.append('/usr/lib/python3/dist-packages')
+import cv2
+import numpy as np
+import time
+import RPi.GPIO as GPIO
+from picamera2 import Picamera2
+import pigpio
+import math
+
+# Konfiguracja GPIO dla serwomechanizmów
+servo_pin_pan = 18  # Serwo poziome (pan)
+servo_pin_tilt = 17  # Serwo pionowe (tilt)
+pi = pigpio.pi()
+if not pi.connected:
+    print("Nie udało się połączyć z pigpiod. Upewnij się, że demon jest uruchomiony.")
+    sys.exit(1)
+
+def set_servo_angle(pin, angle):
+    """Ustawienie kąta serwomechanizmu."""
+    pulse_width = 500 + (angle + 90) * 2000 / 180
+    pi.set_servo_pulsewidth(pin, pulse_width)
+
+# Inicjalizacja pozycji serwomechanizmów
+CENTER_ANGLE = 0
+MIN_ANGLE_PAN, MAX_ANGLE_PAN = -45, 45
+MIN_ANGLE_TILT, MAX_ANGLE_TILT = -30, 30
+PAN_AMPLITUDE = 45  # Amplituda ruchu eliptycznego dla pan
+TILT_AMPLITUDE = 20  # Amplituda ruchu eliptycznego dla tilt
+TILT_OFFSET = 10  # Tilt będzie oscylować wokół tej wartości
+TILT_STOP_THRESHOLD = 30  # Tilt, przy którym silniki się zatrzymują
+PAN_TURN_THRESHOLD = 25  # Pan, przy którym pojazd skręca
+current_pan_angle = CENTER_ANGLE
+current_tilt_angle = CENTER_ANGLE
+set_servo_angle(servo_pin_pan, CENTER_ANGLE)
+set_servo_angle(servo_pin_tilt, CENTER_ANGLE)
+
+# Konfiguracja GPIO dla sterowania silnikami
+GPIO.setmode(GPIO.BCM)
+IN1, PWM1 = 26, 12  # Piny dla silnika 1
+IN2, PWM2 = 24, 13  # Piny dla silnika 2
+GPIO.setup(IN1, GPIO.OUT)
+GPIO.setup(PWM1, GPIO.OUT)
+GPIO.setup(IN2, GPIO.OUT)
+GPIO.setup(PWM2, GPIO.OUT)
+pwm1 = GPIO.PWM(PWM1, 25)  # PWM dla silnika 1
+pwm2 = GPIO.PWM(PWM2, 25)  # PWM dla silnika 2
+pwm1.start(0)
+pwm2.start(0)
+
+# Konfiguracja kamery
+picam2 = Picamera2()
+picam2.preview_configuration.main.size = (640, 480)
+picam2.preview_configuration.main.format = "RGB888"
+picam2.preview_configuration.align()
+picam2.configure("preview")
+picam2.start()
+
+prev_time = time.time()
+last_detected_time = time.time()  # Czas ostatniego wykrycia piłki
+search_time = 0  # Parametr czasu dla ruchu eliptycznego
+turning = False  # Flaga wskazująca, czy robot wykonuje skręt
+
+# Funkcja do detekcji czerwonej piłki
+def detect_red_ball(frame):
+    hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+    lower_red1 = np.array([0, 120, 70])
+    upper_red1 = np.array([10, 255, 255])
+    lower_red2 = np.array([170, 120, 70])
+    upper_red2 = np.array([180, 255, 255])
+
+    mask1 = cv2.inRange(hsv, lower_red1, upper_red1)
+    mask2 = cv2.inRange(hsv, lower_red2, upper_red2)
+    mask = cv2.add(mask1, mask2)
+
+    contours, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    detected = False
+    ball_center_x, ball_center_y = None, None
+
+    for contour in contours:
+        area = cv2.contourArea(contour)
+        if area > 300:  # Minimalny rozmiar obiektu
+            ((x, y), radius) = cv2.minEnclosingCircle(contour)
+            circle_area = np.pi * (radius ** 2)
+            if 0.6 < area / circle_area < 1.4:  # Tolerancja na okrągłość
+                ball_center_x = int(x)
+                ball_center_y = int(y)
+                detected = True
+
+    return detected, ball_center_x, ball_center_y
+
+def stop_motors():
+    pwm1.ChangeDutyCycle(0)
+    pwm2.ChangeDutyCycle(0)
+
+def turn_left():
+    GPIO.output(IN1, GPIO.LOW)
+    GPIO.output(IN2, GPIO.LOW)
+    pwm1.ChangeDutyCycle(20)
+    pwm2.ChangeDutyCycle(20)
+
+def turn_right():
+    GPIO.output(IN1, GPIO.HIGH)
+    GPIO.output(IN2, GPIO.HIGH)
+    pwm1.ChangeDutyCycle(20)
+    pwm2.ChangeDutyCycle(20)
+
+def move_forward():
+    GPIO.output(IN1, GPIO.HIGH)
+    GPIO.output(IN2, GPIO.LOW)
+    pwm1.ChangeDutyCycle(20)
+    pwm2.ChangeDutyCycle(20)
+
+# Logika inicjalizacji elipsy
+def initialize_ellipse_from_position(current_pan_angle, current_tilt_angle):
+    try:
+        # Wyznaczenie t z pan
+        t = math.acos(current_pan_angle / PAN_AMPLITUDE)
+        # Sprawdzenie kierunku tilt, aby określić górną/dolną połowę elipsy
+        if current_tilt_angle < TILT_OFFSET:  # Jeśli tilt jest poniżej środka elipsy
+            t = 2 * math.pi - t
+    except ValueError:
+        # Obsługa błędów, jeśli wartość jest poza zakresem z powodu niedoskonałości
+        t = 0
+    return t
+
+# Inicjalizacja wartości t
+search_time = initialize_ellipse_from_position(current_pan_angle, current_tilt_angle)
+
+try:
+    while True:
+        frame = picam2.capture_array()
+
+        detected, ball_center_x, ball_center_y = detect_red_ball(frame)
+
+        if detected:
+            # Piłka znaleziona
+            last_detected_time = time.time()  # Zapisanie czasu wykrycia
+            search_time = initialize_ellipse_from_position(current_pan_angle, current_tilt_angle)
+            turning = False
+
+            square_center_x = 640 // 2
+            square_center_y = 480 // 2
+            dx = ball_center_x - square_center_x
+            dy = ball_center_y - square_center_y
+
+            normalized_dx = dx / 320
+            normalized_dy = dy / 240
+
+            new_pan_angle = current_pan_angle + (normalized_dx * 5)
+            new_tilt_angle = current_tilt_angle - (normalized_dy * 5)
+
+            new_pan_angle = max(MIN_ANGLE_PAN, min(MAX_ANGLE_PAN, new_pan_angle))
+            new_tilt_angle = max(MIN_ANGLE_TILT, min(MAX_ANGLE_TILT, new_tilt_angle))
+
+            set_servo_angle(servo_pin_pan, new_pan_angle)
+            set_servo_angle(servo_pin_tilt, new_tilt_angle)
+
+            current_pan_angle = new_pan_angle
+            current_tilt_angle = new_tilt_angle
+
+            # Skręcanie
+            if abs(current_pan_angle) >= PAN_TURN_THRESHOLD:
+                turning = True
+                stop_motors()
+                if current_pan_angle > 0:
+                    turn_left()
+                else:
+                    turn_right()
+                time.sleep(0.25)
+                stop_motors()
+                turning = False
+
+            elif abs(current_tilt_angle) < TILT_STOP_THRESHOLD:
+                move_forward()
+            else:
+                stop_motors()
+
+        elif time.time() - last_detected_time > 1:
+            # Jeśli piłka nie była wykryta przez 1 sekundę, rozpocznij ruch eliptyczny
+            stop_motors()
+            search_time += 0.1  # Inkrementacja czasu dla elipsy
+
+            # Obliczenie nowych wartości pan i tilt
+            new_pan_angle = PAN_AMPLITUDE * math.cos(search_time)
+            new_tilt_angle = TILT_AMPLITUDE * math.sin(search_time) + TILT_OFFSET
+
+            # Zastosowanie ograniczeń dla pan i tilt
+            new_pan_angle = max(MIN_ANGLE_PAN, min(MAX_ANGLE_PAN, new_pan_angle))
+            new_tilt_angle = max(MIN_ANGLE_TILT, min(MAX_ANGLE_TILT, new_tilt_angle))
+
+            set_servo_angle(servo_pin_pan, new_pan_angle)
+            set_servo_angle(servo_pin_tilt, new_tilt_angle)
+
+            current_pan_angle = new_pan_angle
+            current_tilt_angle = new_tilt_angle
+
+        else:
+            stop_motors()
+
+        # Obliczanie FPS
+        current_time = time.time()
+        fps = 1 / (current_time - prev_time)
+        prev_time = current_time
+
+        if detected:
+            print(f"DETECTED | FPS: {fps:.2f} | Pan: {current_pan_angle:.2f} | Tilt: {current_tilt_angle:.2f}")
+        else:
+            print(f"SEARCHING | FPS: {fps:.2f}")
+
+finally:
+    set_servo_angle(servo_pin_pan, CENTER_ANGLE)
+    set_servo_angle(servo_pin_tilt, CENTER_ANGLE)
+    pwm1.stop()
+    pwm2.stop()
+    GPIO.cleanup()
+    pi.stop()
+    picam2.stop()
+    print("Program zakończony.")
