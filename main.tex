@@ -975,6 +975,13 @@ Aby zrealizować założenia projektowe, wykorzystano następujące moduły i ko
 
 \newpage
 \subsection{Schemat elektryczny - dokonczyc}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Schemat elektryczny/circuit.png}
+    \caption{Schemat elektryczny podłączeń komponentów.}
+    \label{fig:Schemat elektryczny}
+\end{figure}
+\newpage
 \subsection{Projekt robota mobilnego}
 Jednym z założeń projektu było stworzenie kompaktowego robota mobilnego o możliwie prostym i modułowym układzie konstrukcyjnym. Robot składa się z dwóch pięter: dolnego pełniącego funkcję napędową oraz górnego będącego platformą dla modułów sterujących. Dzięki temu podziałowi możliwe jest zachowanie walorów estetycznych oraz funkcjonalnych.
 \begin{figure}[h]
@@ -1106,9 +1113,53 @@ Szczegółowy spis wszystkich bibliotek został przedstawiony w pliku Requiremen
 
 \chapter{Analiza działania systemu wizyjnego}
 \label{ch:05}
-W niniejszym rozdziale przedstawiono analizę działania systemu wizyjnego, który został zaimplementowany w ramach pracy. System ten umożliwia detekcję obiektu na obrazie z kamery Raspberry Pi, a następnie sterowanie serwomechanizmami w celu utrzymania obiektu w centrum kadru. W ramach analizy porównano skuteczność dwóch algorytmów detekcji obiektów: YOLOv7 oraz binaryzację i klasyczne techniki przetwarzania obrazów. W celu oceny skuteczności algorytmów przeprowadzono testy na zestawie danych treningowych, a następnie porównano wyniki. W kolejnych sekcjach przedstawiono opis działania programu, uzyskane rezultaty oraz porównanie skuteczności algorytmów.
+W niniejszym rozdziale przedstawiono analizę działania systemu wizyjnego, który został zaimplementowany w ramach pracy. System ten umożliwia detekcję obiektu na obrazie z kamery Raspberry Pi, a następnie sterowanie serwomechanizmami w celu utrzymania obiektu w centrum kadru. W ramach analizy porównano skuteczność dwóch podejść do detekcji obiektów: 
+\begin{itemize}
+    \item model YOLOv7 oraz YOLOv8,
+    \item algorytm binaryzacji obrazu z wykorzystaniem przestrzeni barw HSV,
+\end{itemize}
+
+Porównanie zostało przeprowadzone pod kątem dwóch głównych aspektów:
+\begin{enumerate}
+    \item \textbf{Skuteczności wykrywania obiektów:} Analizowano zdolność algorytmów do wykrywania obiektu w różnych warunkach oświetleniowych oraz w otoczeniu obiektów zakłócających.
+    \item \textbf{Wydajności działania:} Mierzono czas przetwarzania obrazu w jednostkach FPS (klatki na sekundę), co pozwala określić, jak szybko algorytm jest w stanie działać na urządzeniu.
+\end{enumerate}
+
+Każde z przedstawionych podejść ma swoje zalety i wady. YOLO to zaawansowany model wykorzystujący sieci neuronowe, które zapewniają wysoką precyzję wykrywania, ale wymagają znacznych zasobów obliczeniowych, co może być wyzwaniem dla urządzeń takich jak Raspberry Pi. Z kolei algorytm binaryzacji obrazu wyróżnia się prostotą i szybkością działania, co czyni go atrakcyjnym w kontekście ograniczonych zasobów sprzętowych.
+\newpage
+
+\section{Specyfikacja sprzętowa}
+Poniżej przedstawiono specyfikację urządzeń użytych do analizy skuteczności algorytmów:
+\begin{itemize}
+    \item \textbf{Komputer osobisty:} Urządzenie wykorzystane do testowania algorytmu binaryzacji oraz modelów YOLO.
+    \begin{itemize}
+        \item \textbf{Procesor:} Intel Core i5-13500H, 12 rdzeni, taktowanie do 2.6 GHz.
+        \item \textbf{Pamięć RAM:} 16 GB DDR5, taktowanie 6400 MHz.
+        \item \textbf{Karta graficzna:} 
+        \begin{itemize}
+            \item Intel Arc A350M Graphics, 1 GB VRAM.
+            \item Intel Iris Xe Graphics, 2 GB VRAM.
+        \end{itemize}
+        \item \textbf{System operacyjny:} Microsoft Windows 11 Home, wersja 10.0.22631, architektura 64-bit.
+    \end{itemize}
+    \item \textbf{Raspberry Pi:} Platforma testowa dla algorytmu binaryzacji oraz modelów YOLO.
+    \begin{itemize}
+        \item \textbf{Procesor:} Broadcom BCM2711 (Cortex-A72), 4 rdzenie, architektura ARMv8-A, taktowanie 1.5 GHz.
+        \item \textbf{Pamięć RAM:} 8 GB LPDDR4.
+        \item \textbf{System operacyjny:} Debian GNU/Linux 12 (Bookworm).
+        \item \textbf{Kamera:} Raspberry Pi Camera HD v3 12MPx.
+    \end{itemize}    
+\end{itemize}
+
+W kolejnych sekcjach szczegółowo omówiono działanie algorytmów, przedstawiono wyniki testów oraz przeprowadzono ich porównanie pod względem skuteczności i wydajności. 
+
 
 \section{Detekcja obiektu za pomocą narzędzi głębokiego uczenia}
+
+W podrozdziale tym opisano podejście do detekcji obiektu (piłki czerwonej) z wykorzystaniem zaawansowanych narzędzi głębokiego uczenia, takich jak modele z rodziny YOLO (ang. \textit{You Only Look Once}).
+
+W porównaniu do klasycznych technik przetwarzania obrazów, modele głębokiego uczenia wymagają większych zasobów obliczeniowych, ale oferują większą elastyczność i skuteczność w złożonych warunkach otoczenia. W szczególności wykorzystano modele YOLOv7 i YOLOv8, które różnią się między sobą szybkością i dokładnością działania.
+
 \newpage
 \subsection{Opis działania programu}
 
@@ -1237,7 +1288,7 @@ W powyższym kodzie:
 \subsection{Uzyskane rezultaty}
 W ramach testów systemu wizyjnego przeprowadzono analizę skuteczności detekcji piłki w różnych warunkach oświetleniowych oraz w obecności obiektów potencjalnie zakłócających prawidłowe działanie algorytmu. Celem testów było zweryfikowanie odporności systemu na zmienne warunki środowiskowe oraz jego zdolności do ignorowania obiektów o zbliżonym kształcie lub barwie do śledzonej piłki.
 
-Na Rysunku~\ref{fig:Wykrycie piłki1} przedstawiono sytuację przy dobrym oświetleniu, gdzie system poprawnie wykrył piłkę czerwoną, jednocześnie ignorując inne obiekty znajdujące się w polu widzenia kamery. Natomiast na Rysunku~\ref{fig:Wykrycie piłki2} zaprezentowano scenariusz przy gorszych warunkach oświetleniowych, w którym system nadal poprawnie wykrył piłkę czerwoną, jednak błędnie sklasyfikował obiekt o innej barwie jako piłkę.
+Na Rysunku~\ref{fig:Wykrycie_piłki1} przedstawiono sytuację przy dobrym oświetleniu, gdzie system poprawnie wykrył piłkę czerwoną, jednocześnie ignorując inne obiekty znajdujące się w polu widzenia kamery. Natomiast na Rysunku~\ref{fig:Wykrycie_piłki2} zaprezentowano scenariusz przy gorszych warunkach oświetleniowych, w którym system nadal poprawnie wykrył piłkę czerwoną, jednak błędnie sklasyfikował obiekt o innej barwie jako piłkę.
 
 \begin{figure}[!hb]
     \centering
@@ -1265,7 +1316,7 @@ W przypadku słabego oświetlenia zauważono spadek skuteczności systemu. Algor
     \label{fig:TerminalOutput}
 \end{figure}
 
-Rysunek~\ref{fig:TerminalOutput} przedstawia widok terminala programu uruchomionego na Raspberry Pi. Jest to widok sytuacji, w której otoczenie jest dobrze oświetlone a program poprawnie wskazał czerwoną piłkę. W sytuacji gorszego oświetlenia i błędnej detekcji dwóch obiektów, program utrzymuje współrzędne serwomechanizmów dla pierwszego zidentyfikowanego obiektu. Ze względu na ograniczone zasoby mocy obliczeniowej Raspberry Pi, zdecydowano się na rezygnację z wyświetlania obrazu bezpośrednio na urządzeniu. Informacje o detekcji, takie jak status wykrycia obiektu (\texttt{DETECTED/SEARCHING}), wartości kątów serwomechanizmów (\texttt{Pan/Tilt}) oraz liczba klatek na sekundę (\texttt{FPS}), są przesyłane do terminala komputera połączonego z Raspberry Pi przez SSH.
+Rysunek~\ref{fig:TerminalOutput} przedstawia widok terminala programu uruchomionego na Raspberry Pi. Jest to widok sytuacji, w której otoczenie jest dobrze oświetlone a program poprawnie wskazał czerwoną piłkę. W sytuacji gorszego oświetlenia i błędnej detekcji dwóch obiektów, program utrzymuje współrzędne serwomechanizmów dla pierwszego zidentyfikowanego obiektu. Ze względu na ograniczone zasoby mocy obliczeniowej Raspberry Pi, zdecydowano się na rezygnację z wyświetlania obrazu bezpośrednio na urządzeniu. Informacje o detekcji, takie jak status wykrycia obiektu "DETECTED" (oznaczające "Wykryto") oraz "SEARCHING" (oznaczające "Szukanie"), wartości kątów serwomechanizmów "Pan" (oznaczający "Obrót" wokół osi pionowej) i "Tilt" (oznaczający "Przechył" wokół osi pionowej) oraz liczba klatek na sekundę (\texttt{FPS}), są przesyłane do terminala komputera połączonego z Raspberry Pi przez SSH.
 
 Warto zauważyć, że Rysunki~\ref{fig:Wykrycie_piłki1} i~\ref{fig:Wykrycie_piłki2} ilustrują działanie tego samego programu, lecz uruchomionego na komputerze w celu wizualizacji. Na obrazach widoczny jest niebieski kwadrat w centrum kadru, który wyznacza obszar uznawany za środek obrazu. Dzięki jego zastosowaniu program jest w stanie bardziej stabilnie śledzić pozycję obiektu. 
 
@@ -1298,7 +1349,7 @@ Rysunek \ref{fig:Wykrycie piłki4} prezentuje wyniki systemu w trudniejszych war
     \label{fig:Wykrycie piłki5}
 \end{figure}
 
-Rysunek \ref{fig:Wykrycie piłki5} przedstawia widok terminala programu uruchomionego na Raspberry Pi. Jest to widok sytuacji, w której otoczenie jest dobrze oświetlone a program poprawnie wskazał czerwoną piłkę. Jednakże można zauważyć, iż program w pewnych momentach działania nie wykrywał modelu wcale i rozpoczął sekwencję poszukiwania.
+Rysunek \ref{fig:Wykrycie piłki5} przedstawia widok terminala programu uruchomionego na Raspberry Pi. Jest to widok sytuacji, w której otoczenie jest dobrze oświetlone a program poprawnie wskazał czerwoną piłkę. Jednakże można zauważyć, iż program w pewnych momentach działania nie wykrywał modelu wcale i rozpoczął sekwencję poszukiwania. 
 
 \newpage
 
@@ -1350,90 +1401,338 @@ for contour in contours:
             detected = True
 \end{lstlisting}
 
-
+\newpage
 \subsection{Uzyskane rezultaty}
+Wyniki działania algorytmu detekcji obiektu za pomocą binaryzacji zostały przedstawione w formie dwóch widoków dla każdego przypadku testowego. Pierwszy widok przedstawia obraz po zastosowaniu binaryzacji, gdzie piksele odpowiadające wykrytej barwie zostały zaznaczone na biało, a pozostałe wykluczone. Drugi widok prezentuje obraz w przestrzeni barw HSV, co umożliwia wizualną ocenę zakresów kolorów zastosowanych w procesie binaryzacji. Należy zaznaczyć, że wizualizacja ta została uruchomiona na komputerze, podczas gdy na Raspberry Pi wyświetlana jest jedynie informacja w terminalu o wykryciu bądź braku wykrycia obiektu.
+
+Na Rysunku~\ref{fig:Wykrycie piłki6} zaprezentowano przykład wykrycia czerwonej piłki w dalekim kadrze przy słabym oświetleniu. Algorytm prawidłowo zidentyfikował piłkę, co dowodzi jego zdolności do poprawnej detekcji w trudnych warunkach oświetleniowych. Podobny przypadek przedstawiono na Rysunku~\ref{fig:Wykrycie piłki7}, gdzie piłka została prawidłowo wykryta w dobrych warunkach oświetleniowych.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193719.png}
-    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
-    \label{fig:Wykrycie piłki5}
+    \caption{Sytuacja przy złym oświetleniu - poprawne wykrycie czerwonej piłki w dalekim kadrze}
+    \label{fig:Wykrycie piłki6}
 \end{figure}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193549.png}
-    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
-    \label{fig:Wykrycie piłki5}
+    \caption{Sytuacja przy dobrym oświetleniu - poprawne wykrycie czerwonej piłki w dalekim kadrze}
+    \label{fig:Wykrycie piłki7}
 \end{figure}
+
+Należy również zauważyć, że podczas działania algorytmu na Raspberry Pi skuteczność detekcji była bardziej wrażliwa na warunki oświetleniowe. W momencie, gdy natężenie światła uległo znacznemu zmniejszeniu, program przestał wykrywać czerwoną piłkę. Na obrazie przedstawionym na Rysunku~\ref{fig:Wykrycie piłki Rasp} widoczny jest moment, w którym światło zostało zgaszone, co spowodowało przejście informacji w terminalu z "DETECTED" (oznaczające "Wykryto") na "SEARCHING" (oznaczające "Szukanie").
+
+
+Zjawisko to wskazuje na ograniczenia algorytmu wynikające z braku wystarczającej ilości informacji w warunkach słabego oświetlenia. Raspberry Pi, mimo zastosowania prostych i wydajnych metod takich jak binaryzacja, wykazuje ograniczenia w detekcji obiektów w trudnych warunkach oświetleniowych. Utrata detekcji w takich sytuacjach wynika głównie z ograniczeń samej metody binaryzacji, która opiera się wyłącznie na analizie kolorów, a nie z braku wystarczających zasobów obliczeniowych.
+Może to stanowić istotne wyzwanie w implementacjach wymagających niezawodnej pracy w zmiennych warunkach oświetleniowych.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.7\textwidth]{Images/Porownanie/Binaryzacja/Para piłek moment zgaszenia swiatla.png}
+    \caption{Informacja z terminalu RaspberryPi - zgubienie piłki w momencie zgaszenia światła}
+    \label{fig:Wykrycie piłki Rasp}
+\end{figure}
+
+
+\newpage
+
+Rysunki~\ref{fig:Wykrycie piłki8} i~\ref{fig:Wykrycie piłki9} przedstawiają wyniki działania algorytmu w bliskim kadrze. W przypadku słabego oświetlenia (Rysunek~\ref{fig:Wykrycie piłki8}), algorytm poprawnie zidentyfikował piłkę oraz zignorował inny obiekt o podobnym kolorze. Natomiast w lepszych warunkach oświetleniowych (Rysunek~\ref{fig:Wykrycie piłki9}) zarejestrowano błędne wskazanie czerwonego obiektu znajdującego się w tle. Wynik ten wskazuje, że intensywne oświetlenie może zwiększyć prawdopodobieństwo fałszywych detekcji.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193840.png}
-    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
-    \label{fig:Wykrycie piłki5}
+    \caption{Sytuacja przy złym oświetleniu - poprawne wykrycie czerwonej piłki w bliskim kadrze oraz zignorowanie czerwonego obiektu}
+    \label{fig:Wykrycie piłki8}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193858.png}
-    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
-    \label{fig:Wykrycie piłki5}
+    \caption{Sytuacja przy dobrym oświetleniu - poprawne wykrycie czerwonej piłki oraz błędne wskazanie czerwonego obiektu}
+    \label{fig:Wykrycie piłki9}
 \end{figure}
+
+\newpage
+
+Kolejny test, zilustrowany na Rysunku~\ref{fig:Wykrycie piłki10}, pokazuje odporność algorytmu na zakłócenia w gorszych warunkach oświetleniowych. W warunkach ograniczonego oświetlenia algorytm poprawnie ignorował czerwone obiekty inne niż piłka (Rysunek~\ref{fig:Wykrycie piłki10}), co dowodzi jego skuteczności w rozróżnianiu obiektów o podobnej barwie. 
+
+Jednakże, w sytuacji przedstawionej na Rysunku~\ref{fig:Wykrycie piłki11}, przy dobrym oświetleniu, algorytm błędnie zidentyfikował poduszkę jako piłkę. W efekcie, rzeczywista piłka, znajdująca się na tle poduszki, została "zgubiona" w procesie detekcji. Ten przypadek ujawnia istotne ograniczenie algorytmu, wynikające z faktu, że analiza barwy nie jest w pełni wystarczającym kryterium identyfikacji obiektów, szczególnie w scenariuszach, gdzie różne obiekty o zbliżonym kolorze występują w tej samej scenie.
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193817.png}
-    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
-    \label{fig:Wykrycie piłki5}
+    \caption{Sytuacja przy złym oświetleniu - poprawne wykrycie czerwonej piłki oraz zignorowanie czerwonego obiektu}
+    \label{fig:Wykrycie piłki10}
 \end{figure}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.9\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193917.png}
-    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
-    \label{fig:Wykrycie piłki5}
+    \caption{Sytuacja przy dobrym oświetleniu - błędne wskazanie czerwonego obiektu zasłoniło piłkę}
+    \label{fig:Wykrycie piłki11}
 \end{figure}
+
+\newpage
 \section{Porównanie skuteczności algorytmów}
-sss
+
+W niniejszym podrozdziale dokonano porównania trzech algorytmów detekcji obiektów: YOLOv7, YOLOv8 oraz algorytmu binaryzacji. Analiza została przeprowadzona w oparciu o różne warunki oświetleniowe i otoczenie, a także na dwóch platformach sprzętowych: komputerze osobistym oraz Raspberry Pi. Celem było określenie kompromisu pomiędzy szybkością działania, wyrażoną w klatkach na sekundę (FPS), a skutecznością w wykrywaniu obiektów oraz eliminacji błędnych detekcji.
+
+Algorytmy z rodziny YOLO (ang. \textit{You Only Look Once}) reprezentują podejście oparte na głębokich sieciach neuronowych, które umożliwia jednoczesne lokalizowanie i klasyfikowanie obiektów w obrazie. YOLOv7, jako starsza wersja, cechuje się dobrym kompromisem pomiędzy wydajnością obliczeniową a dokładnością detekcji. YOLOv8, będący nowszym rozwinięciem, oferuje jeszcze większą precyzję i lepsze dostosowanie do bardziej złożonych scen, ale kosztem większych wymagań sprzętowych.
+
+Z kolei algorytm binaryzacji, oparty na segmentacji obrazu w przestrzeni barw HSV, charakteryzuje się bardzo wysoką szybkością działania i niskimi wymaganiami sprzętowymi. Jego prostota sprawia jednak, że jest bardziej podatny na błędy w trudnych warunkach, takich jak niejednorodne oświetlenie lub obecność obiektów o podobnym kolorze.
+
+W kontekście badania, platformy sprzętowe różniły się znacząco pod względem dostępnych zasobów obliczeniowych. Komputer osobisty, wyposażony w nowoczesny procesor i dedykowaną kartę graficzną, umożliwiał działanie algorytmów YOLO w czasie rzeczywistym z wysoką dokładnością. Raspberry Pi, jako platforma o ograniczonej mocy obliczeniowej, stanowiło wyzwanie dla zaawansowanych algorytmów detekcji, ale dzięki swojej kompaktowej konstrukcji i energooszczędności jest często stosowane w systemach wbudowanych.
+
+Wyniki analizy uwzględniają różne scenariusze testowe, takie jak działanie algorytmów w warunkach dobrego i słabego oświetlenia, obecność przeszkód oraz różne konfiguracje sprzętowe. Pozwoliło to na kompleksowe porównanie skuteczności i efektywności rozważanych podejść, a także ocenę ich przydatności w systemach czasu rzeczywistego.
+
+
+\newpage
+
+\subsection{Charakterystyka modelu YOLOv7}
+
+W warunkach dobrego oświetlenia model YOLOv7 wykazuje wysoką skuteczność w detekcji obiektów, co potwierdzają wyniki przedstawione na Rysunku~\ref{fig:yolov7_good_light}. Algorytm prawidłowo zidentyfikował piłkę czerwoną, jednocześnie ignorując inne obiekty znajdujące się w kadrze. Kluczowym punktem tego testu było sprawdzenie czy model jest w stanie zignorować obiekty o podobnym kształcie lub barwie do śledzonej piłki, co zostało potwierdzone tylko dla przypadku dobrego oświetlenia. Niestety w warunkach słabego oświetlenia, model YOLOv7 błędnie sklasyfikował obiekt o innej barwie jako piłkę, co przedstawiono na Rysunku~\ref{fig:yolov7_bad_light}.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194147.png}
+    \caption{Działanie modelu YOLOv7 przy dobrym oświetleniu.}
+    \label{fig:yolov7_good_light}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194208.png}
+    \caption{Działanie modelu YOLOv7 przy złym oświetleniu.}
+    \label{fig:yolov7_bad_light}
+\end{figure}
+
+\newpage
+Model YOLOv7 wykazuje zdolność do prawidłowego pomijania obiektów, które nie spełniają kryteriów detekcji. Na Rysunku~\ref{fig:yolov7_good_light_good_object} zaprezentowano przykład działania algorytmu przy dobrym oświetleniu, gdzie obiekt w postaci czerwonej poduszki został prawidłowo pominięty. Analogicznie, w warunkach słabego oświetlenia, YOLOv7 również jest w stanie skutecznie ignorować niepożądane obiekty, co ilustruje Rysunek~\ref{fig:yolov7_bad_light_good_object}.
+
+\begin{figure}[!hb]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194354.png}
+    \caption{Działanie modelu YOLOv7 przy dobrym oświetleniu oraz prawidłowe pominięcie obiektu.}
+    \label{fig:yolov7_good_light_good_object}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194641.png}
+    \caption{Działanie modelu YOLOv7 przy złym oświetleniu oraz prawidłowe pominięcie obiektu.}
+    \label{fig:yolov7_bad_light_good_object}
+\end{figure}
+
+\newpage
+\subsection{Charakterystyka modelu YOLOv8}
+
+YOLOv8, będący najnowszą wersją rodziny YOLO, charakteryzuje się najwyższą precyzją detekcji spośród analizowanych algorytmów. W warunkach dobrego oświetlenia algorytm osiąga doskonałe wyniki, co zostało przedstawione na Rysunku~\ref{fig:yolov8_good_light}, gdzie obiekt został prawidłowo zidentyfikowany. 
+
+W trudniejszych warunkach, takich jak gorsze oświetlenie, YOLOv8 wciąż jest w stanie poprawnie wykrywać obiekt o ściśle określonych cechach. Przykład działania algorytmu w takich warunkach zaprezentowano na Rysunku~\ref{fig:yolov8_bad_light}. 
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181013.png}
+    \caption{Działanie modelu YOLOv8 przy dobrym oświetleniu.}
+    \label{fig:yolov8_good_light}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181029.png}
+    \caption{Działanie modelu YOLOv8 przy gorszym oświetleniu.}
+    \label{fig:yolov8_bad_light}
+\end{figure}
+\newpage
+
+Pomimo ogólnie wysokiej dokładności, YOLOv8 czasami wykazuje błędne detekcje. Rysunek~\ref{fig:yolov8_good_light_bad_object} przedstawia przykład, w którym w warunkach dobrego oświetlenia algorytm błędnie zidentyfikował czerwoną poduszkę jako obiekt piłkopodobny.
+
+Z kolei Rysunek~\ref{fig:yolov8_good_light_good_object} pokazuje przypadek, w którym algorytm prawidłowo pominął obiekt w warunkach słabego oświetlenia. Może to być skutkiem zaniku barwy czerwonej w wyniku pogorszenia światła otoczenia.
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194808.png}
+    \caption{Działanie modelu YOLOv8 przy dobrym oświetleniu oraz błędne wykrycie obiektu.}
+    \label{fig:yolov8_good_light_bad_object}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194704.png}
+    \caption{Działanie modelu YOLOv8 przy gorszym oświetleniu oraz prawidłowe pominięcie obiektu.}
+    \label{fig:yolov8_good_light_good_object}
+\end{figure}
+
+\newpage
+\subsection{Charakterystyka algorytmu binaryzacji}
+
+Algorytm binaryzacji opiera się na prostej segmentacji obrazu w przestrzeni barw HSV, co zapewnia mu wyjątkową szybkość działania – na Raspberry Pi osiąga nawet 25-30 FPS. Dzięki tej prostocie algorytm jest szczególnie efektywny w warunkach dobrego oświetlenia, jak pokazano na Rysunku~\ref{fig:binary_confusion_goodlight}. W takich przypadkach binaryzacja umożliwia poprawne wykrycie obiektu, co potwierdza jej skuteczność w sprzyjających warunkach.
+W warunkach słabego oświetlenia, przedstawionych na Rysunku~\ref{fig:binary_confusion_badlight}, algorytm nadal jest w stanie poprawnie zidentyfikować obiekt. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194021.png}
+    \caption{Działanie binaryzacji w warunkach dobrego oświetlenia.}
+    \label{fig:binary_confusion_goodlight}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194004.png}
+    \caption{Działanie binaryzacji w warunkach słabego oświetlenia.}
+    \label{fig:binary_confusion_badlight}
+\end{figure}
+
+\newpage
+
+Jednakże, w bardziej złożonych sytuacjach, binaryzacja ujawnia swoje ograniczenia, co zilustrowano na Rysunkach~\ref{fig:binary_confusion_badlight_goodobject} i~\ref{fig:binary_confusion_goodlight_badobject}. W szczególności, w sytuacjach, gdy kolor obiektu zbliża się do kolorystyki tła, algorytm może generować fałszywe detekcje lub błędnie klasyfikować obiekty.
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193840.png}
+    \caption{Działanie binaryzacji w warunkach słabego oświetlenia oraz prawidłowe zignorowanie obiektu.}
+    \label{fig:binary_confusion_badlight_goodobject}
+\end{figure}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.8\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193858.png}
+    \caption{Działanie binaryzacji w warunkach słabego oświetlenia oraz błędna detekcja obiektu.}
+    \label{fig:binary_confusion_goodlight_badobject}
+\end{figure}
+
+Pomimo swoich ograniczeń, algorytm binaryzacji wyróżnia się wysoką szybkością działania, co czyni go atrakcyjnym rozwiązaniem w systemach o ograniczonych zasobach obliczeniowych, takich jak Raspberry Pi. Niemniej jednak, jego skuteczność zależy w dużej mierze od precyzyjnego doboru zakresów wartości HSV oraz warunków otoczenia, co stanowi istotny element w jego implementacji.
+
+
+\newpage
+\subsection{Wnioski}
+
+\paragraph{Działanie na komputerze osobistym}
+Jak przedstawiono w tabelach~\ref{tab:bez_przeszkody} i~\ref{tab:z_przeszkoda}, algorytmy detekcji różniły się skutecznością w zależności od warunków oświetleniowych i obecności przeszkód. 
+
+Algorytm \textbf{YOLOv7} osiągnął dobrą równowagę między szybkością a dokładnością, niezależnie od warunków oświetleniowych i przeszkód, stabilnie działając z prędkością 16.09 FPS. \textbf{YOLOv8} wyróżniał się najwyższą dokładnością, jednak kosztem niższej szybkości, osiągając 10.71 FPS. W przypadku scen z przeszkodami miał trudności z ich ignorowaniem w dobrym oświetleniu, co wskazuje na większą czułość detektora. \textbf{Binaryzacja}, choć najszybsza z algorytmów (29.61 FPS), miała trudności z prawidłową klasyfikacją obiektów w złożonych scenach, co może prowadzić do fałszywych detekcji.
+
+\begin{table}[h!]
+    \centering
+    \caption{Wyniki algorytmów detekcji obiektu bez przeszkody w różnych warunkach oświetleniowych na komputerze osobistym.}
+    \label{tab:bez_przeszkody}
+    \begin{tabular}{lcccc}
+    \toprule
+     & \multicolumn{2}{c}{Dobre oświetlenie} & \multicolumn{2}{c}{Złe oświetlenie} \\
+    \cmidrule(r){2-3} \cmidrule(r){4-5}
+    Algorytm & Czy wykryto & FPS & Czy wykryto & FPS \\
+    \midrule
+    YOLOv7 & TAK & 16.09 & TAK & 16.09 \\
+    YOLOv8 & TAK & 10.71 & TAK & 10.71 \\
+    Binaryzacja & TAK & 29.61 & TAK & 29.61 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \caption{Wyniki algorytmów detekcji obiektu z przeszkodą w różnych warunkach oświetleniowych na komputerze osobistym.}
+    \label{tab:z_przeszkoda}
+    \begin{tabular}{lcccc}
+    \toprule
+     & \multicolumn{2}{c}{Dobre oświetlenie} & \multicolumn{2}{c}{Złe oświetlenie} \\
+    \cmidrule(r){2-3} \cmidrule(r){4-5}
+    Algorytm & Czy pominął przeszkodę & FPS & Czy pominął przeszkodę & FPS \\
+    \midrule
+    YOLOv7 & TAK & 16.09 & TAK & 16.09 \\
+    YOLOv8 & NIE & 10.71 & TAK & 10.71 \\
+    Binaryzacja & NIE & 29.61 & TAK & 29.61 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\newpage
+
+\paragraph{Działanie na Raspberry Pi}
+Jak przedstawiono w tabelach~\ref{tab:bez_przeszkody_rpi} i~\ref{tab:z_przeszkoda_rpi}, działanie algorytmów na Raspberry Pi było ograniczone przez mniejsze zasoby obliczeniowe. 
+
+\textbf{YOLOv7} działał stabilnie z prędkością około 2.8 FPS, zachowując swoją skuteczność w ignorowaniu przeszkód oraz wykrywaniu obiektów w różnych warunkach oświetleniowych. \textbf{YOLOv8}, choć nadal dokładny, wykazał najniższą wydajność na Raspberry Pi, osiągając zaledwie 1.24 FPS. Algorytm \textbf{binaryzacji}, pomimo najwyższej szybkości działania (25.95 FPS w dobrym oświetleniu), miał trudności w detekcji obiektów w słabym oświetleniu, co ujawnia jego ograniczenia w bardziej wymagających warunkach.
+
+\begin{table}[h!]
+    \centering
+    \caption{Wyniki algorytmów detekcji obiektu bez przeszkody w różnych warunkach oświetleniowych na Raspberry Pi.}
+    \label{tab:bez_przeszkody_rpi}
+    \begin{tabular}{lcccc}
+    \toprule
+     & \multicolumn{2}{c}{Dobre oświetlenie} & \multicolumn{2}{c}{Złe oświetlenie} \\
+    \cmidrule(r){2-3} \cmidrule(r){4-5}
+    Algorytm & Czy wykryto & FPS & Czy wykryto & FPS \\
+    \midrule
+    YOLOv7 & TAK & 2.80 & TAK & 2.70 \\
+    YOLOv8 & TAK & 1.24 & TAK & 1.24 \\
+    Binaryzacja & TAK & 25.95 & NIE & 12.49 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+\begin{table}[h!]
+    \centering
+    \caption{Wyniki algorytmów detekcji obiektu z przeszkodą w różnych warunkach oświetleniowych na Raspberry Pi.}
+    \label{tab:z_przeszkoda_rpi}
+    \begin{tabular}{lcccc}
+    \toprule
+     & \multicolumn{2}{c}{Dobre oświetlenie} & \multicolumn{2}{c}{Złe oświetlenie} \\
+    \cmidrule(r){2-3} \cmidrule(r){4-5}
+    Algorytm & Czy pominął przeszkodę & FPS & Czy pominął przeszkodę & FPS \\
+    \midrule
+    YOLOv7 & TAK & 2.80 & TAK & 2.70 \\
+    YOLOv8 & NIE & 1.24 & NIE & 1.24 \\
+    Binaryzacja & NIE & 25.95 & TAK & 12.49 \\
+    \bottomrule
+    \end{tabular}
+\end{table}
+
+Podsumowując, wybór algorytmu powinien być uzależniony od specyficznych wymagań aplikacji oraz dostępnych zasobów sprzętowych:
+\begin{itemize}
+    \item \textbf{YOLOv7} jest najlepszym wyborem dla aplikacji wymagających równowagi między dokładnością a szybkością, szczególnie na urządzeniach o ograniczonej mocy obliczeniowej, takich jak Raspberry Pi.
+    \item \textbf{YOLOv8} nadaje się do aplikacji, gdzie priorytetem jest maksymalna dokładność, a ograniczenia sprzętowe są mniej istotne, np. na komputerach osobistych.
+    \item \textbf{Binaryzacja} jest idealnym rozwiązaniem dla systemów wymagających bardzo szybkiego przetwarzania w czasie rzeczywistym, pod warunkiem, że scena jest dobrze oświetlona i nie zawiera przeszkód o podobnym kolorze.
+\end{itemize}
+
 
 
 
 \chapter{Problematyka i rozwiązania}
 \label{ch:06}
+W niniejszym rozdziale przedstawiono i opisano problemy związane z realizacją projektu oraz zaproponowane rozwiązania, które pozwoliły na skuteczne zaimplementowanie systemu wizyjnego dla robota mobilnego. Omówiono wyzwania związane z wyborem algorytmów detekcji obiektów, implementacją algorytmów śledzenia obiektu oraz elektroniką i mechaniką robota.
+
+\section{Wybór algorytmów detekcji obiektów}
+
+\section{Implementacja algorytmów śledzenia obiektu}
+\section{Problemy związane z elektroniką i zasilaniem}
+\section{Problemy związane z mechaniką i sterowaniem}
+
 % TODO
 \chapter{Podsumowanie i wnioski}
 \label{ch:07}
+
+W ramach niniejszej pracy zrealizowano projekt systemu wizyjnego dla robota mobilnego, którego zadaniem było autonomiczne wykrywanie i śledzenie obiektów. W projekcie wykorzystano zarówno zaawansowane algorytmy głębokiego uczenia (YOLOv7 i YOLOv8), jak i klasyczne techniki przetwarzania obrazów, takie jak binaryzacja i analiza konturów. System został przeanalizowany pod kątem skuteczności i wydajności w różnych warunkach oświetleniowych oraz na dwóch platformach sprzętowych: komputerze osobistym i Raspberry Pi.
+
+Przeprowadzone testy wykazały, że każde z zastosowanych podejść posiada swoje specyficzne mocne i słabe strony. Modele YOLO zapewniły wysoką precyzję detekcji w złożonych warunkach, jednak ich działanie było ograniczone przez zasoby obliczeniowe modułu Raspberry Pi. Z kolei algorytm binaryzacji charakteryzował się znacznie wyższą szybkością, ale jego skuteczność w trudniejszych warunkach była ograniczona.
+
+\section{Wnioski}
+Na podstawie przeprowadzonych badań można sformułować następujące wnioski:
 \begin{itemize}
-\item sposób testowania w ramach pracy (np. odniesienie do modelu V)
-\item organizacja eksperymentów
-\item przypadki testowe zakres testowania (pełny/niepełny)
-\item wykryte i usunięte błędy
-\item opcjonalnie wyniki badań eksperymentalnych
+    \item Modele YOLOv7 i YOLOv8 są odpowiednie do zastosowań wymagających wysokiej precyzji detekcji, szczególnie w złożonych środowiskach. Ich głównym ograniczeniem jest wysokie zapotrzebowanie na zasoby sprzętowe.
+    \item Algorytm binaryzacji jest wydajnym rozwiązaniem w prostych scenariuszach, gdzie kluczowa jest szybkość działania, a zasoby obliczeniowe są ograniczone.
+    \item Raspberry Pi, pomimo swoich ograniczeń sprzętowych, może być skutecznie wykorzystywane jako platforma do detekcji obiektów w czasie rzeczywistym, szczególnie przy zastosowaniu zoptymalizowanych algorytmów.
 \end{itemize}
 
-\begin{table}
-\centering
-\caption{Nagłówek tabeli jest nad tabelą.}
-\label{id:tab:wyniki}
-\begin{tabular}{rrrrrrrr}
-\toprule
-	         &                                     \multicolumn{7}{c}{metoda}                                      \\
-	         \cmidrule{2-8}
-	         &         &         &        \multicolumn{3}{c}{alg. 3}        & \multicolumn{2}{c}{alg. 4, $\gamma = 2$} \\
-	         \cmidrule(r){4-6}\cmidrule(r){7-8}
-	$\zeta$ &     alg. 1 &   alg. 2 & $\alpha= 1.5$ & $\alpha= 2$ & $\alpha= 3$ &   $\beta = 0.1$  &   $\beta = -0.1$ \\
-\midrule
-	       0 &  8.3250 & 1.45305 &       7.5791 &    14.8517 &    20.0028 & 1.16396 &                       1.1365 \\
-	       5 &  0.6111 & 2.27126 &       6.9952 &    13.8560 &    18.6064 & 1.18659 &                       1.1630 \\
-	      10 & 11.6126 & 2.69218 &       6.2520 &    12.5202 &    16.8278 & 1.23180 &                       1.2045 \\
-	      15 &  0.5665 & 2.95046 &       5.7753 &    11.4588 &    15.4837 & 1.25131 &                       1.2614 \\
-	      20 & 15.8728 & 3.07225 &       5.3071 &    10.3935 &    13.8738 & 1.25307 &                       1.2217 \\
-	      25 &  0.9791 & 3.19034 &       5.4575 &     9.9533 &    13.0721 & 1.27104 &                       1.2640 \\
-	      30 &  2.0228 & 3.27474 &       5.7461 &     9.7164 &    12.2637 & 1.33404 &                       1.3209 \\
-	      35 & 13.4210 & 3.36086 &       6.6735 &    10.0442 &    12.0270 & 1.35385 &                       1.3059 \\
-	      40 & 13.2226 & 3.36420 &       7.7248 &    10.4495 &    12.0379 & 1.34919 &                       1.2768 \\
-	      45 & 12.8445 & 3.47436 &       8.5539 &    10.8552 &    12.2773 & 1.42303 &                       1.4362 \\
-	      50 & 12.9245 & 3.58228 &       9.2702 &    11.2183 &    12.3990 & 1.40922 &                       1.3724 \\
-\bottomrule
-\end{tabular}
-\end{table}  
+\section{Perspektywy dalszych badań}
+W przyszłości można rozważyć następujące kierunki rozwoju systemu:
+\begin{itemize}
+    \item Optymalizację modeli YOLO pod kątem działania na platformach o ograniczonych zasobach obliczeniowych, na przykład poprzez kompresję modelu lub przeniesienie go na TensorFlow Lite.
+    \item Rozbudowanie zbioru danych treningowych o bardziej różnorodne scenariusze oświetleniowe i środowiskowe, co mogłoby zwiększyć uniwersalność algorytmów.
+    \item Integrację segmentacji semantycznej jako uzupełnienia obecnych metod detekcji w celu poprawy skuteczności systemu w bardziej złożonych środowiskach.
+    \item Wdrożenie hybrydowego podejścia, które łączy algorytmy głębokiego uczenia z klasycznymi technikami przetwarzania obrazu, aby wykorzystać ich wzajemne zalety.
+\end{itemize}
+
+Podsumowując, przeprowadzona analiza i testy potwierdziły, że odpowiedni dobór algorytmu detekcji obiektów zależy od dostępnych zasobów sprzętowych oraz wymagań konkretnej aplikacji.
+
+
+
 
 
 
