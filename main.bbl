@@ -17,6 +17,138 @@
 \endgroup
 
 \datalist[entry]{nty/global//global/global}
+  \entry{bib:aoki2001realtime}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=AY}{%
+         family={Aoki},
+         familyi={A\bibinitperiod},
+         given={Yoshimitsu},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=NM}{%
+         family={Nakakita},
+         familyi={N\bibinitperiod},
+         given={Manabu},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=DM}{%
+         family={Doi},
+         familyi={D\bibinitperiod},
+         given={Masataka},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=HS}{%
+         family={Hashimoto},
+         familyi={H\bibinitperiod},
+         given={Shuji},
+         giveni={S\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{AY+1}
+    \strng{fullhash}{AYNMDMHS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{A}
+    \field{sortinithash}{A}
+    \field{booktitle}{Proceedings of the 2001 IEEE International Workshop on
+  Robot and Human Interactive Communication (RO-MAN)}
+    \field{pages}{527\bibrangedash 532}
+    \field{title}{Real-time vision system for autonomous mobile robot}
+    \field{year}{2001}
+  \endentry
+
+  \entry{bib:hatmdd10manual}{manual}{}
+    \name{author}{1}{}{%
+      {{hash=BCTS}{%
+         family={Bhd.},
+         familyi={B\bibinitperiod},
+         given={Cytron Technologies\bibnamedelima Sdn.},
+         giveni={C\bibinitperiod\bibinitdelim T\bibinitperiod\bibinitdelim
+  S\bibinitperiod},
+      }}%
+    }
+    \strng{namehash}{BCTS1}
+    \strng{fullhash}{BCTS1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{note}{Accessed January 2025}
+    \field{title}{Hat-MDD10 User's Manual}
+    \verb{url}
+    \verb https://www.cytron.io/p-hat-mdd10
+    \endverb
+    \field{version}{1.0}
+    \field{year}{2017}
+  \endentry
+
+  \entry{bib:bielecki}{article}{}
+    \name{author}{1}{}{%
+      {{hash=BA}{%
+         family={Bielecki},
+         familyi={B\bibinitperiod},
+         given={Andrzej},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Instytut Informatyki, Uniwersytet Jagielloński}%
+    }
+    \strng{namehash}{BA1}
+    \strng{fullhash}{BA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{pages}{25\bibrangedash 55}
+    \field{title}{Matematyczne podstawy sztucznych sieci neuronowych}
+    \field{volume}{4}
+    \field{journaltitle}{Matematyka Stosowana}
+    \field{year}{2003}
+  \endentry
+
+  \entry{bib:huang2012improved}{inproceedings}{}
+    \name{author}{3}{}{%
+      {{hash=HM}{%
+         family={Huang},
+         familyi={H\bibinitperiod},
+         given={Mengxing},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=YW}{%
+         family={Yu},
+         familyi={Y\bibinitperiod},
+         given={Wenjiao},
+         giveni={W\bibinitperiod},
+      }}%
+      {{hash=ZD}{%
+         family={Zhu},
+         familyi={Z\bibinitperiod},
+         given={Donghai},
+         giveni={D\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{HMYWZD1}
+    \strng{fullhash}{HMYWZD1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{H}
+    \field{sortinithash}{H}
+    \field{booktitle}{2012 13th ACIS International Conference on Software
+  Engineering, Artificial Intelligence, Networking and Parallel/Distributed
+  Computing}
+    \field{pages}{135\bibrangedash 139}
+    \field{title}{An improved image segmentation algorithm based on the Otsu
+  method}
+    \field{year}{2012}
+  \endentry
+
   \entry{bib:labkecki2009aktywny}{article}{}
     \name{author}{2}{}{%
       {{hash=LP}{%
@@ -45,6 +177,46 @@
     \field{volume}{55}
     \field{journaltitle}{Pomiary Automatyka Kontrola}
     \field{year}{2009}
+  \endentry
+
+  \entry{bib:matthies2007mars}{article}{}
+    \true{moreauthor}
+    \true{morelabelname}
+    \name{author}{3}{}{%
+      {{hash=ML}{%
+         family={Matthies},
+         familyi={M\bibinitperiod},
+         given={Larry},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=MM}{%
+         family={Maimone},
+         familyi={M\bibinitperiod},
+         given={Mark},
+         giveni={M\bibinitperiod},
+      }}%
+      {{hash=JA}{%
+         family={Johnson},
+         familyi={J\bibinitperiod},
+         given={Andrew},
+         giveni={A\bibinitperiod},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {Springer}%
+    }
+    \strng{namehash}{MLMMJA+1}
+    \strng{fullhash}{MLMMJA+1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{M}
+    \field{sortinithash}{M}
+    \field{number}{1}
+    \field{pages}{67\bibrangedash 92}
+    \field{title}{Computer Vision on Mars}
+    \field{volume}{75}
+    \field{journaltitle}{International Journal of Computer Vision}
+    \field{year}{2007}
   \endentry
 
   \entry{bib:mikekus2014system}{article}{}
@@ -122,51 +294,6 @@
     \field{pages}{1323\bibrangedash 1329}
     \field{title}{Blind navigation support system using Raspberry Pi \& YOLO}
     \field{year}{2023}
-  \endentry
-
-  \entry{bib:redmon_yolo}{article}{}
-    \name{author}{4}{}{%
-      {{hash=RJ}{%
-         family={Redmon},
-         familyi={R\bibinitperiod},
-         given={Joseph},
-         giveni={J\bibinitperiod},
-      }}%
-      {{hash=DS}{%
-         family={Divvala},
-         familyi={D\bibinitperiod},
-         given={Santosh},
-         giveni={S\bibinitperiod},
-      }}%
-      {{hash=GR}{%
-         family={Girshick},
-         familyi={G\bibinitperiod},
-         given={Ross},
-         giveni={R\bibinitperiod},
-      }}%
-      {{hash=FA}{%
-         family={Farhadi},
-         familyi={F\bibinitperiod},
-         given={Ali},
-         giveni={A\bibinitperiod},
-      }}%
-    }
-    \strng{namehash}{RJ+1}
-    \strng{fullhash}{RJDSGRFA1}
-    \field{labelnamesource}{author}
-    \field{labeltitlesource}{title}
-    \field{sortinit}{R}
-    \field{sortinithash}{R}
-    \field{note}{DOI: 10.1109/CVPR.2016.91}
-    \field{pages}{779\bibrangedash 788}
-    \field{title}{You Only Look Once: Unified, Real-Time Object Detection}
-    \verb{url}
-    \verb https://arxiv.org/abs/1506.02640
-    \endverb
-    \field{volume}{2016}
-    \field{journaltitle}{Proceedings of the IEEE Conference on Computer Vision
-  and Pattern Recognition (CVPR)}
-    \field{year}{2016}
   \endentry
 
   \entry{bib:wang_yolov7}{article}{}

@@ -8,46 +8,46 @@
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Widok strony głównej witryny Roboflow.}}{13}{figure.caption.10}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Etykietowanie obiektów za pomocą witryny Roboflow.}}{13}{figure.caption.12}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Obiekt po zetykietowaniu.}}{14}{figure.caption.14}%
-\contentsline {figure}{\numberline {3.4}{\ignorespaces Etykietowanie w słabym oświetleniu.}}{14}{figure.caption.16}%
-\contentsline {figure}{\numberline {3.5}{\ignorespaces Wykres pierwszych epok treningu.}}{15}{figure.caption.17}%
-\contentsline {figure}{\numberline {3.6}{\ignorespaces Wykres przebiegu treningu z zaistniałym spadkiem mAP.}}{16}{figure.caption.18}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Widok strony głównej witryny Roboflow.}}{19}{figure.caption.10}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Etykietowanie obiektów za pomocą witryny Roboflow.}}{19}{figure.caption.12}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Obiekt po zetykietowaniu.}}{20}{figure.caption.14}%
+\contentsline {figure}{\numberline {3.4}{\ignorespaces Etykietowanie w słabym oświetleniu.}}{20}{figure.caption.16}%
+\contentsline {figure}{\numberline {3.5}{\ignorespaces Wykres pierwszych epok treningu.}}{21}{figure.caption.17}%
+\contentsline {figure}{\numberline {3.6}{\ignorespaces Wykres przebiegu treningu z zaistniałym spadkiem mAP.}}{22}{figure.caption.18}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Schemat blokowy działania algorytmu pracy robota z systemem wizyjnym}}{20}{figure.caption.19}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces Schemat elektryczny podłączeń komponentów.}}{23}{figure.caption.20}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces Projekt konstrukcji robota mobilnego wykonany w programie Autodesk Fusion.}}{24}{figure.caption.21}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces Podział konstrukcji na piętra.}}{24}{figure.caption.22}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Widok rzutu górnego na dolne piętro robota.}}{25}{figure.caption.23}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Widok rzutu górnego na górne piętro robota.}}{25}{figure.caption.24}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Gotowa konstrukcja robota mobilnego.}}{26}{figure.caption.25}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Schemat blokowy działania algorytmu pracy robota z systemem wizyjnym}}{26}{figure.caption.19}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces Schemat elektryczny podłączeń komponentów.}}{29}{figure.caption.20}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces Projekt konstrukcji robota mobilnego wykonany w programie Autodesk Fusion.}}{31}{figure.caption.29}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces Podział konstrukcji na piętra.}}{31}{figure.caption.30}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Widok rzutu górnego na dolne piętro robota.}}{32}{figure.caption.31}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Widok rzutu górnego na górne piętro robota.}}{32}{figure.caption.32}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Gotowa konstrukcja robota mobilnego.}}{33}{figure.caption.33}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Sytuacja przy dobrym oświetleniu — poprawne wykrycie piłki czerwonej oraz zignorowanie piłki o innych barwach.}}{36}{figure.caption.34}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Sytuacja przy złym oświetleniu — poprawne wykrycie piłki czerwonej oraz błędne wskazanie piłki o innych barwach.}}{36}{figure.caption.35}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej}}{37}{figure.caption.36}%
-\contentsline {figure}{\numberline {5.4}{\ignorespaces Sytuacja przy dobrym oświetleniu - poprawne wykrycie piłki czerwonej oraz zignorowanie czerwonego obiektu.}}{38}{figure.caption.37}%
-\contentsline {figure}{\numberline {5.5}{\ignorespaces Sytuacja przy złym oświetleniu - poprawne wykrycie piłki czerwonej oraz poprawne zignorowanie czerwonego obiektu.}}{38}{figure.caption.38}%
-\contentsline {figure}{\numberline {5.6}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}}{39}{figure.caption.39}%
-\contentsline {figure}{\numberline {5.7}{\ignorespaces Sytuacja przy złym oświetleniu - poprawne wykrycie czerwonej piłki w dalekim kadrze}}{42}{figure.caption.43}%
-\contentsline {figure}{\numberline {5.8}{\ignorespaces Sytuacja przy dobrym oświetleniu - poprawne wykrycie czerwonej piłki w dalekim kadrze}}{42}{figure.caption.44}%
-\contentsline {figure}{\numberline {5.9}{\ignorespaces Informacja z terminalu RaspberryPi - zgubienie piłki w momencie zgaszenia światła}}{43}{figure.caption.45}%
-\contentsline {figure}{\numberline {5.10}{\ignorespaces Sytuacja przy złym oświetleniu - poprawne wykrycie czerwonej piłki w bliskim kadrze oraz zignorowanie czerwonego obiektu}}{44}{figure.caption.46}%
-\contentsline {figure}{\numberline {5.11}{\ignorespaces Sytuacja przy dobrym oświetleniu - poprawne wykrycie czerwonej piłki oraz błędne wskazanie czerwonego obiektu}}{44}{figure.caption.47}%
-\contentsline {figure}{\numberline {5.12}{\ignorespaces Sytuacja przy złym oświetleniu - poprawne wykrycie czerwonej piłki oraz zignorowanie czerwonego obiektu}}{45}{figure.caption.48}%
-\contentsline {figure}{\numberline {5.13}{\ignorespaces Sytuacja przy dobrym oświetleniu - błędne wskazanie czerwonego obiektu zasłoniło piłkę}}{45}{figure.caption.49}%
-\contentsline {figure}{\numberline {5.14}{\ignorespaces Działanie modelu YOLOv7 przy dobrym oświetleniu.}}{47}{figure.caption.50}%
-\contentsline {figure}{\numberline {5.15}{\ignorespaces Działanie modelu YOLOv7 przy złym oświetleniu.}}{47}{figure.caption.51}%
-\contentsline {figure}{\numberline {5.16}{\ignorespaces Działanie modelu YOLOv7 przy dobrym oświetleniu oraz prawidłowe pominięcie obiektu.}}{48}{figure.caption.52}%
-\contentsline {figure}{\numberline {5.17}{\ignorespaces Działanie modelu YOLOv7 przy złym oświetleniu oraz prawidłowe pominięcie obiektu.}}{48}{figure.caption.53}%
-\contentsline {figure}{\numberline {5.18}{\ignorespaces Działanie modelu YOLOv8 przy dobrym oświetleniu.}}{49}{figure.caption.54}%
-\contentsline {figure}{\numberline {5.19}{\ignorespaces Działanie modelu YOLOv8 przy gorszym oświetleniu.}}{49}{figure.caption.55}%
-\contentsline {figure}{\numberline {5.20}{\ignorespaces Działanie modelu YOLOv8 przy dobrym oświetleniu oraz błędne wykrycie obiektu.}}{50}{figure.caption.56}%
-\contentsline {figure}{\numberline {5.21}{\ignorespaces Działanie modelu YOLOv8 przy gorszym oświetleniu oraz prawidłowe pominięcie obiektu.}}{50}{figure.caption.57}%
-\contentsline {figure}{\numberline {5.22}{\ignorespaces Działanie binaryzacji w warunkach dobrego oświetlenia.}}{51}{figure.caption.58}%
-\contentsline {figure}{\numberline {5.23}{\ignorespaces Działanie binaryzacji w warunkach słabego oświetlenia.}}{51}{figure.caption.59}%
-\contentsline {figure}{\numberline {5.24}{\ignorespaces Działanie binaryzacji w warunkach słabego oświetlenia oraz prawidłowe zignorowanie obiektu.}}{52}{figure.caption.60}%
-\contentsline {figure}{\numberline {5.25}{\ignorespaces Działanie binaryzacji w warunkach słabego oświetlenia oraz błędna detekcja obiektu.}}{52}{figure.caption.61}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Sytuacja przy dobrym oświetleniu — poprawne wykrycie piłki czerwonej oraz zignorowanie piłki o innych barwach.}}{44}{figure.caption.42}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Sytuacja przy złym oświetleniu — poprawne wykrycie piłki czerwonej oraz błędne wskazanie piłki o innych barwach.}}{44}{figure.caption.43}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej}}{45}{figure.caption.44}%
+\contentsline {figure}{\numberline {5.4}{\ignorespaces Sytuacja przy dobrym oświetleniu - poprawne wykrycie piłki czerwonej oraz zignorowanie czerwonego obiektu.}}{46}{figure.caption.45}%
+\contentsline {figure}{\numberline {5.5}{\ignorespaces Sytuacja przy złym oświetleniu - poprawne wykrycie piłki czerwonej oraz poprawne zignorowanie czerwonego obiektu.}}{46}{figure.caption.46}%
+\contentsline {figure}{\numberline {5.6}{\ignorespaces Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}}{47}{figure.caption.47}%
+\contentsline {figure}{\numberline {5.7}{\ignorespaces Sytuacja przy złym oświetleniu - poprawne wykrycie czerwonej piłki w dalekim kadrze}}{50}{figure.caption.51}%
+\contentsline {figure}{\numberline {5.8}{\ignorespaces Sytuacja przy dobrym oświetleniu - poprawne wykrycie czerwonej piłki w dalekim kadrze}}{50}{figure.caption.52}%
+\contentsline {figure}{\numberline {5.9}{\ignorespaces Informacja z terminalu RaspberryPi - zgubienie piłki w momencie zgaszenia światła}}{51}{figure.caption.53}%
+\contentsline {figure}{\numberline {5.10}{\ignorespaces Sytuacja przy złym oświetleniu - poprawne wykrycie czerwonej piłki w bliskim kadrze oraz zignorowanie czerwonego obiektu}}{52}{figure.caption.54}%
+\contentsline {figure}{\numberline {5.11}{\ignorespaces Sytuacja przy dobrym oświetleniu - poprawne wykrycie czerwonej piłki oraz błędne wskazanie czerwonego obiektu}}{52}{figure.caption.55}%
+\contentsline {figure}{\numberline {5.12}{\ignorespaces Sytuacja przy złym oświetleniu - poprawne wykrycie czerwonej piłki oraz zignorowanie czerwonego obiektu}}{53}{figure.caption.56}%
+\contentsline {figure}{\numberline {5.13}{\ignorespaces Sytuacja przy dobrym oświetleniu - błędne wskazanie czerwonego obiektu zasłoniło piłkę}}{53}{figure.caption.57}%
+\contentsline {figure}{\numberline {5.14}{\ignorespaces Działanie modelu YOLOv7 przy dobrym oświetleniu.}}{55}{figure.caption.58}%
+\contentsline {figure}{\numberline {5.15}{\ignorespaces Działanie modelu YOLOv7 przy złym oświetleniu.}}{55}{figure.caption.59}%
+\contentsline {figure}{\numberline {5.16}{\ignorespaces Działanie modelu YOLOv7 przy dobrym oświetleniu oraz prawidłowe pominięcie obiektu.}}{56}{figure.caption.60}%
+\contentsline {figure}{\numberline {5.17}{\ignorespaces Działanie modelu YOLOv7 przy złym oświetleniu oraz prawidłowe pominięcie obiektu.}}{56}{figure.caption.61}%
+\contentsline {figure}{\numberline {5.18}{\ignorespaces Działanie modelu YOLOv8 przy dobrym oświetleniu.}}{57}{figure.caption.62}%
+\contentsline {figure}{\numberline {5.19}{\ignorespaces Działanie modelu YOLOv8 przy gorszym oświetleniu.}}{57}{figure.caption.63}%
+\contentsline {figure}{\numberline {5.20}{\ignorespaces Działanie modelu YOLOv8 przy dobrym oświetleniu oraz błędne wykrycie obiektu.}}{58}{figure.caption.64}%
+\contentsline {figure}{\numberline {5.21}{\ignorespaces Działanie modelu YOLOv8 przy gorszym oświetleniu oraz prawidłowe pominięcie obiektu.}}{58}{figure.caption.65}%
+\contentsline {figure}{\numberline {5.22}{\ignorespaces Działanie binaryzacji w warunkach dobrego oświetlenia.}}{59}{figure.caption.66}%
+\contentsline {figure}{\numberline {5.23}{\ignorespaces Działanie binaryzacji w warunkach słabego oświetlenia.}}{59}{figure.caption.67}%
+\contentsline {figure}{\numberline {5.24}{\ignorespaces Działanie binaryzacji w warunkach słabego oświetlenia oraz prawidłowe zignorowanie obiektu.}}{60}{figure.caption.68}%
+\contentsline {figure}{\numberline {5.25}{\ignorespaces Działanie binaryzacji w warunkach słabego oświetlenia oraz błędna detekcja obiektu.}}{60}{figure.caption.69}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

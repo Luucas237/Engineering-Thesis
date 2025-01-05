@@ -7,88 +7,109 @@
 \babel@toc {polish}{}\relax 
 \thispagestyle {empty}
 \contentsline {chapter}{\numberline {1}Wstęp}{1}{chapter.1}%
-\contentsline {section}{\numberline {1.1}Wprowadzenie w problem}{1}{section.1.1}%
-\contentsline {section}{\numberline {1.2}Osadzenie problemu w dziedzinie}{2}{section.1.2}%
-\contentsline {section}{\numberline {1.3}Cel pracy}{2}{section.1.3}%
-\contentsline {section}{\numberline {1.4}Zakres pracy}{3}{section.1.4}%
-\contentsline {section}{\numberline {1.5}Struktura pracy}{3}{section.1.5}%
-\contentsline {section}{\numberline {1.6}Wkład własny autora}{4}{section.1.6}%
-\contentsline {chapter}{\numberline {2}Analiza tematu i przegląd literatury}{5}{chapter.2}%
-\contentsline {section}{\numberline {2.1}Sformułowanie problemu}{5}{section.2.1}%
-\contentsline {section}{\numberline {2.2}Stan wiedzy i osadzenie w kontekście aktualnych badań}{6}{section.2.2}%
-\contentsline {subsection}{\numberline {2.2.1}Metody przetwarzania obrazu}{6}{subsection.2.2.1}%
-\contentsline {subsection}{\numberline {2.2.2}Algorytmy detekcji obiektów}{6}{subsection.2.2.2}%
-\contentsline {subsection}{\numberline {2.2.3}Algorytm YOLO}{6}{subsection.2.2.3}%
-\contentsline {paragraph}{Założenia projektowe}{6}{section*.8}%
-\contentsline {paragraph}{Architektura sieci YOLO}{7}{section*.9}%
-\contentsline {subsection}{\numberline {2.2.4}Zastosowania w robotyce mobilnej}{7}{subsection.2.2.4}%
-\contentsline {section}{\numberline {2.3}Studia literaturowe i znane rozwiązania}{7}{section.2.3}%
-\contentsline {subsection}{\numberline {2.3.1}System programowania i sterowania robota mobilnego}{8}{subsection.2.3.1}%
-\contentsline {subsection}{\numberline {2.3.2}Aktywny system wizyjny dla robota kroczącego}{8}{subsection.2.3.2}%
-\contentsline {subsection}{\numberline {2.3.3}System wspomagania nawigacji osób niewidomych}{9}{subsection.2.3.3}%
-\contentsline {chapter}{\numberline {3}Przygotowanie i trening modelu detekcji obiektów}{11}{chapter.3}%
-\contentsline {section}{\numberline {3.1}Przygotowanie danych wzorcowych}{11}{section.3.1}%
-\contentsline {section}{\numberline {3.2}Platforma Roboflow}{12}{section.3.2}%
-\contentsline {subsection}{\numberline {3.2.1}Proces użycia witryny Roboflow}{13}{subsection.3.2.1}%
-\contentsline {paragraph}{Zdjęcie \ref {fig:labeling1}}{13}{section*.11}%
-\contentsline {paragraph}{Zdjęcie \ref {fig:labeling2}}{14}{section*.13}%
-\contentsline {paragraph}{Zdjęcie \ref {fig:labeling3}}{14}{section*.15}%
-\contentsline {subsection}{\numberline {3.2.2}Trening zestawu danych}{15}{subsection.3.2.2}%
-\contentsline {section}{\numberline {3.3}Trening modelu YOLOv7}{17}{section.3.3}%
-\contentsline {subsection}{\numberline {3.3.1}Przygotowanie środowiska}{17}{subsection.3.3.1}%
-\contentsline {subsection}{\numberline {3.3.2}Instalacja wymaganych bibliotek}{17}{subsection.3.3.2}%
-\contentsline {subsection}{\numberline {3.3.3}Pobranie i przygotowanie danych treningowych}{17}{subsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.3.4}Przygotowanie modelu}{18}{subsection.3.3.4}%
-\contentsline {subsection}{\numberline {3.3.5}Trening modelu}{18}{subsection.3.3.5}%
-\contentsline {chapter}{\numberline {4}Proces tworzenia robota mobilnego}{19}{chapter.4}%
-\contentsline {section}{\numberline {4.1}Założenia logiczne}{19}{section.4.1}%
-\contentsline {section}{\numberline {4.2}Konstrukcja robota mobilnego}{21}{section.4.2}%
-\contentsline {subsection}{\numberline {4.2.1}Wykorzystane moduły}{21}{subsection.4.2.1}%
-\contentsline {subsection}{\numberline {4.2.2}Schemat elektryczny - dokonczyc}{23}{subsection.4.2.2}%
-\contentsline {subsection}{\numberline {4.2.3}Projekt robota mobilnego}{24}{subsection.4.2.3}%
-\contentsline {section}{\numberline {4.3}Dostosowanie RaspberryPi}{27}{section.4.3}%
-\contentsline {subsection}{\numberline {4.3.1}Spis wymaganych bibliotek}{28}{subsection.4.3.1}%
-\contentsline {chapter}{\numberline {5}Analiza działania systemu wizyjnego}{29}{chapter.5}%
-\contentsline {section}{\numberline {5.1}Specyfikacja sprzętowa}{30}{section.5.1}%
-\contentsline {section}{\numberline {5.2}Detekcja obiektu za pomocą narzędzi głębokiego uczenia}{30}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Opis działania programu}{31}{subsection.5.2.1}%
-\contentsline {paragraph}{Wczytanie modelu}{31}{section*.26}%
-\contentsline {paragraph}{Detekcja piłki}{31}{section*.27}%
-\contentsline {paragraph}{Logika kwadratu w centrum obrazu}{32}{section*.28}%
-\contentsline {paragraph}{Definiowanie ograniczeń kątowych}{32}{section*.29}%
-\contentsline {paragraph}{Przeliczanie kąta na szerokość impulsu}{32}{section*.30}%
-\contentsline {paragraph}{Sterowanie serwomechanizmami}{33}{section*.31}%
-\contentsline {paragraph}{Logika sterowania ruchem}{34}{section*.32}%
-\contentsline {paragraph}{Zgubienie piłki}{34}{section*.33}%
-\contentsline {subsection}{\numberline {5.2.2}Uzyskane rezultaty}{36}{subsection.5.2.2}%
-\contentsline {section}{\numberline {5.3}Detekcja obiektu za pomocą binaryzacji i klasycznych technik przetwarzania obrazów}{40}{section.5.3}%
-\contentsline {subsection}{\numberline {5.3.1}Opis działania programu}{40}{subsection.5.3.1}%
-\contentsline {paragraph}{Konwersja przestrzeni barw}{40}{section*.40}%
-\contentsline {paragraph}{Binaryzacja obrazu}{40}{section*.41}%
-\contentsline {paragraph}{Analiza konturów}{41}{section*.42}%
-\contentsline {subsection}{\numberline {5.3.2}Uzyskane rezultaty}{42}{subsection.5.3.2}%
-\contentsline {section}{\numberline {5.4}Porównanie skuteczności algorytmów}{46}{section.5.4}%
-\contentsline {subsection}{\numberline {5.4.1}Charakterystyka modelu YOLOv7}{47}{subsection.5.4.1}%
-\contentsline {subsection}{\numberline {5.4.2}Charakterystyka modelu YOLOv8}{49}{subsection.5.4.2}%
-\contentsline {subsection}{\numberline {5.4.3}Charakterystyka algorytmu binaryzacji}{51}{subsection.5.4.3}%
-\contentsline {subsection}{\numberline {5.4.4}Wnioski}{53}{subsection.5.4.4}%
-\contentsline {paragraph}{Działanie na komputerze osobistym}{53}{section*.62}%
-\contentsline {paragraph}{Działanie na Raspberry Pi}{54}{section*.65}%
-\contentsline {chapter}{\numberline {6}Problematyka i rozwiązania}{55}{chapter.6}%
-\contentsline {section}{\numberline {6.1}Wybór algorytmów detekcji obiektów}{55}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Implementacja algorytmów śledzenia obiektu}{55}{section.6.2}%
-\contentsline {section}{\numberline {6.3}Problemy związane z elektroniką i zasilaniem}{55}{section.6.3}%
-\contentsline {section}{\numberline {6.4}Problemy związane z mechaniką i sterowaniem}{55}{section.6.4}%
-\contentsline {chapter}{\numberline {7}Podsumowanie i wnioski}{57}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Wnioski}{57}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Perspektywy dalszych badań}{58}{section.7.2}%
-\contentsline {chapter}{Bibliografia}{59}{chapter*.68}%
-\contentsline {chapter}{Spis skrótów i symboli}{63}{appendix*.69}%
+\contentsline {section}{\numberline {1.1}Wprowadzenie w problem}{2}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Osadzenie problemu w dziedzinie}{3}{section.1.2}%
+\contentsline {section}{\numberline {1.3}Cel pracy}{3}{section.1.3}%
+\contentsline {section}{\numberline {1.4}Zakres pracy}{4}{section.1.4}%
+\contentsline {section}{\numberline {1.5}Struktura pracy}{4}{section.1.5}%
+\contentsline {section}{\numberline {1.6}Wkład własny autora}{5}{section.1.6}%
+\contentsline {chapter}{\numberline {2}Analiza tematu i przegląd literatury}{7}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Sformułowanie problemu}{7}{section.2.1}%
+\contentsline {section}{\numberline {2.2}Stan wiedzy i osadzenie w kontekście aktualnych badań}{8}{section.2.2}%
+\contentsline {section}{\numberline {2.3}Przetwarzanie obrazu i algorytmy detekcji obiektów}{9}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Algorytmy głębokiego uczenia}{9}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Klasyczne metody przetwarzania obrazu}{9}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Porównanie metod}{9}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Sieci neuronowe i ich uczenie}{10}{section.2.4}%
+\contentsline {subsection}{\numberline {2.4.1}Budowa sieci neuronowej}{10}{subsection.2.4.1}%
+\contentsline {paragraph}{Funkcje aktywacji}{10}{section*.8}%
+\contentsline {subsection}{\numberline {2.4.2}Architektura sieci}{11}{subsection.2.4.2}%
+\contentsline {subsection}{\numberline {2.4.3}Proces uczenia sieci neuronowej}{11}{subsection.2.4.3}%
+\contentsline {paragraph}{Propagacja wsteczna}{11}{section*.9}%
+\contentsline {subsection}{\numberline {2.4.4}Zasada działania}{11}{subsection.2.4.4}%
+\contentsline {subsection}{\numberline {2.4.5}Architektura sieci}{12}{subsection.2.4.5}%
+\contentsline {subsection}{\numberline {2.4.6}Zastosowania w robotyce mobilnej}{12}{subsection.2.4.6}%
+\contentsline {section}{\numberline {2.5}Binaryzacja}{12}{section.2.5}%
+\contentsline {subsection}{\numberline {2.5.1}Zasada działania}{13}{subsection.2.5.1}%
+\contentsline {subsection}{\numberline {2.5.2}Zastosowania}{13}{subsection.2.5.2}%
+\contentsline {section}{\numberline {2.6}Studia literaturowe i znane rozwiązania}{13}{section.2.6}%
+\contentsline {subsection}{\numberline {2.6.1}System programowania i sterowania robota mobilnego}{13}{subsection.2.6.1}%
+\contentsline {subsection}{\numberline {2.6.2}Aktywny system wizyjny dla robota kroczącego}{14}{subsection.2.6.2}%
+\contentsline {subsection}{\numberline {2.6.3}System wspomagania nawigacji osób niewidomych}{15}{subsection.2.6.3}%
+\contentsline {chapter}{\numberline {3}Przygotowanie i trening modelu detekcji obiektów}{17}{chapter.3}%
+\contentsline {section}{\numberline {3.1}Przygotowanie danych wzorcowych}{17}{section.3.1}%
+\contentsline {section}{\numberline {3.2}Platforma Roboflow}{18}{section.3.2}%
+\contentsline {subsection}{\numberline {3.2.1}Proces użycia witryny Roboflow}{19}{subsection.3.2.1}%
+\contentsline {paragraph}{Zdjęcie \ref {fig:labeling1}}{19}{section*.11}%
+\contentsline {paragraph}{Zdjęcie \ref {fig:labeling2}}{20}{section*.13}%
+\contentsline {paragraph}{Zdjęcie \ref {fig:labeling3}}{20}{section*.15}%
+\contentsline {subsection}{\numberline {3.2.2}Trening zestawu danych}{21}{subsection.3.2.2}%
+\contentsline {section}{\numberline {3.3}Trening modelu YOLOv7}{23}{section.3.3}%
+\contentsline {subsection}{\numberline {3.3.1}Przygotowanie środowiska}{23}{subsection.3.3.1}%
+\contentsline {subsection}{\numberline {3.3.2}Instalacja wymaganych bibliotek}{23}{subsection.3.3.2}%
+\contentsline {subsection}{\numberline {3.3.3}Pobranie i przygotowanie danych treningowych}{23}{subsection.3.3.3}%
+\contentsline {subsection}{\numberline {3.3.4}Przygotowanie modelu}{24}{subsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.3.5}Trening modelu}{24}{subsection.3.3.5}%
+\contentsline {chapter}{\numberline {4}Proces tworzenia robota mobilnego}{25}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Założenia logiczne}{25}{section.4.1}%
+\contentsline {section}{\numberline {4.2}Konstrukcja robota mobilnego}{27}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Wykorzystane moduły}{27}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Schemat elektryczny}{29}{subsection.4.2.2}%
+\contentsline {paragraph}{Symbol M:}{30}{section*.21}%
+\contentsline {paragraph}{Symbol S:}{30}{section*.22}%
+\contentsline {paragraph}{Kamera:}{30}{section*.23}%
+\contentsline {paragraph}{Hat-MDD10:}{30}{section*.24}%
+\contentsline {paragraph}{Powerbank 5V 3A:}{30}{section*.25}%
+\contentsline {paragraph}{Akumulatory 18650:}{30}{section*.26}%
+\contentsline {paragraph}{Przełącznik:}{30}{section*.27}%
+\contentsline {paragraph}{RaspberryPi:}{30}{section*.28}%
+\contentsline {subsection}{\numberline {4.2.3}Projekt robota mobilnego}{31}{subsection.4.2.3}%
+\contentsline {section}{\numberline {4.3}Dostosowanie RaspberryPi}{34}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Spis wymaganych bibliotek}{35}{subsection.4.3.1}%
+\contentsline {chapter}{\numberline {5}Analiza działania systemu wizyjnego}{37}{chapter.5}%
+\contentsline {section}{\numberline {5.1}Specyfikacja sprzętowa}{38}{section.5.1}%
+\contentsline {section}{\numberline {5.2}Detekcja obiektu za pomocą narzędzi głębokiego uczenia}{38}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Opis działania programu}{39}{subsection.5.2.1}%
+\contentsline {paragraph}{Wczytanie modelu}{39}{section*.34}%
+\contentsline {paragraph}{Detekcja piłki}{39}{section*.35}%
+\contentsline {paragraph}{Logika kwadratu w centrum obrazu}{40}{section*.36}%
+\contentsline {paragraph}{Definiowanie ograniczeń kątowych}{40}{section*.37}%
+\contentsline {paragraph}{Przeliczanie kąta na szerokość impulsu}{40}{section*.38}%
+\contentsline {paragraph}{Sterowanie serwomechanizmami}{41}{section*.39}%
+\contentsline {paragraph}{Logika sterowania ruchem}{42}{section*.40}%
+\contentsline {paragraph}{Zgubienie piłki}{42}{section*.41}%
+\contentsline {subsection}{\numberline {5.2.2}Uzyskane rezultaty}{44}{subsection.5.2.2}%
+\contentsline {section}{\numberline {5.3}Detekcja obiektu za pomocą binaryzacji i klasycznych technik przetwarzania obrazów}{48}{section.5.3}%
+\contentsline {subsection}{\numberline {5.3.1}Opis działania programu}{48}{subsection.5.3.1}%
+\contentsline {paragraph}{Konwersja przestrzeni barw}{48}{section*.48}%
+\contentsline {paragraph}{Binaryzacja obrazu}{48}{section*.49}%
+\contentsline {paragraph}{Analiza konturów}{49}{section*.50}%
+\contentsline {subsection}{\numberline {5.3.2}Uzyskane rezultaty}{50}{subsection.5.3.2}%
+\contentsline {section}{\numberline {5.4}Porównanie skuteczności algorytmów}{54}{section.5.4}%
+\contentsline {subsection}{\numberline {5.4.1}Charakterystyka modelu YOLOv7}{55}{subsection.5.4.1}%
+\contentsline {subsection}{\numberline {5.4.2}Charakterystyka modelu YOLOv8}{57}{subsection.5.4.2}%
+\contentsline {subsection}{\numberline {5.4.3}Charakterystyka algorytmu binaryzacji}{59}{subsection.5.4.3}%
+\contentsline {subsection}{\numberline {5.4.4}Wnioski}{61}{subsection.5.4.4}%
+\contentsline {paragraph}{Działanie na komputerze osobistym}{61}{section*.70}%
+\contentsline {paragraph}{Działanie na Raspberry Pi}{62}{section*.73}%
+\contentsline {chapter}{\numberline {6}Problematyka i rozwiązania}{63}{chapter.6}%
+\contentsline {section}{\numberline {6.1}Wybór algorytmów detekcji obiektów}{63}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Implementacja algorytmów śledzenia obiektu}{64}{section.6.2}%
+\contentsline {section}{\numberline {6.3}Problemy związane z elektroniką i zasilaniem}{65}{section.6.3}%
+\contentsline {section}{\numberline {6.4}Problemy związane z mechaniką i sterowaniem}{66}{section.6.4}%
+\contentsline {paragraph}{Obrót obrazu i sterowanie serwomechanizmami}{66}{section*.76}%
+\contentsline {paragraph}{Zależność ruchu kamery i silników DC}{66}{section*.77}%
+\contentsline {paragraph}{Mechanizm poszukiwania obiektu}{67}{section*.78}%
+\contentsline {chapter}{\numberline {7}Podsumowanie i wnioski}{69}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Wnioski}{69}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Perspektywy dalszych badań}{70}{section.7.2}%
+\contentsline {chapter}{Bibliografia}{71}{chapter*.79}%
+\contentsline {chapter}{Spis skrótów i symboli}{75}{appendix*.80}%
 \babel@toc {british}{}\relax 
 \babel@toc {polish}{}\relax 
 \babel@toc {british}{}\relax 
 \babel@toc {polish}{}\relax 
-\contentsline {chapter}{Źródła}{65}{appendix*.70}%
-\contentsline {chapter}{Lista dodatkowych plików, uzupełniających tekst pracy}{67}{appendix*.71}%
-\contentsline {chapter}{Spis rysunków}{70}{appendix*.72}%
-\contentsline {chapter}{Spis tabel}{71}{appendix*.73}%
+\contentsline {chapter}{Źródła}{77}{appendix*.81}%
+\contentsline {chapter}{Lista dodatkowych plików, uzupełniających tekst pracy}{79}{appendix*.82}%
+\contentsline {chapter}{Spis rysunków}{82}{appendix*.83}%
+\contentsline {chapter}{Spis tabel}{83}{appendix*.84}%

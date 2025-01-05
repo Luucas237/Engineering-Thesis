@@ -22,49 +22,47 @@ Reallocating 'singl_function' (item size: 4) to 100 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
 Database file #1: main-blx.bib
 Database file #2: biblio.bib
-Warning--I didn't find a database entry for "redmon2016yolo"
 Biblatex version: 3.19
 Reallocating 'wiz_functions' (item size: 4) to 9000 items.
 Reallocating 'singl_function' (item size: 4) to 100 items.
-You've used 6 entries,
+You've used 10 entries,
             6399 wiz_defined-function locations,
-            1240 strings with 10175 characters,
-and the built_in function-call counts, 49100 in all, are:
-= -- 3973
-> -- 751
-< -- 173
-+ -- 1484
-- -- 336
-* -- 3760
-:= -- 5995
+            1265 strings with 10869 characters,
+and the built_in function-call counts, 78512 in all, are:
+= -- 6264
+> -- 1255
+< -- 356
++ -- 2273
+- -- 522
+* -- 5843
+:= -- 9061
 add.period$ -- 0
-call.type$ -- 6
-change.case$ -- 52
+call.type$ -- 10
+change.case$ -- 155
 chr.to.int$ -- 44
-cite$ -- 10
-duplicate$ -- 4873
-empty$ -- 4098
-format.name$ -- 426
-if$ -- 9816
+cite$ -- 18
+duplicate$ -- 7951
+empty$ -- 6654
+format.name$ -- 698
+if$ -- 15921
 int.to.chr$ -- 0
-int.to.str$ -- 11
+int.to.str$ -- 23
 missing$ -- 0
-newline$ -- 205
-num.names$ -- 212
-pop$ -- 1916
+newline$ -- 328
+num.names$ -- 450
+pop$ -- 3318
 preamble$ -- 1
-purify$ -- 89
+purify$ -- 212
 quote$ -- 0
-skip$ -- 1040
+skip$ -- 1911
 stack$ -- 0
-substring$ -- 7655
-swap$ -- 843
-text.length$ -- 200
-text.prefix$ -- 6
+substring$ -- 11673
+swap$ -- 1494
+text.length$ -- 325
+text.prefix$ -- 10
 top$ -- 1
-type$ -- 192
+type$ -- 328
 warning$ -- 0
-while$ -- 732
+while$ -- 1094
 width$ -- 0
-write$ -- 200
-(There was 1 warning)
+write$ -- 319
