@@ -149,34 +149,30 @@
     \field{year}{2012}
   \endentry
 
-  \entry{bib:labkecki2009aktywny}{article}{}
-    \name{author}{2}{}{%
-      {{hash=LP}{%
-         family={{\L}ab{\k{e}}cki},
-         familyi={{\L}\bibinitperiod},
-         given={Przemys{\l}aw},
+  \entry{bib:fujarewicz}{article}{}
+    \name{author}{1}{}{%
+      {{hash=hiKFP}{%
+         prefix={hab.\bibnamedelima inż.},
+         prefixi={h\bibinitperiod\bibinitdelim i\bibinitperiod},
+         family={Krzysztof\bibnamedelima Fujarewicz},
+         familyi={K\bibinitperiod\bibinitdelim F\bibinitperiod},
+         given={Prof.dr},
          giveni={P\bibinitperiod},
       }}%
-      {{hash=KA}{%
-         family={Kasi{\'n}ski},
-         familyi={K\bibinitperiod},
-         given={Andrzej},
-         giveni={A\bibinitperiod},
-      }}%
     }
-    \strng{namehash}{LPKA1}
-    \strng{fullhash}{LPKA1}
+    \strng{namehash}{KFPhi1}
+    \strng{fullhash}{KFPhi1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{L}
-    \field{sortinithash}{L}
-    \field{number}{9}
-    \field{pages}{731\bibrangedash 736}
-    \field{title}{Aktywny pok{\l}adowy system wizyjny dla robota
-  autonomicznego}
-    \field{volume}{55}
-    \field{journaltitle}{Pomiary Automatyka Kontrola}
-    \field{year}{2009}
+    \field{sortinit}{K}
+    \field{sortinithash}{K}
+    \field{howpublished}{Prezentacja współfinansowana przez Unię Europejską
+  ze środków Europejskiego Funduszu Społecznego, Politechnika Śląska,
+  Wydział Automatyki, Elektroniki i Informatyki}
+    \field{note}{Dostępne w ramach projektu „Unowocześnienie i rozszerzenie
+  oferty edukacyjnej na kierunku Automatyka i Robotyka”}
+    \field{title}{Materiały dydaktyczne dla przedmiotu „Metody sztucznej
+  inteligencji”}
   \endentry
 
   \entry{bib:matthies2007mars}{article}{}

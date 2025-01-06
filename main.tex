@@ -483,10 +483,14 @@ escapeinside={@*}{*@},%
 \Title
 
 \subsubsection*{Streszczenie}  
-(Streszczenie pracy – odpowiednie pole w systemie APD powinno zawierać kopię tego streszczenia.)
+
+Projekt koncentruje się na opracowaniu i implementacji systemu wizyjnego dla robota mobilnego umożliwiającego detekcję i śledzenie obiektów w czasie rzeczywistym. W projekcie wykorzystano modele YOLOv7 i YOLOv8, które zostały porównane z klasycznymi metodami przetwarzania obrazu pod kątem szybkości działania oraz skuteczności identyfikacji obiektów. Proces przygotowania danych obejmował anotację obrazów przy użyciu platformy Roboflow oraz trening modeli w środowisku Google Colab z wykorzystaniem zasobów GPU.
+System został zintegrowany na platformie Raspberry Pi, co wymagało dostosowania algorytmów do ograniczonych zasobów sprzętowych oraz konfiguracji środowiska Linux.
+Wyniki pracy potwierdzają skuteczność zastosowanego podejścia, jednocześnie podkreślając konieczność kompromisów między wydajnością a dokładnością w środowiskach o ograniczonych możliwościach obliczeniowych.
+
 
 \subsubsection*{Słowa kluczowe} 
-RaspberryPi, Python, OpenCV, YOLO, Binaryzacja
+Raspberry Pi, System wizyjny, Robot mobilny, YOLO, Binaryzacja
 
 \subsubsection*{Thesis title} 
 \begin{otherlanguage}{british}
@@ -495,11 +499,13 @@ RaspberryPi, Python, OpenCV, YOLO, Binaryzacja
 
 \subsubsection*{Abstract} 
 \begin{otherlanguage}{british}
-(Thesis abstract – to be copied into an appropriate field during an electronic submission – in English.)
+    The project focuses on the development and implementation of a vision system for a mobile robot to detect and track objects in real time. The project used YOLOv7 and YOLOv8 models, which were compared with classical image processing methods in terms of speed of operation and object identification efficiency. The data preparation process included image annotation using the Roboflow platform and model training in the Google Colab environment using GPU resources.
+    The system was integrated on a Raspberry Pi platform, which required adapting the algorithms to the limited hardware resources and configuration of the Linux environment.
+    The results of the work confirm the effectiveness of the approach used, while highlighting the need for compromises between performance and accuracy in computationally constrained environments.
 \end{otherlanguage}
 \subsubsection*{Key words}  
 \begin{otherlanguage}{british}
-RaspberryPi, Python, OpenCV, YOLO, Binarization
+Raspberry Pi, Vision system, Mobile Robot, YOLO, Binarization
 \end{otherlanguage}
 
 
@@ -605,6 +611,8 @@ W ramach niniejszej pracy autor:
 
 \label{ch:analiza}
 
+W niniejszym rozdziale przedstawiono analizę istniejących rozwiązań w dziedzinie systemów wizyjnych dla robotów mobilnych. Omówiono aktualny stan wiedzy oraz najnowsze osiągnięcia w dziedzinie detekcji i śledzenia obiektów, ze szczególnym uwzględnieniem algorytmów głębokiego uczenia.
+
 \section{Sformułowanie problemu}
 Współczesna robotyka mobilna stawia liczne wyzwania związane z autonomicznym działaniem robotów w dynamicznych i złożonych środowiskach. Jednym z kluczowych aspektów umożliwiających taką autonomię jest detekcja i śledzenie obiektów w czasie rzeczywistym, co pozwala robotowi na skuteczną interakcję z otoczeniem oraz podejmowanie decyzji na podstawie danych wizualnych. Wyzwania te stają się szczególnie istotne w warunkach zmiennego oświetlenia, ograniczonej mocy obliczeniowej oraz konieczności integracji zaawansowanych algorytmów wizji komputerowej z systemami sterowania.
 
@@ -616,8 +624,6 @@ Systemy wizyjne odgrywają kluczową rolę w procesie autonomizacji robotów, za
 \end{itemize}
 
 Te funkcjonalności umożliwiają robotom podejmowanie działań adaptacyjnych w zmieniających się i nieprzewidywalnych warunkach środowiskowych. Wymaga to jednak zastosowania zaawansowanych algorytmów detekcji i śledzenia, które są w stanie działać efektywnie, mimo ograniczonych zasobów sprzętowych dostępnych na platformach takich jak Raspberry Pi.
-
-Niniejsza praca koncentruje się na analizie i implementacji systemów wizyjnych opartych na algorytmach głębokiego uczenia, takich jak YOLO (\textit{You Only Look Once}), oraz na podstawowych technikach przetwarzania obrazów, takich jak binaryzacja. Systemy te zostały zaimplementowane na platformie Raspberry Pi, co pozwala na praktyczne przetestowanie ich efektywności i dostosowanie do rzeczywistych ograniczeń sprzętowych.
 
 \newpage
 
@@ -669,7 +675,7 @@ gdzie \(w_i\) to wagi, \(b\) to przesunięcie (ang. \textit{bias}), a \(s\) to s
 \end{align}
 
 \paragraph{Funkcje aktywacji}
-Funkcja aktywacji \(f(s)\) determinuje, jak neuron reaguje na wzbudzenie. Przykłady funkcji aktywacji to:
+\cite{bib:fujarewicz} Funkcja aktywacji \(f(s)\) determinuje, jak neuron reaguje na wzbudzenie. Przykłady funkcji aktywacji to:
 \begin{itemize}
     \item \textbf{Sigmoidalna:} \(f(s) = \frac{1}{1 + e^{-s}}\), umożliwiająca modelowanie nieliniowych zależności w sposób płynny.
     \item \textbf{Tangens hiperboliczny:} \(f(s) = \tanh(s)\), zapewniający wyjścia w zakresie od \(-1\) do \(1\).
@@ -697,16 +703,35 @@ Sieci neuronowe składają się z trzech typów warstw:
 Uczenie sieci neuronowej polega na dostosowywaniu wag \(w_i\) w celu minimalizacji błędu między wynikami przewidywanymi przez sieć a oczekiwanymi. Wykorzystuje się w tym celu algorytmy gradientowe, takie jak propagacja wsteczna błędu (ang. \textit{backpropagation}).
 
 \paragraph{Propagacja wsteczna}
-Algorytm propagacji wstecznej to metoda stosowana w procesie uczenia wielowarstwowych sieci neuronowych. Jej celem jest dostosowanie wag w sieci w taki sposób, aby minimalizować różnicę między wynikami przewidywanymi przez sieć a oczekiwanymi. Algorytm działa w kilku etapach:
+Algorytm propagacji wstecznej  to iteracyjna metoda gradientowa wykorzystywana do uczenia wielowarstwowych perceptronów. Jego głównym celem jest minimalizacja wskaźnika jakości \( J \), który mierzy różnicę między oczekiwanym sygnałem wyjściowym \( d \) a rzeczywistym wyjściem \( y_P \) \cite{bib:fujarewicz}. Proces ten pozwala na iteracyjne dostosowywanie wag sieci w taki sposób, aby błąd sieci stopniowo zmniejszał się w kolejnych iteracjach.
 
+Proces propagacji wstecznej składa się z kilku kluczowych etapów:
 \begin{enumerate}
-    \item \textbf{Przepływ w przód:} Dane wejściowe są przetwarzane przez kolejne warstwy sieci. Każdy neuron przekształca dane wejściowe na podstawie swoich wag i funkcji aktywacji, generując sygnały wyjściowe dla następnej warstwy. Na końcu sieci obliczane są wyniki, które są porównywane z wartościami oczekiwanymi.
-    \item \textbf{Obliczenie błędu:} Na podstawie różnicy między rzeczywistym wynikiem sieci a oczekiwanym rezultatem obliczany jest błąd, który jest wykorzystywany do dalszych obliczeń.
-    \item \textbf{Propagacja błędu wstecz:} Obliczony błąd jest propagowany wstecz przez sieć, od warstwy wyjściowej do warstw ukrytych. Każda warstwa analizuje, w jakim stopniu jej wagi przyczyniły się do powstania błędu.
-    \item \textbf{Aktualizacja wag:} Wagi neuronów są dostosowywane na podstawie obliczonych błędów, co zmniejsza różnicę między przewidywaniami a oczekiwanymi wynikami w kolejnych iteracjach.
+    \item \textbf{Propagacja w przód:} Dane wejściowe są przesyłane przez kolejne warstwy sieci neuronowej, a każdy neuron oblicza swoje wyjście na podstawie funkcji aktywacji i aktualnych wag. Na końcu sieci obliczane są sygnały wyjściowe \( y_P \), które są porównywane z oczekiwanymi wartościami \( d \).
+    
+    \item \textbf{Obliczenie błędu wyjścia:} Różnica między wyjściem sieci a wartością oczekiwaną określa błąd wyjścia. Funkcja kosztu \( J \), często wyrażana jako błąd średniokwadratowy, jest obliczana według wzoru:
+    \begin{align}
+        J = \frac{1}{2} \sum_{k} (y_k - d_k)^2,
+    \end{align}
+    gdzie \( y_k \) to wyjście sieci, a \( d_k \) to wartość oczekiwana.
+
+    \item \textbf{Propagacja błędu wstecz:} Obliczony błąd wyjścia jest propagowany wstecz przez sieć, zaczynając od warstwy wyjściowej, aż do warstw ukrytych. W tym procesie wykorzystywane są pochodne funkcji aktywacji, które określają wpływ każdej wagi na wartość błędu.
+
+    \item \textbf{Aktualizacja wag:} Wagi sieci są dostosowywane w kierunku minimalizacji błędu według reguły:
+    \begin{align}
+        w_{ij}^k(t+1) = w_{ij}^k(t) - \eta \frac{\partial J}{\partial w_{ij}^k},
+    \end{align}
+    gdzie:
+    \begin{itemize}
+        \item \( \eta \) – współczynnik nauki, określający wielkość kroku aktualizacji,
+        \item \( \frac{\partial J}{\partial w_{ij}^k} \) – gradient funkcji kosztu względem wagi \( w_{ij}^k \).
+    \end{itemize}
 \end{enumerate}
 
-\subsection{Zasada działania}
+Gradienty są obliczane na podstawie błędów i pochodnych funkcji aktywacji, co pozwala na efektywną aktualizację wag. 
+Algorytm propagacji wstecznej wyróżnia się swoją uniwersalnością i skutecznością w modelowaniu nieliniowych zależności. Jednak ma również ograniczenia, takie jak ryzyko utknięcia w lokalnych minimach oraz wolna zbieżność przy niewłaściwym doborze współczynnika nauki.
+
+\section{Zasada działania YOLO}
 YOLO (\textit{You Only Look Once}) to algorytm detekcji obiektów, który przekształca cały obraz na jedną siatkę o wymiarach \( S \times S \). Każda komórka siatki analizuje fragment obrazu i przewiduje:
 \begin{itemize}
     \item ramki ograniczające (ang. \textit{bounding boxes}), które określają potencjalne pozycje obiektów,
@@ -745,7 +770,7 @@ W procesie binaryzacji każdy piksel \( I(x, y) \) obrazu wejściowego jest por�
 \end{align}
 
 Istnieją różne techniki wyznaczania progu, np. metoda Otsu, która automatycznie dobiera \( T \), minimalizując wariancję wewnątrzklasową \cite{bib:huang2012improved}.
-
+\newpage
 \subsection{Zastosowania}
 Binaryzacja znajduje szerokie zastosowanie w różnych zadaniach przetwarzania obrazu, takich jak:
 \begin{itemize}
@@ -754,7 +779,7 @@ Binaryzacja znajduje szerokie zastosowanie w różnych zadaniach przetwarzania o
     \item redukcja złożoności obrazu w celu optymalizacji przetwarzania w systemach o ograniczonych zasobach obliczeniowych, takich jak Raspberry Pi,
     \item wspomaganie systemów wizyjnych w robotyce, np. do śledzenia linii na torze jazdy w autonomicznych pojazdach.
 \end{itemize}
-
+\newpage
 \section{Studia literaturowe i znane rozwiązania}
 W literaturze naukowej można znaleźć liczne prace dotyczące implementacji systemów wizyjnych w robotyce mobilnej. W niniejszym rozdziale przytoczono przykłady wybranych badań.
 
@@ -763,12 +788,7 @@ W literaturze naukowej można znaleźć liczne prace dotyczące implementacji sy
 W pracy \cite{bib:mikekus2014system} prof. dr hab. inż. Krzysztof Kozłowski i współautorzy przedstawili koncepcję oraz realizację modułowego robota mobilnego, zaprojektowanego do zastosowań transportowych w zamkniętych środowiskach. Celem projektu było opracowanie systemu programowania i sterowania, uwzględniającego wymogi bezpieczeństwa oraz przyjaznego interfejsu użytkownika.
 
 \textbf{Cel systemu:}
-Robot został zaprojektowany jako urządzenie transportowe o nośności do 120 kg, dedykowane do przewozu ładunków w pomieszczeniach zamkniętych. Wymagania projektowe obejmowały:
-\begin{itemize}
-    \item Modułową budowę, umożliwiającą integrację różnych podsystemów.
-    \item Zapewnienie bezpieczeństwa użytkowania dzięki systemowi zderzaków i czujników.
-    \item Możliwość programowania trasy przejazdu za pomocą przyjaznego interfejsu.
-\end{itemize}
+Robot został zaprojektowany jako urządzenie transportowe o nośności do 120 kg, dedykowane do przewozu ładunków w pomieszczeniach zamkniętych.
 
 \textbf{Metodologia:}
 Autorzy zastosowali klasyczny model pojazdu dwukołowego z napędem różnicowym oraz pasywnym kołem podporowym. System sterowania oparto na komputerze pokładowym klasy PC oraz dedykowanym oprogramowaniu zbudowanym w architekturze klient-serwer. Wprowadzono język programowania LeoOS Programming Language (LPL), który umożliwia definiowanie trajektorii ruchu robota za pomocą punktów referencyjnych.
@@ -782,29 +802,9 @@ Robot został wyposażony w zaawansowane systemy sensoryczne, w tym skaner laser
 \end{itemize}
 
 \textbf{Wnioski:}
-Praca autorów pokazuje potencjał zastosowania modularnych systemów sterowania w robotyce mobilnej, szczególnie w środowiskach o dużych wymaganiach bezpieczeństwa. Implementacja języka LPL oraz architektury modułowej zwiększa elastyczność i efektywność systemu, jednocześnie otwierając drogę do dalszego rozwoju.
+Praca autorów pokazuje potencjał zastosowania modularnych systemów sterowania w robotyce mobilnej, szczególnie w środowiskach o dużych wymaganiach bezpieczeństwa.
 
-\subsection{Aktywny system wizyjny dla robota kroczącego}
-
-W pracy \cite{bib:labkecki2009aktywny} mgr inż. Przemysław Łabęcki i Dr hab. inż. Andrzej Kasiński przedstawili aktywny system wizyjny, zaprojektowany z myślą o implementacji w robotach kroczących. System ten opierał się na połączeniu kamery oraz oświetlacza laserowego, którego zadaniem było rzutowanie światła na otoczenie w celu pozyskania informacji o geometrii przestrzeni.
-
-\textbf{Cel systemu:}
-Głównym celem opisanego systemu było zapewnienie robotowi informacji 3D o przestrzeni znajdującej się bezpośrednio przed nim, co umożliwiało zarówno nawigację, jak i detekcję przeszkód.
-
-\textbf{Metodologia:}
-- Zastosowano arkusz świetlny emitowany przez laser, a jego ślad rejestrowany był przez kamerę.
-- Opracowano matematyczny model układu, definiujący relacje geometryczne między kamerą, oświetlaczem i otoczeniem.
-- Przeprowadzono kalibrację systemu, aby dokładnie określić parametry układu, takie jak kąty widzenia kamery i położenie głównych punktów odniesienia.
-- Do detekcji śladu wiązki lasera na obrazie wykorzystano techniki przetwarzania obrazu w przestrzeni barw HSV.
-
-\textbf{Wyniki:}
-- System pozwalał na odwzorowanie geometrii otoczenia z błędem względnym nieprzekraczającym 5\%.
-- Przeprowadzono eksperymenty z obiektami znajdującymi się w różnych odległościach od kamery, wykazując wysoką dokładność w pomiarach wymiarów geometrycznych.
-- System sprawdził się jako dalmierz i narzędzie do tworzenia mapy przestrzeni 3D, co było szczególnie przydatne w planowaniu ruchu robota kroczącego.
-
-\textbf{Wnioski:}
-Wyniki badań potwierdzają przydatność aktywnych systemów wizyjnych w robotyce mobilnej, szczególnie w warunkach wymagających precyzyjnych pomiarów odległości i analizy przestrzeni. Rozwiązanie to cechuje niski koszt i możliwość integracji z systemami sterowania robotów.
-
+\newpage
 
 \subsection{System wspomagania nawigacji osób niewidomych}
 
@@ -821,29 +821,8 @@ W artykule \cite{bib:parvadhavardhni2023blind} poświęconym konferencji ICAAIC 
 \textbf{Działanie systemu:}
 System analizuje obraz z kamery w czasie rzeczywistym, identyfikuje obiekty znajdujące się na drodze użytkownika i dostarcza odpowiednie informacje zwrotne. Użytkownik jest w ten sposób ostrzegany o przeszkodach, co umożliwia unikanie kolizji i bezpieczne poruszanie się.
 
-\textbf{Zalety rozwiązania:}
-\begin{itemize}
-    \item \textbf{Niski koszt:} Wykorzystanie Raspberry Pi oraz otwartoźródłowego oprogramowania czyni system przystępnym cenowo.
-    \item \textbf{Mobilność:} Kompaktowe komponenty pozwalają na łatwe przenoszenie oraz integrację z akcesoriami, takimi jak laska dla niewidomych.
-    \item \textbf{Skalowalność:} Możliwość rozbudowy systemu o dodatkowe funkcje, np. rozpoznawanie znaków drogowych lub sygnalizacji świetlnej.
-\end{itemize}
-
 \textbf{Wnioski:}
 Przedstawiony system stanowi obiecujące narzędzie wspierające osoby niewidome w samodzielnym poruszaniu się, zwiększając ich bezpieczeństwo i komfort życia. Integracja technologii, takich jak Raspberry Pi oraz algorytmy głębokiego uczenia, umożliwia tworzenie efektywnych i dostępnych rozwiązań wspomagających nawigację.
-
-
-
-%\subsection{Znane rozwiązania praktyczne}
-%\textbf{Przykład:} Autonomiczne wózki AGV w magazynach Amazon.\\
-%Systemy te wykorzystują detekcję obiektów w czasie rzeczywistym, aby unikać przeszkód i zapewniać precyzyjną nawigację w dynamicznie zmieniającym się środowisku.
-
-
-
-\begin{align}
-y = \frac{\partial x}{\partial t}
-\end{align}
-jak i pojedyncze symbole $x$ i $y$  składa się w trybie matematycznym.
-
 
 %\begin{Definition}\label{def:1}
 %Definicja to zdanie (lub układ zdań) odpowiadające na pytanie o strukturze „co to jest a?”. Definicja normalna jest zdaniem złożonym z 2 członów: definiowanego (łac. definiendum) i definiującego (łac. definiens), połączonych spójnikiem definicyjnym („jest to”, „to tyle, co” itp.). 
@@ -862,40 +841,37 @@ jak i pojedyncze symbole $x$ i $y$  składa się w trybie matematycznym.
 
 
 
-% TODO
 \chapter{Przygotowanie i trening modelu detekcji obiektów}
 \label{ch:Przygotowanie-i-trening-modelu}
+Niniejszy rozdział opisuje proces przygotowania danych do treningu modelu detekcji obiektów. Omówiono wykorzystanie własnoręcznie przygotowanego zestawu danych wzorcowych w postaci zdjęć, etykietowania danych za pomocą platformy Roboflow oraz treningu modelu przeprowadzonego w środowisku Google Colab.
+
+
 \section{Przygotowanie danych wzorcowych}
 Do poprawnego wytrenowania sieci neuronowej, konieczne jest przygotowanie zestawu danych wzorcowych. W przypadku algorytmów głębokiego uczenia kluczowe znaczenie ma jakość i zróżnicowanie danych treningowych, ponieważ sieci neuronowe uczą się rozpoznawania wzorców na podstawie dostarczonych przykładów. 
 
 Dane wzorcowe muszą spełniać pewne istotne wymagania, aby zapewnić odpowiednią skuteczność modelu:
 \begin{itemize}
-    \item \textbf{Różnorodność scenariuszy}: Obrazy powinny przedstawiać obiekt w różnych warunkach oświetleniowych (np. światło dzienne, sztuczne oświetlenie, cienie), co pozwala modelowi uogólniać na nowe środowiska.
-    \item \textbf{Zmienne pozycje i orientacje}: Dane powinny zawierać obiekt w różnych orientacjach, kątach oraz pozycjach względem kamery, aby uniknąć problemu nadmiernego dopasowania do specyficznego układu.
-    \item \textbf{Różne odległości od kamery}: Obiekty powinny być widoczne w kadrze zarówno z bliska, jak i z daleka, co ułatwia modelowi detekcję niezależnie od dystansu.
+    \item \textbf{Różnorodność scenariuszy}: Obrazy powinny przedstawiać obiekt w różnych warunkach oświetleniowych (np. światło dzienne, sztuczne oświetlenie, cienie).
+    \item \textbf{Zmienne pozycje i orientacje}: Dane powinny zawierać obiekt w różnych orientacjac względem kamery, aby uniknąć problemu nadmiernego dopasowania do specyficznego układu.
+    \item \textbf{Różne odległości od kamery}: Obiekty powinny być widoczne w kadrze zarówno z bliska, jak i z daleka.
 \end{itemize}
+
+\newpage
 
 W praktyce przygotowanie takiego zbioru danych wymaga użycia narzędzi do annotacji, które pozwalają na oznaczenie obiektów w obrazach za pomocą ramek ograniczających (ang. \textit{bounding boxes}). Do tego celu często wykorzystuje się narzędzia do annotacji zdjęć, takie jak \textbf{Roboflow} czy \textbf{LabelImg}, które wspomagają proces podziału na zbiory treningowe, walidacyjne i testowe.
 
 
 %%%% Platforma Roboflow %%%%%
 \section{Platforma Roboflow}
-Aby zrealizować założenia pracy, do przygotowania zbioru uczącego wykorzystano platformę Roboflow. Jest to narzędzie dostępne online, które umożliwia zarządzanie danymi, ich etykietowanie oraz konwersję między różnymi formatami. W kontekście tej pracy wykorzystano obrazy przedstawiające czerwoną piłkę w realistycznym środowisku.
+Aby zrealizować założenia pracy, do przygotowania zbioru uczącego wykorzystano platformę Roboflow. Jest to narzędzie dostępne w wyszukiwarce internetowej, które umożliwia zarządzanie danymi, ich etykietowanie oraz konwersję między różnymi formatami. W kontekście tej pracy wykorzystano obrazy przedstawiające czerwoną piłkę w realistycznym środowisku.
 
 Proces przygotowania danych w Roboflow składał się z następujących etapów:
 
 \begin{enumerate}
 	\item \textbf{Zbieranie danych} - zgromadzono zestaw około 400 zdjęć przedstawiających czerwoną piłkę w różnych warunkach oświetleniowych i na różnych tłach.
 	
-	\item \textbf{Annotacja} - każde zdjęcie zostało oznaczone poprzez narysowanie ramki ograniczającej wokół piłki. Roboflow udostępnia intuicyjny interfejs do tego procesu.
-	
-	\item \textbf{Augmentacja danych} - aby zwiększyć różnorodność zbioru treningowego, zastosowano następujące techniki augmentacji:
-	\begin{itemize}
-		\item Zmiana jasności 
-		\item Rozmycie
-		\item Zróżnicowanie otoczenia
-	\end{itemize}
-	
+	\item \textbf{Annotacja} - każde zdjęcie zostało oznaczone poprzez narysowanie ramki ograniczającej wokół piłki.
+		
 	\item \textbf{Podział danych} - zbiór został podzielony w proporcjach:
 	\begin{itemize}
 		\item 70\% - zbiór treningowy
@@ -903,13 +879,13 @@ Proces przygotowania danych w Roboflow składał się z następujących etapów:
 		\item 10\% - zbiór testowy
 	\end{itemize}
 	
-	\item \textbf{Eksport} - przygotowane dane zostały wyeksportowane w formacie YOLO v7 Pytorch.
+	\item \textbf{Eksport} - przygotowane dane zostały wyeksportowane w formacie YOLOv7 Pytorch oraz YOLOv8.
 \end{enumerate}
 
 \newpage
 
 \subsection{Proces użycia witryny Roboflow}
-W celu przygotowania danych treningowych, zarejestrowano konto na platformie Roboflow i przystąpiono do etykietowania obiektów. Na rysunku \ref{fig:roboflow-main} przedstawiono widok strony głównej witryny Roboflow.
+Rysunek \ref{fig:roboflow-main} przedstawia widok strony głównej projektu. Po zalogowaniu się do platformy, użytkownik ma dostęp do wszystkich funkcji, takich jak zarządzanie danymi, etykietowanie obiektów, czy eksport danych w wybranym formacie.
 
 \begin{figure}[h]
 	\centering
@@ -918,28 +894,18 @@ W celu przygotowania danych treningowych, zarejestrowano konto na platformie Rob
 	\label{fig:roboflow-main}
 \end{figure}
 
-Proces etykietowania można przeprowadzić automatycznie, korzystając z algorytmów detekcji obiektów, lub ręcznie, poprzez zaznaczenie obiektów na obrazie. Korzystając z etykietowania ręcznego istnieje pewność, że obiekty zostaną poprawnie oznaczone w takich przypadkach jak rozmyty obraz bądź słabe oświetlenie. 
+Proces etykietowania danych można przeprowadzić na dwa sposoby. Pierwszy z nich to automatyczne etykietowanie, które wykorzystuje algorytmy detekcji obiektów w celu przyspieszenia oznaczania danych. Drugi sposób to etykietowanie ręczne, które polega na samodzielnym zaznaczaniu obiektów na obrazie przez użytkownika. Chociaż proces ręczny jest bardziej czasochłonny, zapewnia większą kontrolę nad poprawnością oznaczeń, co jest szczególnie istotne w przypadku trudnych warunków, takich jak rozmyte obrazy, słabe oświetlenie lub obiekty częściowo zasłonięte.
 
+\newpage
 
 \paragraph{Zdjęcie \ref{fig:labeling1}}
-przedstawia interfejs użytkownika podczas etykietowania obiektów. Na obrazie widoczna jest czerwona piłka, która została zaznaczona ramką ograniczającą.
+przedstawia interfejs użytkownika podczas etykietowania obiektów. Na obrazie widoczna jest czerwona piłka, która została zaznaczona ramką ograniczającą oraz nadano jej klasę \textbf{Ball} (oznaczającą piłkę).
 
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.75\textwidth]{Images/Roboflow/labeling1.png}
 	\caption{Etykietowanie obiektów za pomocą witryny Roboflow.}
 	\label{fig:labeling1}
-\end{figure}
-
-\newpage
-\paragraph{Zdjęcie \ref{fig:labeling2}}
-przedstawia obiekt po zetykietowaniu. Na obrazie widoczna jest czerwona piłka, która została poprawnie oznaczona ramką ograniczającą.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.75\textwidth]{Images/Roboflow/labeling2.png}
-    \caption{Obiekt po zetykietowaniu.}
-    \label{fig:labeling2}
 \end{figure}
 
 \paragraph{Zdjęcie \ref{fig:labeling3}}
@@ -956,7 +922,7 @@ pokazuje proces etykietowania w warunkach słabego oświetlenia. Pomimo trudnych
 
 \subsection{Trening zestawu danych}
 Po zakończeniu etykietowania danych, przystąpiono do segmentacji zbioru na zbiór treningowy, walidacyjny i testowy.
-Następnie przeprowadzono trening danych aby można było wyeksportować je w formacie YOLO v7 Pytorch.
+Następnie przeprowadzono trening danych aby można było wyeksportować je w formacie YOLO.
 Na wykresie \ref{fig:Wykrespoczatek} przedstawiono przebieg treningu w pierwszych epokach. Widać, że wartość funkcji straty maleje wraz z postępem uczenia, co świadczy o skuteczności procesu.
 
 \begin{figure}[h]
@@ -967,32 +933,13 @@ Na wykresie \ref{fig:Wykrespoczatek} przedstawiono przebieg treningu w pierwszyc
 \end{figure}
 
 \newpage
-Natomiast wykres \ref{fig:Wykres2} przedstawia przebieg treningu w kolejnych epokach. Widać, że w momencie 20 epoki wartość wskaźnika mAP maleje. 
-\textbf{mAP (mean Average Precision)} jest miarą jakości modeli detekcji obiektów, uwzględniającą zarówno \textit{precision}, jak i \textit{recall}. Oblicza się go jako średnią precyzji (AP) dla wszystkich klas obiektów.
 
-Podczas treningu mAP może zmaleć, a następnie wzrosnąć z kilku powodów:
-\begin{itemize}
-    \item \textbf{Augmentacja danych:} Trudniejsze przypadki augmentacji danych mogą chwilowo obniżyć mAP, ale poprawiają generalizację modelu.
-    \item \textbf{Dane walidacyjne:} Specyficzne, trudne obrazy w danych walidacyjnych mogą wpłynąć na chwilowe obniżenie wyników.
-\end{itemize}
+\section{Trening modelu YOLO}
 
-Spadek mAP jest naturalnym zjawiskiem, oznaczającym reakcję modelu na zmiany w procesie treningu. Wzrost mAP po spadku wskazuje na poprawę generalizacji oraz stabilizację procesu optymalizacji.
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.75\textwidth]{Images/Roboflow/wykres2.png}
-    \caption{Wykres przebiegu treningu z zaistniałym spadkiem mAP.}
-    \label{fig:Wykres2}
-\end{figure}
-
-\newpage
-
-\section{Trening modelu YOLOv7}
-
-Po przygotowaniu danych treningowych przystąpiono do wytrenowania modelu detekcji obiektów YOLOv7, korzystając z platformy Google Colab. Umożliwia ona wykorzystanie zasobów obliczeniowych w chmurze, w tym akceleracji przez GPU (Graphics Processing Unit), które znacząco przyspiesza przetwarzanie dużych ilości danych dzięki równoległemu wykonywaniu obliczeń. Jest to szczególnie istotne w przypadku modeli uczenia maszynowego, takich jak głębokie sieci neuronowe, które wymagają intensywnych operacji macierzowych. Proces treningu przebiegał zgodnie z następującymi krokami:
+Po przygotowaniu danych treningowych przystąpiono do wytrenowania modelu detekcji obiektów YOLO, korzystając z platformy Google Colab. Umożliwia ona wykorzystanie zasobów obliczeniowych w chmurze, w tym akceleracji przez GPU (ang. \textit{Graphics Processing Unit}), które znacząco przyspiesza przetwarzanie dużych ilości danych dzięki równoległemu wykonywaniu obliczeń. Jest to szczególnie istotne w przypadku modeli uczenia maszynowego, takich jak głębokie sieci neuronowe, które wymagają intensywnych operacji macierzowych. Proces treningu przebiegał zgodnie z następującymi krokami:
 
 \subsection{Przygotowanie środowiska}
-Utworzonie nowego projektu w Google Colab i skonfigurowano środowiska do korzystania z GPU:
+Utworzonie nowego projektu w Google Colab i skonfigurowanie środowiska do korzystania z GPU:
 \begin{enumerate}
     \item Z pasku narzędzi \texttt{Środowisko wykonawcze} wybrano opcję \texttt{Zmień typ środowiska wykonawczego}.
     \item Jako \texttt{Akcelerator sprzętowy} ustawiono \texttt{GPU}.
@@ -1026,8 +973,11 @@ Pobranie wstępnie wytrenowanych wag modelu YOLOv7:
 Model wytrenowano, uruchamiając poniższą komendę:
 \begin{verbatim}
 %env WANDB_MODE=disabled
-!python yolov7/train.py --data Ball-Detection-3/data.yaml --cfg yolov7/cfg/training/yolov7.yaml --weights yolov7.pt --epochs 50 --batch-size 16 --device 0
+!python yolov7/train.py --data Ball-Detection-3/data.yaml 
+--cfg yolov7/cfg/training/yolov7.yaml 
+--weights yolov7.pt --epochs 50 --batch-size 16 --device 0
 \end{verbatim}
+
 Parametry treningu były następujące:
 \begin{itemize}
     \item \texttt{--data}: Ścieżka do pliku konfiguracyjnego zestawu danych otrzymanych z Roboflow.
@@ -1037,13 +987,16 @@ Parametry treningu były następujące:
     \item \texttt{--batch-size}: Rozmiar grupy treningowej (ustawiono na 16).
     \item \texttt{--device}: GPU (0 oznacza pierwsze dostępne GPU).
 \end{itemize}
-Po zakończeniu treningu najlepsze wagi modelu są zapisywane w pliku \texttt{best.pt} w folderze \texttt{runs}. Plik ten będzie wykorzystywany w programie do detekcji obiektu w czasie rzeczywistym.
-Dodatkowo należy pobrać foldery \texttt{models} oraz \texttt{utils} z repozytorium YOLOv7 i umieścić je w folderze z projektem.
+
+Epoka (ang. \textit{epoch}) to jeden pełny przebieg przez cały zbiór treningowy w procesie uczenia modelu. Podczas każdej epoki model widzi wszystkie dane treningowe przynajmniej raz i dostosowuje swoje wagi na podstawie obliczonego błędu. W tym treningu wybrano 50 epok, co oznacza, że zbiór danych treningowych został przetworzony 50 razy.
+
+Po zakończeniu treningu najlepsze wagi modelu są zapisywane w pliku \texttt{best.pt} w folderze \texttt{runs}. Plik ten będzie wykorzystywany w programie do detekcji obiektu w czasie rzeczywistym. Dodatkowo należy pobrać foldery \texttt{models} oraz \texttt{utils} z repozytorium YOLOv7 i umieścić je w folderze z projektem.
+
 
 % TODO
 \chapter{Proces tworzenia robota mobilnego}
 \label{ch:04}
-W obecnym rozdziale przedstawiony zostanie proces tworzenia robota mobilnego, uwzględniający zarówno założenia logiczne, jak i aspekty techniczne związane z budową oraz implementacją systemów sterowania. W pierwszej części opisane zostaną kluczowe założenia projektowe oraz schemat blokowy algorytmu robota mobilnego opartego na systemie wizyjnym. Następnie zostanie zaprezentowany proces konstrukcji robota, opierając się na modelu 3D stworzonym w programie Autodesk Fusion oraz przedstawienie wykorzystanych modułów i ich sposób podłączenia przedstawionego za pośrednictwem schematu blokowego. Ostatnia część rozdziału dotyczy dostosowania jednostki sterującej w postaci Raspberry Pi, w tym konfiguracji niezbędnych bibliotek umożliwiających integrację podzespołów i realizację funkcjonalności systemu wizyjnego dla robota mobilnego.
+W niniejszym rozdziale przedstawiono proces tworzenia robota mobilnego, uwzględniający zarówno założenia logiczne, jak i aspekty techniczne związane z budową oraz implementacją systemów sterowania. W pierwszej części opisano kluczowe założenia projektowe oraz schemat blokowy algorytmu robota mobilnego opartego na systemie wizyjnym. Następnie zaprezentowano proces konstrukcji robota, opierając się na modelu 3D stworzonym w programie Autodesk Fusion, oraz przedstawiono wykorzystane moduły i sposób ich podłączenia za pomocą schematu blokowego. W ostatniej części rozdziału opisano dostosowanie jednostki sterującej w postaci Raspberry Pi, w tym konfigurację niezbędnych bibliotek umożliwiających integrację podzespołów i realizację funkcjonalności systemu wizyjnego dla robota mobilnego.
 
 \section{Założenia logiczne}
 Poniżej przedstawiono diagram blokowy ilustrujący działanie algorytmu detekcji obiektów w czasie rzeczywistym. Proces rozpoczyna się od akwizycji obrazu z kamery, który następnie trafia do modelu detekcji obiektów YOLOv7. Na podstawie wyników detekcji robot dostosowuje kąty serwomechanizmów pionowego i poziomego, aby utrzymać obiekt w centrum kadru. Jeśli obiekt przesunie się poza wyznaczone centrum, program oblicza różnicę w pikselach i przelicza ją na odpowiednie wartości kątowe, umożliwiając sterowanie serwomechanizmami w celu zapewnienia ciągłości śledzenia. Celem algorytmu jest nieustanne utrzymanie obiektu w centrum widoku kamery.
@@ -1103,10 +1056,10 @@ Aby zrealizować założenia projektowe, wykorzystano następujące moduły i ko
 \paragraph{RaspberryPi:} Moduł Raspberry Pi 4B zasilany z powerbanku 5V 3A oraz podłączony ze sterownikiem Hat-MDD10 w sposób nakładkowy.
 \newpage
 \subsection{Projekt robota mobilnego}
-Jednym z założeń projektu było stworzenie kompaktowego robota mobilnego o możliwie prostym i modułowym układzie konstrukcyjnym. Robot składa się z dwóch pięter: dolnego pełniącego funkcję napędową oraz górnego będącego platformą dla modułów sterujących. Dzięki temu podziałowi możliwe jest zachowanie walorów estetycznych oraz funkcjonalnych.
+Jednym z założeń projektu było stworzenie kompaktowego robota mobilnego o możliwie prostym i modułowym układzie konstrukcyjnym. Robot składa się z dwóch pięter: dolnego pełniącego funkcję napędową oraz górnego będącego platformą dla modułów sterujących. Rysunek \ref{fig:Robot projekt} przedstawia projekt konstrukcji robota wykonany w programie Autodesk Fusion, widoczne na nim strzałki oznaczają kierunki obrotu serwomechanizmów oraz całej platformy mobilnej.
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{Images/Robot/Robot projekt.png}
+    \includegraphics[width=0.6\textwidth]{Images/Robot/Robot kierunki.png}
     \caption{Projekt konstrukcji robota mobilnego wykonany w programie Autodesk Fusion.}
     \label{fig:Robot projekt}
 \end{figure}
@@ -1117,26 +1070,40 @@ Jednym z założeń projektu było stworzenie kompaktowego robota mobilnego o mo
     \label{fig:Robot piętra}
 \end{figure}
 
-Obraz \ref{fig:Robot dół} przedstawia dolne piętro robota, na którym zamontowane są silniki DC wraz z kołami oraz zasilaniem w postaci koszyka z czterema ogniwami 18650 Litowo-jonowymi. Dodatkowo umieszczono przełącznik dźwigniowy ON-OFF, który umożliwia ręczne wyłączenie zasilania silników DC.
+\newpage
+Obraz \ref{fig:Robot dół} przedstawia dolne piętro robota, na którym zamontowane są:
+\begin{enumerate}
+    \item Przełącznik dźwigniowy ON-OFF
+    \item Silniki DC
+    \item Koszyk na cztery ogniwa 18650
+    \item Koła Polulu
+\end{enumerate}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{Images/Robot/Robot dół.png}
-    \caption{Widok rzutu górnego na dolne piętro robota.}
+    \includegraphics[width=0.9\textwidth]{Images/Robot/Robot dół oznaczenia.png}
+    \caption{Widok rzutu górnego na piętro odpowiedzialne za napęd robota.}
     \label{fig:Robot dół}
 \end{figure}
 \newpage
-Obraz \ref{fig:Robot góra} przedstawia górne piętro robota, na którym zamontowane są takie moduły jak Raspberry Pi, sterownik silników DC, uchwyt na kamerę wraz z serwomechanizmami oraz zasilaniem. Z powodu dużej wagi powerbanka, konieczne było zastosowanie przeciwwagi w postaci granitowego bloku na przodzie modułu górnego piętra. Zastosowanie to zapewnia stabilność robota oraz równomierny rozkład masy.
+Obraz \ref{fig:Robot góra} przedstawia górne piętro robota, na którym zamontowano:
+\begin{enumerate}
+    \item Zasilanie RaspberryPi w postaci powerbanku
+    \item Połączony moduł RaspberryPi z Hat-MDD10
+    \item Odważnik, którego celem jest stabilizacja robota
+    \item Uchwyt na kamerę RaspberryPi wraz zamocowanymi serwomechanizmami.
+    \item Kamera
+\end{enumerate}
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{Images/Robot/Robot góra.png}
-    \caption{Widok rzutu górnego na górne piętro robota.}
+    \includegraphics[width=0.9\textwidth]{Images/Robot/Robot góra oznaczenia.png}
+    \caption{Widok rzutu górnego na piętro odpowiedzialne za sterowanie robotem.}
     \label{fig:Robot góra}
 \end{figure}
 \newpage
 Zdjęcie \ref{fig:Robot_gotowy} przedstawia gotową konstrukcję robota mobilnego wykonanego z tworzywa sztucznego PETG. 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.6\textwidth]{Images/Robot/Robot_gotowy.png}
+    \includegraphics[width=0.8\textwidth]{Images/Robot/Robot_gotowy.png}
     \caption{Gotowa konstrukcja robota mobilnego.}
     \label{fig:Robot_gotowy}
 \end{figure}
@@ -1144,8 +1111,9 @@ Zdjęcie \ref{fig:Robot_gotowy} przedstawia gotową konstrukcję robota mobilneg
 \newpage
 
 \section{Dostosowanie RaspberryPi}
-Na Raspberry Pi zainstalowano system operacyjny Debian GNU/Linux 12 (Bookworm), który jest 64-bitową wersją opartą na jądrze Linux 6.6.51, zoptymalizowaną pod architekturę ARM (aarch64). Wybrana wersja systemu jest kompatybilna z bibliotekami istotnymi do poprawnego działania systemu wizyjnego. Aby zoptymalizować pracę programu i zapewnić pełną kontrolę nad jego zależnościami, utworzono dedykowane wirtualne środowisko, w którym przechowywane są wszystkie wymagane biblioteki. Środowisko to zostało stworzone przy użyciu narzędzia \texttt{venv} za pomocą poniższego polecenia w terminalu: \begin{verbatim} python -m venv nazwa-env \end{verbatim} Po utworzeniu środowiska wirtualnego należy je aktywować, używając polecenia: \begin{verbatim} source nazwa-env/bin/activate \end{verbatim} Program jest uruchamiany wewnątrz tego środowiska, co pozwala na uniknięcie konfliktów między wersjami bibliotek oraz zapewnia powtarzalność działania systemu na różnych urządzeniach. Przykładowe polecenie uruchamiające program w aktywnym środowisku to: \begin{verbatim} python program.py \end{verbatim} Takie podejście gwarantuje, że wszystkie zależności programu są odpowiednio załadowane i kompatybilne z systemem operacyjnym oraz sprzętem Raspberry Pi.
-\newpage
+Na Raspberry Pi zainstalowano system operacyjny Debian GNU/Linux 12 (Bookworm), który jest 64-bitową wersją opartą na jądrze Linux 6.6.51, zoptymalizowaną pod architekturę ARM (aarch64). Wybrana wersja systemu jest kompatybilna z bibliotekami istotnymi do poprawnego działania systemu wizyjnego. Projekt został zrealizowany w oparciu o wersję Python 3.11.2. Aby zoptymalizować pracę programu i zapewnić pełną kontrolę nad jego zależnościami, utworzono dedykowane wirtualne środowisko, w którym przechowywane są wszystkie wymagane biblioteki. Środowisko to zostało stworzone przy użyciu narzędzia \texttt{venv} za pomocą poniższego polecenia w terminalu: \begin{verbatim} python -m venv nazwa-env \end{verbatim} Po utworzeniu środowiska wirtualnego należy je aktywować, używając polecenia: \begin{verbatim} source nazwa-env/bin/activate \end{verbatim} Program jest uruchamiany wewnątrz tego środowiska, co pozwala na uniknięcie konfliktów między wersjami bibliotek oraz zapewnia powtarzalność działania systemu na różnych urządzeniach.
+
+
 \subsection{Spis wymaganych bibliotek}
 Poniżej przedstawiono listę bibliotek wymaganych do uruchomienia systemu wizyjnego oraz sterowania robotem mobilnym, z podziałem na ich funkcje:
 
@@ -1163,6 +1131,7 @@ Poniżej przedstawiono listę bibliotek wymaganych do uruchomienia systemu wizyj
         \item \textbf{numpy} – Operacje matematyczne i macierzowe, kluczowe dla analizy danych wizualnych.
         \item \textbf{Picamera2} – Obsługa kamery Raspberry Pi do akwizycji obrazu.
     \end{itemize}
+\newpage
     
     \item \textbf{Sterowanie sprzętem:}
     \begin{itemize}
@@ -1177,7 +1146,7 @@ Poniżej przedstawiono listę bibliotek wymaganych do uruchomienia systemu wizyj
     \end{itemize}
 \end{itemize}
 
-Szczegółowy spis wszystkich bibliotek został przedstawiony w pliku Requirements.txt dostarczonym w załączniku do pracy.
+Szczegółowy spis wszystkich bibliotek został przedstawiony w pliku Biblioteki.txt dostarczonym w załączniku do pracy.
 
 
 %\begin{figure}
@@ -1242,10 +1211,9 @@ W niniejszym rozdziale przedstawiono analizę działania systemu wizyjnego, któ
 Porównanie zostało przeprowadzone pod kątem dwóch głównych aspektów:
 \begin{enumerate}
     \item \textbf{Skuteczności wykrywania obiektów:} Analizowano zdolność algorytmów do wykrywania obiektu w różnych warunkach oświetleniowych oraz w otoczeniu obiektów zakłócających.
-    \item \textbf{Wydajności działania:} Mierzono czas przetwarzania obrazu w jednostkach FPS (klatki na sekundę), co pozwala określić, jak szybko algorytm jest w stanie działać na urządzeniu.
+    \item \textbf{Wydajności działania:} Mierzono czas przetwarzania obrazu w klatkach na sekundę - FPS (ang. \textit{Frames Per Second}), co pozwala określić, jak szybko algorytm jest w stanie działać na urządzeniu.
 \end{enumerate}
 
-Każde z przedstawionych podejść ma swoje zalety i wady. YOLO to zaawansowany model wykorzystujący sieci neuronowe, które zapewniają wysoką precyzję wykrywania, ale wymagają znacznych zasobów obliczeniowych, co może być wyzwaniem dla urządzeń takich jak Raspberry Pi. Z kolei algorytm binaryzacji obrazu wyróżnia się prostotą i szybkością działania, co czyni go atrakcyjnym w kontekście ograniczonych zasobów sprzętowych.
 \newpage
 
 \section{Specyfikacja sprzętowa}
@@ -1271,14 +1239,10 @@ Poniżej przedstawiono specyfikację urządzeń użytych do analizy skutecznośc
     \end{itemize}    
 \end{itemize}
 
-W kolejnych sekcjach szczegółowo omówiono działanie algorytmów, przedstawiono wyniki testów oraz przeprowadzono ich porównanie pod względem skuteczności i wydajności. 
-
-
 \section{Detekcja obiektu za pomocą narzędzi głębokiego uczenia}
 
-W podrozdziale tym opisano podejście do detekcji obiektu (piłki czerwonej) z wykorzystaniem zaawansowanych narzędzi głębokiego uczenia, takich jak modele z rodziny YOLO (ang. \textit{You Only Look Once}).
-
-W porównaniu do klasycznych technik przetwarzania obrazów, modele głębokiego uczenia wymagają większych zasobów obliczeniowych, ale oferują większą elastyczność i skuteczność w złożonych warunkach otoczenia. W szczególności wykorzystano modele YOLOv7 i YOLOv8, które różnią się między sobą szybkością i dokładnością działania.
+W podrozdziale tym opisano podejście do detekcji obiektu (czerwonej piłki) z wykorzystaniem zaawansowanych narzędzi głębokiego uczenia, takich jak modele z rodziny YOLO (ang. \textit{You Only Look Once}).
+W porównaniu do klasycznych technik przetwarzania obrazów, modele głębokiego uczenia wymagają większych zasobów obliczeniowych, ale oferują większą elastyczność i skuteczność w złożonych warunkach otoczenia.
 
 \newpage
 \subsection{Opis działania programu}
@@ -1286,7 +1250,7 @@ W porównaniu do klasycznych technik przetwarzania obrazów, modele głębokiego
 System opiera się na detekcji obiektu (piłki) w czasie rzeczywistym z wykorzystaniem modelu YOLO oraz sterowaniu ruchem robota przy pomocy serwomechanizmów i silników DC. Program realizuje funkcjonalność autonomicznego śledzenia piłki oraz reagowania na jej pozycję w kadrze kamery.
 
 \paragraph{Wczytanie modelu}
-Model YOLO, zapisany w pliku \texttt{best.pt}, jest wczytywany z użyciem funkcji \texttt{attempt\_load}. Model jest przełączany w tryb ewaluacyjny (ang. \textit{evaluation mode}), aby umożliwić jego wykorzystanie wyłącznie do predykcji. Kod odpowiedzialny za ładowanie modelu przedstawiono w Kodzie~\ref{lst:model_loading}.
+Model YOLO, zapisany w pliku \texttt{best.pt}, jest wczytywany z użyciem funkcji \texttt{attempt\_load}. Model jest przełączany w tryb ewaluacyjny (ang. \textit{evaluation mode}), aby umożliwić jego wykorzystanie wyłącznie do predykcji. Kod odpowiedzialny za ładowanie modelu przedstawiono w \textbf{Kodzie}~\ref{lst:model_loading}.
 
 \begin{lstlisting}[language=Python, caption={Ładowanie modelu YOLO do pamięci.}, label={lst:model_loading}, captionpos=b]
 model_path = "/home/lukasgrab/GoodDetection/runs/train/ball_detection6/weights/best.pt"
@@ -1296,7 +1260,7 @@ model.eval()
 \end{lstlisting}
 
 \paragraph{Detekcja piłki}
-Podstawowa logika detekcji polega na przetwarzaniu obrazu z kamery, który jest skalowany i przetwarzany przez model YOLO. Wyniki predykcji są filtrowane za pomocą mechanizmu \textit{non-max suppression} w celu eliminacji zbędnych ramek detekcji. Po wykryciu piłki jej pozycja jest obliczana względem środka obrazu. Fragment kodu odpowiedzialny za tę funkcję przedstawiono w Kodzie~\ref{lst:ball_detection}.
+Podstawowa logika detekcji polega na przetwarzaniu obrazu z kamery, który jest skalowany i przetwarzany przez model YOLO. Wyniki predykcji są filtrowane za pomocą mechanizmu \textit{non-max suppression} w celu eliminacji zbędnych ramek detekcji. Po wykryciu piłki jej pozycja jest obliczana względem środka obrazu. Fragment kodu odpowiedzialny za tę funkcję przedstawiono w \textbf{Kodzie}~\ref{lst:ball_detection}.
 
 \begin{lstlisting}[language=Python, caption={Logika detekcji piłki przy użyciu modelu YOLO.}, label={lst:ball_detection}, captionpos=b]
 predictions = model(img)[0]
@@ -1318,10 +1282,10 @@ W centrum obrazu rysowany jest kwadrat, który definiuje obszar uznawany za "śr
 Kwadrat pozwala na bardziej stabilne śledzenie, ponieważ robot uznaje piłkę za "wycentrowaną", gdy znajduje się w tym obszarze, nawet jeśli nie jest dokładnie w punkcie środkowym.
 
 \paragraph{Definiowanie ograniczeń kątowych}
-Sterowanie serwomechanizmami w programie wymagało zdefiniowania zakresów ruchu, aby uniknąć uszkodzenia mechanicznego urządzeń. Dla serwomechanizmu odpowiedzialnego za ruch poziomy (ang. \textit{pan}) przyjęto ograniczenia w zakresie od $-45^{\circ}$ do $45^{\circ}$. Z kolei serwomechanizm odpowiedzialny za ruch pionowy (ang. \textit{tilt}) może zmieniać kąt w zakresie od $-30^{\circ}$ do $30^{\circ}$. Te wartości są podyktowane fizycznymi możliwościami serwomechanizmów oraz potrzebą zapewnienia odpowiedniej elastyczności ruchu robota.
+Sterowanie serwomechanizmami w programie wymagało zdefiniowania zakresów ruchu, aby uniknąć uszkodzenia mechanicznego urządzeń. Dla serwomechanizmu odpowiedzialnego za ruch poziomy (ang. \textit{pan}) przyjęto ograniczenia w zakresie od $-25^{\circ}$ do $25^{\circ}$. Z kolei serwomechanizm odpowiedzialny za ruch pionowy (ang. \textit{tilt}) może zmieniać kąt w zakresie od $-30^{\circ}$ do $30^{\circ}$. Te wartości są podyktowane fizycznymi możliwościami serwomechanizmów oraz potrzebą zapewnienia odpowiedniej elastyczności ruchu robota.
 
 \paragraph{Przeliczanie kąta na szerokość impulsu}
-Sterowanie serwomechanizmami wymaga przekształcenia kąta (w stopniach) na szerokość impulsu (ang. \textit{pulse width}) w mikrosekundach, co odpowiada wymaganiom sterownika serwomechanizmu. Proces ten realizuje funkcja przedstawiona w Kodzie~\ref{lst:set_servo_angle}.
+Sterowanie serwomechanizmami wymaga przekształcenia kąta (w stopniach) na szerokość impulsu (ang. \textit{pulse width}) w mikrosekundach, co odpowiada wymaganiom sterownika serwomechanizmu. Proces ten realizuje funkcja przedstawiona w \textbf{Kodzie}~\ref{lst:set_servo_angle}.
 
 \begin{lstlisting}[language=Python, caption={Przeliczanie kąta na szerokość impulsu.}, label={lst:set_servo_angle}, captionpos=b]
 def set_servo_angle(pin, angle):
@@ -1344,11 +1308,11 @@ Funkcja \texttt{set\_servo\_angle} realizuje następujące kroki:
         \item $180$ — zakres pełnych kątów ruchu serwomechanizmu ($-90^{\circ}$ do $90^{\circ}$),
         \item $\texttt{angle} + 90$ — przesunięcie kąta, aby obliczenia obejmowały pełny zakres od $0^{\circ}$ do $180^{\circ}$.
     \end{itemize}
-    \item Funkcja wywołuje \texttt{pi.set\_servo\_pulsewidth}, aby ustawić odpowiednią szerokość impulsu na wybranym pinie GPIO (\texttt{pin}).
+    \item Funkcja wywołuje \texttt{pi.set\_servo\_pulsewidth}, aby ustawić odpowiednią szerokość impulsu na wybranym pinie GPIO.
 \end{itemize}
 
 \paragraph{Sterowanie serwomechanizmami}
-Sterowanie serwomechanizmami realizuje dynamiczne dostosowanie kątów nachylenia w celu śledzenia pozycji piłki. Pozycja piłki w kadrze obrazu jest przekształcana na współrzędne w pikselach, a następnie na kąty dla serwomechanizmów. Kluczowy fragment kodu odpowiedzialny za sterowanie serwomechanizmami przedstawiono w Kodzie~\ref{lst:servo_control}.
+Sterowanie serwomechanizmami realizuje dynamiczne dostosowanie kątów nachylenia w celu śledzenia pozycji piłki. Pozycja piłki w kadrze obrazu jest przekształcana na współrzędne w pikselach, a następnie na kąty dla serwomechanizmów. Kluczowy fragment kodu odpowiedzialny za sterowanie serwomechanizmami przedstawiono w \textbf{Kodzie}~\ref{lst:servo_control}.
 
 \begin{lstlisting}[language=Python, caption={Algorytm sterowania serwomechanizmami.}, label={lst:servo_control}, captionpos=b]
 new_pan_angle = current_pan_angle + (normalized_dx * 5)
@@ -1362,7 +1326,7 @@ set_servo_angle(servo_pin_tilt, new_tilt_angle)
 \end{lstlisting}
 
 \paragraph{Logika sterowania ruchem}
-Robot realizuje ruch do przodu, gdy piłka jest wykryta i znajduje się w granicach zadanych kątów serwomechanizmów. W przypadku, gdy kąt poziomy (pan) przekroczy wartość graniczną, robot wykonuje skręt w odpowiednią stronę. Logikę sterowania ruchem przedstawiono w Kodzie~\ref{lst:motion_logic}.
+Robot realizuje ruch do przodu, gdy piłka jest wykryta i znajduje się w granicach zadanych kątów serwomechanizmów. W przypadku, gdy kąt poziomy (pan) przekroczy wartość graniczną, robot wykonuje skręt w odpowiednią stronę. Logikę sterowania ruchem przedstawiono w \textbf{Kodzie}~\ref{lst:motion_logic}.
 
 \begin{lstlisting}[language=Python, caption={Logika sterowania ruchem robota.}, label={lst:motion_logic}, captionpos=b]
 if abs(current_tilt_angle) < TILT_STOP_THRESHOLD:
@@ -1398,8 +1362,8 @@ if time.time() - last_detected_time > 1:
 W powyższym kodzie:
 \begin{itemize}
     \item \texttt{search\_time} — zmienna czasu, która jest inkrementowana w każdej iteracji, aby generować płynne zmiany kąta.
-    \item \texttt{math.cos(search\_time)} — generuje wartości dla poziomego ruchu serwomechanizmu (\texttt{pan}), symulując eliptyczny ruch.
-    \item \texttt{math.sin(search\_time)} — generuje wartości dla pionowego ruchu serwomechanizmu (\texttt{tilt}).
+    \item \texttt{math.cos(search\_time)} — generuje wartości dla poziomego ruchu serwomechanizmu \textbf{pan}.
+    \item \texttt{math.sin(search\_time)} — generuje wartości dla pionowego ruchu serwomechanizmu \textbf{tilt}.
     \item \texttt{PAN\_AMPLITUDE} i \texttt{TILT\_AMPLITUDE} — amplitudy ruchu poziomego i pionowego, które kontrolują zakres ruchu serwomechanizmów.
     \item \texttt{TILT\_OFFSET} — przesunięcie pionowe, aby tilt oscylował wokół ustalonej wartości.
 \end{itemize}
@@ -1408,7 +1372,7 @@ W powyższym kodzie:
 \subsection{Uzyskane rezultaty}
 W ramach testów systemu wizyjnego przeprowadzono analizę skuteczności detekcji piłki w różnych warunkach oświetleniowych oraz w obecności obiektów potencjalnie zakłócających prawidłowe działanie algorytmu. Celem testów było zweryfikowanie odporności systemu na zmienne warunki środowiskowe oraz jego zdolności do ignorowania obiektów o zbliżonym kształcie lub barwie do śledzonej piłki.
 
-Na Rysunku~\ref{fig:Wykrycie_piłki1} przedstawiono sytuację przy dobrym oświetleniu, gdzie system poprawnie wykrył piłkę czerwoną, jednocześnie ignorując inne obiekty znajdujące się w polu widzenia kamery. Natomiast na Rysunku~\ref{fig:Wykrycie_piłki2} zaprezentowano scenariusz przy gorszych warunkach oświetleniowych, w którym system nadal poprawnie wykrył piłkę czerwoną, jednak błędnie sklasyfikował obiekt o innej barwie jako piłkę.
+Na \textbf{Rysunku}~\ref{fig:Wykrycie_piłki1} przedstawiono sytuację przy dobrym oświetleniu, gdzie system poprawnie wykrył piłkę czerwoną, jednocześnie ignorując inne obiekty znajdujące się w polu widzenia kamery. Natomiast na \textbf{Rysunku}~\ref{fig:Wykrycie_piłki2} zaprezentowano scenariusz przy gorszych warunkach oświetleniowych, w którym system nadal poprawnie wykrył piłkę czerwoną, jednak błędnie sklasyfikował obiekt o innej barwie jako piłkę.
 
 \begin{figure}[!hb]
     \centering
@@ -1420,32 +1384,32 @@ Na Rysunku~\ref{fig:Wykrycie_piłki1} przedstawiono sytuację przy dobrym oświe
 \begin{figure}[!hb]
     \centering
     \includegraphics[width=0.5\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194208.png}
-    \caption{Sytuacja przy złym oświetleniu — poprawne wykrycie piłki czerwonej oraz błędne wskazanie piłki o innych barwach.}
+    \caption{Sytuacja przy gorszym oświetleniu — poprawne wykrycie piłki czerwonej oraz błędne wskazanie piłki o innych barwach.}
     \label{fig:Wykrycie_piłki2}
 \end{figure}
 
 \newpage
-Analiza wyników wykazała, że system wizyjny działa poprawnie w warunkach dobrego oświetlenia, precyzyjnie identyfikując piłkę czerwoną oraz ignorując inne obiekty. W takich warunkach algorytm wykazuje wysoką precyzję i skuteczność w wykrywaniu obiektu zgodnego z jego charakterystyką. 
+Analiza wyników wykazała, że system wizyjny działa poprawnie w warunkach dobrego oświetlenia, precyzyjnie identyfikując piłkę czerwoną oraz ignorując inne obiekty.
 
-W przypadku słabego oświetlenia zauważono spadek skuteczności systemu. Algorytm błędnie klasyfikuje obiekt o podobnym kształcie jako piłkę, co może wynikać z ograniczeń modelu detekcji lub niewystarczającej jakości danych treningowych dla scen o niskim poziomie światła. Mimo to system nadal rozpoznaje piłkę czerwoną, co świadczy o jego częściowej odporności na zmienne warunki oświetleniowe.
+W przypadku słabego oświetlenia zauważono spadek skuteczności systemu. Algorytm błędnie klasyfikuje obiekt o podobnym kształcie jako piłkę, co może wynikać z niewystarczającej jakości danych treningowych dla scen o niskim poziomie światła. Mimo to system nadal rozpoznaje piłkę czerwoną, co świadczy o jego częściowej odporności na zmienne warunki oświetleniowe.
 
 \begin{figure}[!hb]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo7 robot/Para pilek ciemno poprawnie wskazal czerwona.png}
-    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej}
+    \caption{Informacja zwrotna w terminalu Raspberry Pi o wykryciu piłki czerwonej}
     \label{fig:TerminalOutput}
 \end{figure}
 
-Rysunek~\ref{fig:TerminalOutput} przedstawia widok terminala programu uruchomionego na Raspberry Pi. Jest to widok sytuacji, w której otoczenie jest dobrze oświetlone a program poprawnie wskazał czerwoną piłkę. W sytuacji gorszego oświetlenia i błędnej detekcji dwóch obiektów, program utrzymuje współrzędne serwomechanizmów dla pierwszego zidentyfikowanego obiektu. Ze względu na ograniczone zasoby mocy obliczeniowej Raspberry Pi, zdecydowano się na rezygnację z wyświetlania obrazu bezpośrednio na urządzeniu. Informacje o detekcji, takie jak status wykrycia obiektu "DETECTED" (oznaczające "Wykryto") oraz "SEARCHING" (oznaczające "Szukanie"), wartości kątów serwomechanizmów "Pan" (oznaczający "Obrót" wokół osi pionowej) i "Tilt" (oznaczający "Przechył" wokół osi pionowej) oraz liczba klatek na sekundę (\texttt{FPS}), są przesyłane do terminala komputera połączonego z Raspberry Pi przez SSH.
+\textbf{Rysunek}~\ref{fig:TerminalOutput} przedstawia widok terminala programu uruchomionego na Raspberry Pi. Jest to widok sytuacji, w której otoczenie jest dobrze oświetlone a program poprawnie wskazał czerwoną piłkę. W sytuacji gorszego oświetlenia i błędnej detekcji dwóch obiektów, program utrzymuje współrzędne serwomechanizmów dla pierwszego zidentyfikowanego obiektu. Ze względu na ograniczone zasoby mocy obliczeniowej Raspberry Pi, zdecydowano się na rezygnację z wyświetlania obrazu bezpośrednio na urządzeniu. Informacje o detekcji, takie jak status wykrycia obiektu \textbf{DETECTED} (oznaczające "Wykryto") oraz \textbf{SEARCHING} (oznaczające "Szukanie"), wartości kątów serwomechanizmów \textbf{Pan} (oznaczający "Obrót" wokół osi pionowej) i \textbf{Tilt} (oznaczający "Przechył" wokół osi pionowej) oraz liczba klatek na sekundę (\textbf{FPS}), są przesyłane do terminala komputera połączonego z Raspberry Pi przez SSH.
 
-Warto zauważyć, że Rysunki~\ref{fig:Wykrycie_piłki1} i~\ref{fig:Wykrycie_piłki2} ilustrują działanie tego samego programu, lecz uruchomionego na komputerze w celu wizualizacji. Na obrazach widoczny jest niebieski kwadrat w centrum kadru, który wyznacza obszar uznawany za środek obrazu. Dzięki jego zastosowaniu program jest w stanie bardziej stabilnie śledzić pozycję obiektu. 
+Warto zauważyć, że \textbf{Rysunki}~\ref{fig:Wykrycie_piłki1} i~\ref{fig:Wykrycie_piłki2} ilustrują działanie tego samego programu, lecz uruchomionego na komputerze w celu wizualizacji. Na obrazach widoczny jest niebieski kwadrat w centrum kadru, który wyznacza obszar uznawany za środek obrazu. Dzięki jego zastosowaniu program jest w stanie bardziej stabilnie śledzić pozycję obiektu. 
 
 
 
 \newpage
-W celu oceny skuteczności zaprojektowanego systemu wizyjnego przeprowadzono testy w różnych warunkach oświetleniowych oraz w obecności obiektów potencjalnie zakłócających detekcję piłki. Analiza wyników opierała się na obserwacji działania programu w scenariuszach symulujących rzeczywiste sytuacje. Na Rysunku \ref{fig:Wykrycie piłki3} przedstawiono sytuację, w której system działał w warunkach dobrego oświetlenia. Detekcja piłki czerwonej została przeprowadzona prawidłowo, a inne obiekty, takie jak czerwona poduszka znajdująca się w kadrze, zostały skutecznie zignorowane. Wynik ten potwierdza, że mechanizm filtrowania wyników detekcji, oparty na \textit{non-max suppression}, skutecznie eliminuje zbędne ramki detekcji.
+W celu oceny skuteczności zaprojektowanego systemu wizyjnego przeprowadzono testy w różnych warunkach oświetleniowych oraz w obecności obiektów potencjalnie zakłócających detekcję piłki. Analiza wyników opierała się na obserwacji działania programu w scenariuszach symulujących rzeczywiste sytuacje. Na \textbf{Rysunku} \ref{fig:Wykrycie piłki3} przedstawiono sytuację, w której system działał w warunkach dobrego oświetlenia. Detekcja piłki czerwonej została przeprowadzona prawidłowo, a inne obiekty, takie jak czerwona poduszka znajdująca się w kadrze, zostały skutecznie zignorowane. Wynik ten potwierdza, że mechanizm filtrowania wyników detekcji, oparty na \textit{non-max suppression}, skutecznie eliminuje zbędne ramki detekcji.
 
-Rysunek \ref{fig:Wykrycie piłki4} prezentuje wyniki systemu w trudniejszych warunkach oświetleniowych, w których detekcja piłki czerwonej została przeprowadzona poprawnie, mimo ograniczonej widoczności. Co więcej, system zignorował obiekt o zbliżonym kolorze (czerwoną poduszkę), co świadczy o zdolności modelu do rozróżniania kluczowych cech obiektów.
+\textbf{Rysunek} \ref{fig:Wykrycie piłki4} prezentuje wyniki systemu w trudniejszych warunkach oświetleniowych, w których detekcja piłki czerwonej została przeprowadzona poprawnie, mimo ograniczonej widoczności. Co więcej, system zignorował obiekt o zbliżonym kolorze (czerwoną poduszkę), co świadczy o zdolności modelu do rozróżniania kluczowych cech obiektów.
 
 \begin{figure}[!hb]
     \centering
@@ -1465,11 +1429,11 @@ Rysunek \ref{fig:Wykrycie piłki4} prezentuje wyniki systemu w trudniejszych war
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo7 robot/pilka i poduszka zgaszone swiatlo dalej wykrywa.png}
-    \caption{Zwrot informacji w terminalu o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
+    \caption{Informacja zwrotna w terminalu Raspberry Pi o wykryciu piłki czerwonej i zignorowaniu czerwonego obiektu}
     \label{fig:Wykrycie piłki5}
 \end{figure}
 
-Rysunek \ref{fig:Wykrycie piłki5} przedstawia widok terminala programu uruchomionego na Raspberry Pi. Jest to widok sytuacji, w której otoczenie jest dobrze oświetlone a program poprawnie wskazał czerwoną piłkę. Jednakże można zauważyć, iż program w pewnych momentach działania nie wykrywał modelu wcale i rozpoczął sekwencję poszukiwania. 
+\textbf{Rysunek} \ref{fig:Wykrycie piłki5} przedstawia widok terminala programu uruchomionego na Raspberry Pi. Jest to widok sytuacji, w której otoczenie jest dobrze oświetlone a program poprawnie wskazał czerwoną piłkę. Jednakże można zauważyć, iż program w pewnych momentach działania nie wykrywał modelu wcale i rozpoczął sekwencję poszukiwania. 
 
 \newpage
 
@@ -1479,10 +1443,10 @@ W podrozdziale tym przedstawiono podejście do detekcji obiektu (piłki czerwone
 
 \subsection{Opis działania programu}
 
-Program rozpoczyna swoje działanie od pobrania obrazu z kamery w czasie rzeczywistym, który następnie jest przetwarzany w celu wykrycia piłki czerwonej. Proces ten opiera się na kilku kluczowych krokach:
+Program rozpoczyna swoje działanie od pobrania obrazu z kamery w czasie rzeczywistym, który następnie jest przetwarzany w celu wykrycia czerwonej piłki. Proces ten opiera się na kilku kluczowych krokach:
 
 \paragraph{Konwersja przestrzeni barw}
-Pierwszym krokiem jest konwersja obrazu z przestrzeni barw RGB na przestrzeń HSV (ang. \textit{Hue, Saturation, Value}). Przestrzeń HSV umożliwia łatwiejszą separację kolorów, co jest szczególnie przydatne przy detekcji obiektów o specyficznej barwie, takich jak piłka czerwona. Konwersję realizuje funkcja \texttt{cv2.cvtColor}, której działanie przedstawiono w Kodzie~\ref{lst:hsv_conversion}.
+Pierwszym krokiem jest konwersja obrazu z przestrzeni barw RGB na przestrzeń HSV (ang. \textit{Hue, Saturation, Value}). Przestrzeń HSV umożliwia łatwiejszą separację kolorów, co jest szczególnie przydatne przy detekcji obiektów o specyficznej barwie. Konwersję realizuje funkcja \texttt{cv2.cvtColor}, której działanie przedstawiono w Kodzie~\ref{lst:hsv_conversion}.
 
 \begin{lstlisting}[language=Python, caption={Konwersja obrazu z przestrzeni RGB do HSV.}, label={lst:hsv_conversion}, captionpos=b]
 hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
@@ -1525,7 +1489,7 @@ for contour in contours:
 \subsection{Uzyskane rezultaty}
 Wyniki działania algorytmu detekcji obiektu za pomocą binaryzacji zostały przedstawione w formie dwóch widoków dla każdego przypadku testowego. Pierwszy widok przedstawia obraz po zastosowaniu binaryzacji, gdzie piksele odpowiadające wykrytej barwie zostały zaznaczone na biało, a pozostałe wykluczone. Drugi widok prezentuje obraz w przestrzeni barw HSV, co umożliwia wizualną ocenę zakresów kolorów zastosowanych w procesie binaryzacji. Należy zaznaczyć, że wizualizacja ta została uruchomiona na komputerze, podczas gdy na Raspberry Pi wyświetlana jest jedynie informacja w terminalu o wykryciu bądź braku wykrycia obiektu.
 
-Na Rysunku~\ref{fig:Wykrycie piłki6} zaprezentowano przykład wykrycia czerwonej piłki w dalekim kadrze przy słabym oświetleniu. Algorytm prawidłowo zidentyfikował piłkę, co dowodzi jego zdolności do poprawnej detekcji w trudnych warunkach oświetleniowych. Podobny przypadek przedstawiono na Rysunku~\ref{fig:Wykrycie piłki7}, gdzie piłka została prawidłowo wykryta w dobrych warunkach oświetleniowych.
+Na \textbf{Rysunku}~\ref{fig:Wykrycie piłki6} zaprezentowano przykład wykrycia czerwonej piłki w dalekim kadrze przy słabym oświetleniu. Algorytm prawidłowo zidentyfikował piłkę, co dowodzi jego zdolności do poprawnej detekcji w trudnych warunkach oświetleniowych. Podobny przypadek przedstawiono na \textbf{Rysunku}~\ref{fig:Wykrycie piłki7}, gdzie piłka została prawidłowo wykryta w dobrych warunkach oświetleniowych.
 
 \begin{figure}[h]
     \centering
@@ -1540,23 +1504,21 @@ Na Rysunku~\ref{fig:Wykrycie piłki6} zaprezentowano przykład wykrycia czerwone
     \label{fig:Wykrycie piłki7}
 \end{figure}
 
-Należy również zauważyć, że podczas działania algorytmu na Raspberry Pi skuteczność detekcji była bardziej wrażliwa na warunki oświetleniowe. W momencie, gdy natężenie światła uległo znacznemu zmniejszeniu, program przestał wykrywać czerwoną piłkę. Na obrazie przedstawionym na Rysunku~\ref{fig:Wykrycie piłki Rasp} widoczny jest moment, w którym światło zostało zgaszone, co spowodowało przejście informacji w terminalu z "DETECTED" (oznaczające "Wykryto") na "SEARCHING" (oznaczające "Szukanie").
+Należy również zauważyć, że podczas działania algorytmu na Raspberry Pi skuteczność detekcji była bardziej wrażliwa na warunki oświetleniowe. W momencie, gdy natężenie światła uległo znacznemu zmniejszeniu, program przestał wykrywać czerwoną piłkę. Na obrazie przedstawionym na \textbf{Rysunku}~\ref{fig:Wykrycie piłki Rasp} widoczny jest moment, w którym światło zostało zgaszone, co spowodowało przejście informacji w terminalu z \textbf{DETECTED} na \textbf{SEARCHING}.
 
 
 Zjawisko to wskazuje na ograniczenia algorytmu wynikające z braku wystarczającej ilości informacji w warunkach słabego oświetlenia. Raspberry Pi, mimo zastosowania prostych i wydajnych metod takich jak binaryzacja, wykazuje ograniczenia w detekcji obiektów w trudnych warunkach oświetleniowych. Utrata detekcji w takich sytuacjach wynika głównie z ograniczeń samej metody binaryzacji, która opiera się wyłącznie na analizie kolorów, a nie z braku wystarczających zasobów obliczeniowych.
-Może to stanowić istotne wyzwanie w implementacjach wymagających niezawodnej pracy w zmiennych warunkach oświetleniowych.
-
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.7\textwidth]{Images/Porownanie/Binaryzacja/Para piłek moment zgaszenia swiatla.png}
-    \caption{Informacja z terminalu RaspberryPi - zgubienie piłki w momencie zgaszenia światła}
+    \caption{Informacja zwrotna w  terminalu Raspberry Pi - zgubienie piłki w momencie zgaszenia światła}
     \label{fig:Wykrycie piłki Rasp}
 \end{figure}
 
 
 \newpage
 
-Rysunki~\ref{fig:Wykrycie piłki8} i~\ref{fig:Wykrycie piłki9} przedstawiają wyniki działania algorytmu w bliskim kadrze. W przypadku słabego oświetlenia (Rysunek~\ref{fig:Wykrycie piłki8}), algorytm poprawnie zidentyfikował piłkę oraz zignorował inny obiekt o podobnym kolorze. Natomiast w lepszych warunkach oświetleniowych (Rysunek~\ref{fig:Wykrycie piłki9}) zarejestrowano błędne wskazanie czerwonego obiektu znajdującego się w tle. Wynik ten wskazuje, że intensywne oświetlenie może zwiększyć prawdopodobieństwo fałszywych detekcji.
+\textbf{Rysunki}~\ref{fig:Wykrycie piłki8} i~\ref{fig:Wykrycie piłki9} przedstawiają wyniki działania algorytmu w bliskim kadrze. W przypadku słabego oświetlenia (\textbf{Rysunek}~\ref{fig:Wykrycie piłki8}), algorytm poprawnie zidentyfikował piłkę oraz zignorował inny obiekt o podobnym kolorze. Natomiast w lepszych warunkach oświetleniowych (\textbf{Rysunek}~\ref{fig:Wykrycie piłki9}) zarejestrowano błędne wskazanie czerwonego obiektu znajdującego się w tle. Wynik ten wskazuje, że intensywne oświetlenie może zwiększyć prawdopodobieństwo fałszywych detekcji.
 
 \begin{figure}[h]
     \centering
@@ -1574,9 +1536,9 @@ Rysunki~\ref{fig:Wykrycie piłki8} i~\ref{fig:Wykrycie piłki9} przedstawiają w
 
 \newpage
 
-Kolejny test, zilustrowany na Rysunku~\ref{fig:Wykrycie piłki10}, pokazuje odporność algorytmu na zakłócenia w gorszych warunkach oświetleniowych. W warunkach ograniczonego oświetlenia algorytm poprawnie ignorował czerwone obiekty inne niż piłka (Rysunek~\ref{fig:Wykrycie piłki10}), co dowodzi jego skuteczności w rozróżnianiu obiektów o podobnej barwie. 
+Kolejny test, zilustrowany na \textbf{Rysunku}~\ref{fig:Wykrycie piłki10}, pokazuje odporność algorytmu na zakłócenia w gorszych warunkach oświetleniowych. W warunkach ograniczonego oświetlenia algorytm poprawnie ignorował czerwone obiekty inne niż piłka (\textbf{Rysunek}~\ref{fig:Wykrycie piłki10}), co dowodzi jego skuteczności w rozróżnianiu obiektów o podobnej barwie. 
 
-Jednakże, w sytuacji przedstawionej na Rysunku~\ref{fig:Wykrycie piłki11}, przy dobrym oświetleniu, algorytm błędnie zidentyfikował poduszkę jako piłkę. W efekcie, rzeczywista piłka, znajdująca się na tle poduszki, została "zgubiona" w procesie detekcji. Ten przypadek ujawnia istotne ograniczenie algorytmu, wynikające z faktu, że analiza barwy nie jest w pełni wystarczającym kryterium identyfikacji obiektów, szczególnie w scenariuszach, gdzie różne obiekty o zbliżonym kolorze występują w tej samej scenie.
+Jednakże, w sytuacji przedstawionej na \textbf{Rysunku}~\ref{fig:Wykrycie piłki11}, przy dobrym oświetleniu, algorytm błędnie zidentyfikował poduszkę jako piłkę. W efekcie, rzeczywista piłka, znajdująca się na tle poduszki nie została wykryta w procesie detekcji. Ten przypadek ujawnia istotne ograniczenie algorytmu, wynikające z faktu, że analiza barwy nie jest w pełni wystarczającym kryterium identyfikacji obiektów, szczególnie w scenariuszach, gdzie różne obiekty o zbliżonym kolorze występują w tej samej scenie.
 
 \begin{figure}[h]
     \centering
@@ -1596,11 +1558,7 @@ Jednakże, w sytuacji przedstawionej na Rysunku~\ref{fig:Wykrycie piłki11}, prz
 
 W niniejszym podrozdziale dokonano porównania trzech algorytmów detekcji obiektów: YOLOv7, YOLOv8 oraz algorytmu binaryzacji. Analiza została przeprowadzona w oparciu o różne warunki oświetleniowe i otoczenie, a także na dwóch platformach sprzętowych: komputerze osobistym oraz Raspberry Pi. Celem było określenie kompromisu pomiędzy szybkością działania, wyrażoną w klatkach na sekundę (FPS), a skutecznością w wykrywaniu obiektów oraz eliminacji błędnych detekcji.
 
-Algorytmy z rodziny YOLO (ang. \textit{You Only Look Once}) reprezentują podejście oparte na głębokich sieciach neuronowych, które umożliwia jednoczesne lokalizowanie i klasyfikowanie obiektów w obrazie. YOLOv7, jako starsza wersja, cechuje się dobrym kompromisem pomiędzy wydajnością obliczeniową a dokładnością detekcji. YOLOv8, będący nowszym rozwinięciem, oferuje jeszcze większą precyzję i lepsze dostosowanie do bardziej złożonych scen, ale kosztem większych wymagań sprzętowych.
-
-Z kolei algorytm binaryzacji, oparty na segmentacji obrazu w przestrzeni barw HSV, charakteryzuje się bardzo wysoką szybkością działania i niskimi wymaganiami sprzętowymi. Jego prostota sprawia jednak, że jest bardziej podatny na błędy w trudnych warunkach, takich jak niejednorodne oświetlenie lub obecność obiektów o podobnym kolorze.
-
-W kontekście badania, platformy sprzętowe różniły się znacząco pod względem dostępnych zasobów obliczeniowych. Komputer osobisty, wyposażony w nowoczesny procesor i dedykowaną kartę graficzną, umożliwiał działanie algorytmów YOLO w czasie rzeczywistym z wysoką dokładnością. Raspberry Pi, jako platforma o ograniczonej mocy obliczeniowej, stanowiło wyzwanie dla zaawansowanych algorytmów detekcji, ale dzięki swojej kompaktowej konstrukcji i energooszczędności jest często stosowane w systemach wbudowanych.
+W kontekście badania, platformy sprzętowe różniły się znacząco pod względem dostępnych zasobów obliczeniowych. Komputer osobisty, wyposażony w wydajny procesor i dedykowaną kartę graficzną, umożliwiał działanie algorytmów YOLO w czasie rzeczywistym z wysoką dokładnością. Raspberry Pi, jako platforma o ograniczonej mocy obliczeniowej, stanowiło wyzwanie dla zaawansowanych algorytmów detekcji.
 
 Wyniki analizy uwzględniają różne scenariusze testowe, takie jak działanie algorytmów w warunkach dobrego i słabego oświetlenia, obecność przeszkód oraz różne konfiguracje sprzętowe. Pozwoliło to na kompleksowe porównanie skuteczności i efektywności rozważanych podejść, a także ocenę ich przydatności w systemach czasu rzeczywistego.
 
@@ -1609,7 +1567,7 @@ Wyniki analizy uwzględniają różne scenariusze testowe, takie jak działanie 
 
 \subsection{Charakterystyka modelu YOLOv7}
 
-W warunkach dobrego oświetlenia model YOLOv7 wykazuje wysoką skuteczność w detekcji obiektów, co potwierdzają wyniki przedstawione na Rysunku~\ref{fig:yolov7_good_light}. Algorytm prawidłowo zidentyfikował piłkę czerwoną, jednocześnie ignorując inne obiekty znajdujące się w kadrze. Kluczowym punktem tego testu było sprawdzenie czy model jest w stanie zignorować obiekty o podobnym kształcie lub barwie do śledzonej piłki, co zostało potwierdzone tylko dla przypadku dobrego oświetlenia. Niestety w warunkach słabego oświetlenia, model YOLOv7 błędnie sklasyfikował obiekt o innej barwie jako piłkę, co przedstawiono na Rysunku~\ref{fig:yolov7_bad_light}.
+W warunkach dobrego oświetlenia model YOLOv7 wykazuje wysoką skuteczność w detekcji obiektów, co potwierdzają wyniki przedstawione na \textbf{Rysunku}~\ref{fig:yolov7_good_light}. Algorytm prawidłowo zidentyfikował piłkę czerwoną, jednocześnie ignorując inne obiekty znajdujące się w kadrze. Kluczowym punktem tego testu było sprawdzenie czy model jest w stanie zignorować obiekty o podobnym kształcie lub barwie do śledzonej piłki, co zostało potwierdzone tylko dla przypadku dobrego oświetlenia. Niestety w warunkach słabego oświetlenia, model YOLOv7 błędnie sklasyfikował obiekt o innej barwie jako piłkę, co przedstawiono na \textbf{Rysunku}~\ref{fig:yolov7_bad_light}.
 
 \begin{figure}[h]
     \centering
@@ -1620,70 +1578,70 @@ W warunkach dobrego oświetlenia model YOLOv7 wykazuje wysoką skuteczność w d
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194208.png}
-    \caption{Działanie modelu YOLOv7 przy złym oświetleniu.}
+    \caption{Działanie modelu YOLOv7 przy gorszym oświetleniu.}
     \label{fig:yolov7_bad_light}
 \end{figure}
 
 \newpage
-Model YOLOv7 wykazuje zdolność do prawidłowego pomijania obiektów, które nie spełniają kryteriów detekcji. Na Rysunku~\ref{fig:yolov7_good_light_good_object} zaprezentowano przykład działania algorytmu przy dobrym oświetleniu, gdzie obiekt w postaci czerwonej poduszki został prawidłowo pominięty. Analogicznie, w warunkach słabego oświetlenia, YOLOv7 również jest w stanie skutecznie ignorować niepożądane obiekty, co ilustruje Rysunek~\ref{fig:yolov7_bad_light_good_object}.
+Model YOLOv7 wykazuje zdolność do prawidłowego pomijania obiektów, które nie spełniają kryteriów detekcji. Na \textbf{Rysunku}~\ref{fig:yolov7_good_light_good_object} zaprezentowano przykład działania algorytmu przy dobrym oświetleniu, gdzie obiekt w postaci czerwonej poduszki został prawidłowo pominięty. Analogicznie, w warunkach słabego oświetlenia, YOLOv7 również jest w stanie skutecznie ignorować niepożądane obiekty, co ilustruje \textbf{Rysunek}~\ref{fig:yolov7_bad_light_good_object}.
 
 \begin{figure}[!hb]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194354.png}
-    \caption{Działanie modelu YOLOv7 przy dobrym oświetleniu oraz prawidłowe pominięcie obiektu.}
+    \caption{Działanie modelu YOLOv7 przy dobrym oświetleniu - prawidłowa detekcja tylko pożądanego obiektu jakim jest piłka.}
     \label{fig:yolov7_good_light_good_object}
 \end{figure}
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194641.png}
-    \caption{Działanie modelu YOLOv7 przy złym oświetleniu oraz prawidłowe pominięcie obiektu.}
+    \caption{Działanie modelu YOLOv7 przy złym oświetleniu - prawidłowa detekcja tylko pożądanego obiektu jakim jest piłka.}
     \label{fig:yolov7_bad_light_good_object}
 \end{figure}
 
 \newpage
 \subsection{Charakterystyka modelu YOLOv8}
 
-YOLOv8, będący najnowszą wersją rodziny YOLO, charakteryzuje się najwyższą precyzją detekcji spośród analizowanych algorytmów. W warunkach dobrego oświetlenia algorytm osiąga doskonałe wyniki, co zostało przedstawione na Rysunku~\ref{fig:yolov8_good_light}, gdzie obiekt został prawidłowo zidentyfikowany. 
+YOLOv8, będący nowocześniejszą wersją od YOLOv7, charakteryzuje się najwyższą precyzją detekcji spośród analizowanych algorytmów. W warunkach dobrego oświetlenia algorytm osiąga zadowalające wyniki, co zostało przedstawione na \textbf{Rysunku}~\ref{fig:yolov8_good_light}, gdzie obiekt został prawidłowo zidentyfikowany. 
 
-W trudniejszych warunkach, takich jak gorsze oświetlenie, YOLOv8 wciąż jest w stanie poprawnie wykrywać obiekt o ściśle określonych cechach. Przykład działania algorytmu w takich warunkach zaprezentowano na Rysunku~\ref{fig:yolov8_bad_light}. 
+W trudniejszych warunkach, takich jak gorsze oświetlenie, YOLOv8 wciąż jest w stanie poprawnie wykrywać obiekt o ściśle określonych cechach. Przykład działania algorytmu w takich warunkach zaprezentowano na \textbf{Rysunku}~\ref{fig:yolov8_bad_light}. 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181013.png}
-    \caption{Działanie modelu YOLOv8 przy dobrym oświetleniu.}
+    \caption{Działanie modelu YOLOv8 przy dobrym oświetleniu - poprawna identyfkacja pożądanego obiektu.}
     \label{fig:yolov8_good_light}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181029.png}
-    \caption{Działanie modelu YOLOv8 przy gorszym oświetleniu.}
+    \caption{Działanie modelu YOLOv8 przy gorszym oświetleniu - poprawna identyfikacja pożądanego obiektu.}
     \label{fig:yolov8_bad_light}
 \end{figure}
 \newpage
 
-Pomimo ogólnie wysokiej dokładności, YOLOv8 czasami wykazuje błędne detekcje. Rysunek~\ref{fig:yolov8_good_light_bad_object} przedstawia przykład, w którym w warunkach dobrego oświetlenia algorytm błędnie zidentyfikował czerwoną poduszkę jako obiekt piłkopodobny.
+Pomimo ogólnie wysokiej dokładności, YOLOv8 czasami wykazuje błędne detekcje. \textbf{Rysunek}~\ref{fig:yolov8_good_light_bad_object} przedstawia przykład, w którym w warunkach dobrego oświetlenia algorytm błędnie zidentyfikował czerwoną poduszkę jako obiekt piłkopodobny.
 
-Z kolei Rysunek~\ref{fig:yolov8_good_light_good_object} pokazuje przypadek, w którym algorytm prawidłowo pominął obiekt w warunkach słabego oświetlenia. Może to być skutkiem zaniku barwy czerwonej w wyniku pogorszenia światła otoczenia.
+Z kolei \textbf{Rysunek}~\ref{fig:yolov8_good_light_good_object} pokazuje przypadek, w którym algorytm prawidłowo pominął obiekt w warunkach słabego oświetlenia. Może to być skutkiem zaniku barwy czerwonej w wyniku pogorszenia światła otoczenia.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194808.png}
-    \caption{Działanie modelu YOLOv8 przy dobrym oświetleniu oraz błędne wykrycie obiektu.}
+    \caption{Działanie modelu YOLOv8 przy dobrym oświetleniu - niepoprawne wykrycie przeszkody jako obiekt piłkopodobny.}
     \label{fig:yolov8_good_light_bad_object}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.6\textwidth]{Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194704.png}
-    \caption{Działanie modelu YOLOv8 przy gorszym oświetleniu oraz prawidłowe pominięcie obiektu.}
+    \caption{Działanie modelu YOLOv8 przy gorszym oświetleniu - prawidłowe pominięcie obiektu będącego przeszkodą.}
     \label{fig:yolov8_good_light_good_object}
 \end{figure}
 
 \newpage
 \subsection{Charakterystyka algorytmu binaryzacji}
 
-Algorytm binaryzacji opiera się na prostej segmentacji obrazu w przestrzeni barw HSV, co zapewnia mu wyjątkową szybkość działania – na Raspberry Pi osiąga nawet 25-30 FPS. Dzięki tej prostocie algorytm jest szczególnie efektywny w warunkach dobrego oświetlenia, jak pokazano na Rysunku~\ref{fig:binary_confusion_goodlight}. W takich przypadkach binaryzacja umożliwia poprawne wykrycie obiektu, co potwierdza jej skuteczność w sprzyjających warunkach.
-W warunkach słabego oświetlenia, przedstawionych na Rysunku~\ref{fig:binary_confusion_badlight}, algorytm nadal jest w stanie poprawnie zidentyfikować obiekt. 
+Algorytm binaryzacji oparty na prostej segmentacji obrazu w przestrzeni barw HSV, na Raspberry Pi osiąga poziom nawet 25-30 FPS. Dzięki swej prostocie algorytm jest szczególnie efektywny w warunkach dobrego oświetlenia, jak pokazano na \textbf{Rysunku}~\ref{fig:binary_confusion_goodlight}. W takich przypadkach binaryzacja umożliwia poprawne wykrycie obiektu, co potwierdza jej skuteczność w sprzyjających warunkach.
+W warunkach słabego oświetlenia, przedstawionych na \textbf{Rysunku}~\ref{fig:binary_confusion_badlight}, algorytm nadal jest w stanie poprawnie zidentyfikować obiekt. 
 
 \begin{figure}[h]
     \centering
@@ -1701,31 +1659,30 @@ W warunkach słabego oświetlenia, przedstawionych na Rysunku~\ref{fig:binary_co
 
 \newpage
 
-Jednakże, w bardziej złożonych sytuacjach, binaryzacja ujawnia swoje ograniczenia, co zilustrowano na Rysunkach~\ref{fig:binary_confusion_badlight_goodobject} i~\ref{fig:binary_confusion_goodlight_badobject}. W szczególności, w sytuacjach, gdy kolor obiektu zbliża się do kolorystyki tła, algorytm może generować fałszywe detekcje lub błędnie klasyfikować obiekty.
-
+Jednakże, w bardziej złożonych sytuacjach, binaryzacja ujawnia swoje ograniczenia, co zilustrowano na \textbf{Rysunkach}~\ref{fig:binary_confusion_badlight_goodobject} i~\ref{fig:binary_confusion_goodlight_badobject}. W szczególności, w sytuacjach, gdy kolor obiektu zbliża się do kolorystyki tła, algorytm może błędnie klasyfikować obiekty.
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193840.png}
-    \caption{Działanie binaryzacji w warunkach słabego oświetlenia oraz prawidłowe zignorowanie obiektu.}
+    \caption{Działanie algorytmu binaryzacji w warunkach słabego oświetlenia - prawidłowe zignorowanie przeszkody.}
     \label{fig:binary_confusion_badlight_goodobject}
 \end{figure}
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.8\textwidth]{Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193858.png}
-    \caption{Działanie binaryzacji w warunkach słabego oświetlenia oraz błędna detekcja obiektu.}
+    \caption{Działanie algorytmu binaryzacji w warunkach słabego oświetlenia - błędna detekcja przeszkody.}
     \label{fig:binary_confusion_goodlight_badobject}
 \end{figure}
 
-Pomimo swoich ograniczeń, algorytm binaryzacji wyróżnia się wysoką szybkością działania, co czyni go atrakcyjnym rozwiązaniem w systemach o ograniczonych zasobach obliczeniowych, takich jak Raspberry Pi. Niemniej jednak, jego skuteczność zależy w dużej mierze od precyzyjnego doboru zakresów wartości HSV oraz warunków otoczenia, co stanowi istotny element w jego implementacji.
+Pomimo swoich ograniczeń, algorytm binaryzacji wyróżnia się wysoką szybkością działania, co czyni go atrakcyjnym rozwiązaniem w systemach o ograniczonych zasobach obliczeniowych. Niemniej jednak, jego skuteczność zależy w dużej mierze od precyzyjnego doboru zakresów wartości HSV oraz warunków otoczenia.
 
 
 \newpage
 \subsection{Wnioski}
 
 \paragraph{Działanie na komputerze osobistym}
-Jak przedstawiono w tabelach~\ref{tab:bez_przeszkody} i~\ref{tab:z_przeszkoda}, algorytmy detekcji różniły się skutecznością w zależności od warunków oświetleniowych i obecności przeszkód. 
+Jak przedstawiono w \textbf{Tabelach}~\ref{tab:bez_przeszkody} i~\ref{tab:z_przeszkoda}, algorytmy detekcji różniły się skutecznością w zależności od warunków oświetleniowych i obecności przeszkód. 
 
 Algorytm \textbf{YOLOv7} osiągnął dobrą równowagę między szybkością a dokładnością, niezależnie od warunków oświetleniowych i przeszkód, stabilnie działając z prędkością 16.09 FPS. \textbf{YOLOv8} wyróżniał się najwyższą dokładnością, jednak kosztem niższej szybkości, osiągając 10.71 FPS. W przypadku scen z przeszkodami miał trudności z ich ignorowaniem w dobrym oświetleniu, co wskazuje na większą czułość detektora. \textbf{Binaryzacja}, choć najszybsza z algorytmów (29.61 FPS), miała trudności z prawidłową klasyfikacją obiektów w złożonych scenach, co może prowadzić do fałszywych detekcji.
 
@@ -1766,9 +1723,9 @@ Algorytm \textbf{YOLOv7} osiągnął dobrą równowagę między szybkością a d
 \newpage
 
 \paragraph{Działanie na Raspberry Pi}
-Jak przedstawiono w tabelach~\ref{tab:bez_przeszkody_rpi} i~\ref{tab:z_przeszkoda_rpi}, działanie algorytmów na Raspberry Pi było ograniczone przez mniejsze zasoby obliczeniowe. 
+Jak przedstawiono w \textbf{Tabelach}~\ref{tab:bez_przeszkody_rpi} i~\ref{tab:z_przeszkoda_rpi}, działanie algorytmów na Raspberry Pi było ograniczone przez mniejsze zasoby obliczeniowe. 
 
-\textbf{YOLOv7} działał stabilnie z prędkością około 2.8 FPS, zachowując swoją skuteczność w ignorowaniu przeszkód oraz wykrywaniu obiektów w różnych warunkach oświetleniowych. \textbf{YOLOv8}, choć nadal dokładny, wykazał najniższą wydajność na Raspberry Pi, osiągając zaledwie 1.24 FPS. Algorytm \textbf{binaryzacji}, pomimo najwyższej szybkości działania (25.95 FPS w dobrym oświetleniu), miał trudności w detekcji obiektów w słabym oświetleniu, co ujawnia jego ograniczenia w bardziej wymagających warunkach.
+\textbf{YOLOv7} działał stabilnie z prędkością około 2.8 FPS, zachowując swoją skuteczność w ignorowaniu przeszkód oraz wykrywaniu obiektów w różnych warunkach oświetleniowych. \textbf{YOLOv8}, choć nadal dokładny, wykazał najniższą wydajność na Raspberry Pi, osiągając zaledwie 1.24 FPS. Algorytm \textbf{binaryzacji}, pomimo najwyższej szybkości działania 25.95 FPS, miał trudności w detekcji obiektów w słabym oświetleniu, co ujawnia jego ograniczenia w bardziej wymagających warunkach.
 
 \begin{table}[h!]
     \centering
@@ -1807,106 +1764,80 @@ Jak przedstawiono w tabelach~\ref{tab:bez_przeszkody_rpi} i~\ref{tab:z_przeszkod
 Podsumowując, wybór algorytmu powinien być uzależniony od specyficznych wymagań aplikacji oraz dostępnych zasobów sprzętowych:
 \begin{itemize}
     \item \textbf{YOLOv7} jest najlepszym wyborem dla aplikacji wymagających równowagi między dokładnością a szybkością, szczególnie na urządzeniach o ograniczonej mocy obliczeniowej, takich jak Raspberry Pi.
-    \item \textbf{YOLOv8} nadaje się do aplikacji, gdzie priorytetem jest maksymalna dokładność, a ograniczenia sprzętowe są mniej istotne, np. na komputerach osobistych.
+    \item \textbf{YOLOv8} nadaje się do aplikacji, gdzie priorytetem jest maksymalna dokładność, a ograniczenia sprzętowe są mniej istotne.
     \item \textbf{Binaryzacja} jest idealnym rozwiązaniem dla systemów wymagających bardzo szybkiego przetwarzania w czasie rzeczywistym, pod warunkiem, że scena jest dobrze oświetlona i nie zawiera przeszkód o podobnym kolorze.
 \end{itemize}
 
-
-
-
-\chapter{Problematyka i rozwiązania}
+\chapter{Napotkane problemy i ich rozwiązania}
 \label{ch:06}
 W niniejszym rozdziale przedstawiono i opisano problemy związane z realizacją projektu oraz zaproponowane rozwiązania, które pozwoliły na skuteczne zaimplementowanie systemu wizyjnego dla robota mobilnego. Omówiono wyzwania związane z wyborem algorytmów detekcji obiektów, implementacją algorytmów śledzenia obiektu oraz elektroniką i mechaniką robota.
 
 \section{Wybór algorytmów detekcji obiektów}
 
-Pierwszym wyzwaniem w realizacji projektu było podjęcie decyzji dotyczącej wyboru modelu głębokiego uczenia oraz przygotowania odpowiedniego zbioru danych do treningu. Proces rozpoczęto od instalacji aplikacji do oznaczania i etykietowania obrazów (\textit{labelImg}), która miała na celu ułatwienie przygotowania danych wejściowych dla modelu. Problemem okazało się jednak prawidłowe przygotowanie plików, w szczególności plików tekstowych (\texttt{.txt}) zawierających etykiety pozycji piłki na obrazie.
+Pierwszym wyzwaniem w realizacji projektu było dokonanie wyboru odpowiedniego modelu głębokiego uczenia oraz przygotowanie zbioru danych do treningu. Początkowo założono, że model YOLO zostanie wytrenowany na komputerze osobistym. Jednak podczas konfiguracji napotkano trudności związane z integracją bibliotek, co uniemożliwiło rozpoczęcie procesu treningowego. W odpowiedzi na te problemy podjęto próbę zastosowania alternatywnego rozwiązania w postaci TensorFlow. Niestety, wymagało to stworzenia dedykowanego programu do treningu sieci neuronowej, co okazało się zbyt złożone i nieefektywne.
 
-Pierwotnym założeniem było wytrenowanie modelu YOLO na komputerze osobistym. Podczas przygotowań napotkano trudności związane z konfiguracją bibliotek i ich integracją. Model YOLO nie inicjował procesu treningowego. W efekcie podjęto próbę zastosowania alternatywnego rozwiązania w postaci TensorFlow. Niestety, wymagało to stworzenia własnego programu zdolnego do rozpoczęcia treningu sieci neuronowej, co okazało się zbyt skomplikowane i nie przyniosło oczekiwanych rezultatów.
+Przełom nastąpił dzięki wykorzystaniu platformy Roboflow, która umożliwiła intuicyjne etykietowanie obrazów i przygotowanie zestawu danych.
 
-Przełom nastąpił dzięki odkryciu platformy Roboflow, która umożliwia intuicyjne etykietowanie obrazów i przygotowanie zestawu danych. Obrazy zostały wygenerowane za pomocą prostego programu w Pythonie, a następnie załadowane na platformę, gdzie zostały oznaczone. Proces przygotowania zbioru danych, w zależności od liczby zdjęć, trwał od kilkunastu do kilkudziesięciu minut. Po zakończeniu etykietowania wybrano format pliku YOLOv7 z PyTorch do pobrania.
+Aby przyspieszyć proces treningu modelu, zdecydowano się na wykorzystanie platformy Google Colab, zapewniającej dostęp do jednostek GPU. Po zakończeniu treningu modelu plik \texttt{best.pt} został pobrany. Próba uruchomienia modelu na komputerze osobistym początkowo nie powiodła się z powodu brakujących folderów \texttt{utils} oraz \texttt{models}, w tym pliku \texttt{experimental.py}. Dopiero po odpowiedniej konfiguracji środowiska i wskazaniu właściwych ścieżek model został pomyślnie uruchomiony na komputerze osobistym.
 
-Aby przyspieszyć proces treningu sieci, zdecydowano się na wykorzystanie Google Colab, który umożliwia dostęp do jednostek GPU. Po wytrenowaniu modelu pobrano plik \texttt{best.pt}. Próba jego uruchomienia początkowo nie powiodła się z powodu brakujących folderów \texttt{utils} oraz \texttt{models}, w tym pliku \texttt{experimental.py}. Dopiero po odpowiedniej konfiguracji środowiska i odniesieniu się do właściwych ścieżek udało się uruchomić model, ale wyłącznie na komputerze osobistym.
+Kolejnym wyzwaniem było dostosowanie modelu do pracy na platformie Raspberry Pi, gdzie zasoby sprzętowe są ograniczone. YOLOv7 działał na tej platformie z prędkością zaledwie 2–3 FPS, co okazało się niewystarczające. W odpowiedzi podjęto próbę wytrenowania modelu YOLOv8 i przekonwertowania go za pomocą ONNX na TensorFlow Lite. Choć konwersja pozwoliła na osiągnięcie prędkości 10 FPS, spowodowała znaczną utratę jakości detekcji, przez co robot nie był w stanie skutecznie wykrywać piłki. Dla porównania, uruchomienie YOLOv8 bez konwersji dawało prędkość jedynie 0.9–1.2 FPS, co było najgorszym wynikiem spośród testowanych rozwiązań.
 
-Kolejnym wyzwaniem było dostosowanie modelu do pracy w środowisku Raspberry Pi, gdzie zasoby sprzętowe są ograniczone. YOLOv7 działał na tej platformie z prędkością zaledwie 3 FPS, co okazało się niewystarczające. Podjęto próbę wytrenowania nowego modelu YOLOv8, który następnie przekonwertowano przy użyciu ONNX na TensorFlow Lite. Konwersja spowodowała jednak znaczne straty w jakości, a robot nie był w stanie skutecznie wykrywać piłki, mimo że program działał z prędkością 10 FPS. Dla porównania, uruchomienie YOLOv8 bez konwersji dawało jedynie 0.9–1.2 FPS, co było najgorszym wynikiem spośród testowanych rozwiązań.
+Ostatecznie zdecydowano się pozostać przy modelu YOLOv7, pomimo ograniczonej prędkości wynoszącej 3 FPS. Rozważano również zastosowanie starszych wersji YOLO, które mogłyby lepiej sprawdzić się na platformie Raspberry Pi, jednak komplikacje związane z implementacją spowodowały rezygnację z tego kierunku działań.
 
-Ostatecznie zdecydowano się pozostać przy modelu YOLOv7, pomimo ograniczonej prędkości 3 FPS. Rozważano również zastosowanie starszych wersji YOLO, które mogłyby lepiej sprawdzić się w środowisku Raspberry Pi, ale nie podjęto dalszych działań w tym kierunku. Wynik ten podkreśla znaczenie kompromisu między dokładnością, szybkością działania a ograniczeniami sprzętowymi. 
 
 \section{Implementacja algorytmów śledzenia obiektu}
 
-Jednym z największych wyzwań podczas realizacji projektu było zaimplementowanie wytrenowanego modelu, przygotowanego na komputerze osobistym z systemem Windows, na platformie Raspberry Pi. 
+Jednym z największych wyzwań podczas realizacji projektu było zaimplementowanie wytrenowanego modelu, przygotowanego na komputerze osobistym z systemem Windows, na platformie Raspberry Pi.
 
-Pierwszym napotkanym problemem był błąd przy instalacji biblioteki PyTorch. Kluczowe okazało się przejście na 64-bitową wersję systemu Raspberry Pi OS, ponieważ wersja 32-bitowa nie była kompatybilna z wymaganą wersją PyTorch. Po zainstalowaniu odpowiedniej wersji systemu i biblioteki, przystąpiono do przesłania wszystkich niezbędnych plików na Raspberry Pi za pomocą protokołu SSH.
+Pierwszym problemem napotkanym podczas implementacji był błąd przy instalacji biblioteki PyTorch. Kluczowym rozwiązaniem okazało się przejście na 64-bitową wersję systemu Raspberry Pi OS, ponieważ wersja 32-bitowa nie była kompatybilna z wymaganą wersją biblioteki. Po instalacji odpowiedniej wersji systemu i zaktualizowaniu biblioteki PyTorch, przystąpiono do przesłania niezbędnych plików na Raspberry Pi za pomocą protokołu SSH.
 
-Kolejnym wyzwaniem było uruchomienie programu. Po próbie uruchomienia detekcji na Raspberry Pi pojawił się błąd związany z wczytywaniem modelu. Okazało się, że problem wynikał z funkcji \texttt{attempt\_download(w)} w pliku \texttt{experimental.py}. Funkcja ta jest odpowiedzialna za automatyczne pobieranie brakujących wag modelu z sieci. Jednak na Raspberry Pi, z uwagi na brak potrzeby automatycznego pobierania wag, usunięto tę linię kodu.
+Kolejnym wyzwaniem było uruchomienie programu detekcji na Raspberry Pi. Podczas próby wczytania modelu pojawił się błąd związany z funkcją \texttt{attempt\_download(w)} w pliku \texttt{experimental.py}. Funkcja ta, odpowiedzialna za automatyczne pobieranie brakujących wag modelu z sieci, powodowała problemy w środowisku Raspberry Pi, gdzie lokalne wagi były już dostępne. Aby rozwiązać ten problem, zdecydowano się na usunięcie tej linii kodu. 
 
-Zmodyfikowany fragment pliku wygląda następująco:
+Zmodyfikowany fragment pliku przedstawiono poniżej:
 \begin{lstlisting}[language=Python, caption={Usunięcie funkcji \texttt{attempt\_download} z pliku \texttt{experimental.py}.}, label={lst:attempt_download_removal}, captionpos=b]
- attempt_download(w)
+attempt_download(w)
 \end{lstlisting}
 
-Zmiana ta pozwoliła na poprawne wczytanie lokalnie przechowywanych wag modelu bez próby ich ponownego pobrania z sieci. 
+Dzięki tej modyfikacji program poprawnie wczytywał lokalnie przechowywane wagi modelu bez potrzeby ponownego pobierania ich z sieci.
 
-Po tej modyfikacji program udało się uruchomić, jednak pojawił się kolejny problem związany z wyświetlaniem obrazu. Początkowo zakładano podgląd wideo z kamery na komputerze za pomocą VNC. Okazało się jednak, że jednoczesne użycie bibliotek \texttt{libcamera} i \texttt{OpenCV} powodowało konflikty, uniemożliwiając wyświetlenie okna podglądu wideo w czasie rzeczywistym. Zdecydowano się więc zrezygnować z podglądu obrazu, pozostając jedynie przy wyświetlaniu w konsoli informacji o wykryciu obiektu, liczbie klatek na sekundę (FPS) oraz aktualnej pozycji serwomechanizmów.
+Po udanej modyfikacji programu pojawił się jednak problem związany z wyświetlaniem obrazu z kamery. Zakładano, że podgląd wideo będzie realizowany na komputerze za pomocą protokołu VNC. Okazało się jednak, że jednoczesne korzystanie z bibliotek \texttt{libcamera} i \texttt{OpenCV} powodowało konflikty, które uniemożliwiały wyświetlenie okna podglądu w czasie rzeczywistym. 
 
-Dzięki tym rozwiązaniom możliwe było efektywne uruchomienie algorytmu detekcji na Raspberry Pi, mimo ograniczeń związanych z wydajnością i kompatybilnością środowiska.
+Ostatecznie zrezygnowano z podglądu obrazu, ograniczając program do wyświetlania w konsoli informacji o wykryciu obiektów, liczbie przetworzonych klatek na sekundę (FPS) oraz aktualnych pozycjach serwomechanizmów. Takie rozwiązanie, choć nieidealne, pozwoliło na uruchomienie programu i realizację podstawowej funkcjonalności systemu.
 
 
 \section{Problemy związane z elektroniką i zasilaniem}
 
-Jednym z kluczowych wyzwań projektu było zaprojektowanie odpowiedniego systemu zasilania dla Raspberry Pi. Początkowym założeniem było wykorzystanie dwóch ogniw o łącznym napięciu 7.2V jako źródła zasilania. Z uwagi na fakt, że Raspberry Pi może przyjąć maksymalne napięcie wynoszące 5V, konieczne było zastosowanie przetwornicy typu ang. \textit{step-down}, której zadaniem jest obniżenie napięcia wejściowego do bezpiecznego poziomu wyjściowego.
+Kolejnym wyzwaniem w projekcie było zaprojektowanie odpowiedniego systemu zasilania dla Raspberry Pi. Początkowo planowano wykorzystanie dwóch ogniw o łącznym napięciu 7.2V jako źródła zasilania. Ze względu na to, że Raspberry Pi wymaga maksymalnego napięcia wynoszącego 5V, konieczne było zastosowanie przetwornicy typu \textit{step-down}, której zadaniem było obniżenie napięcia wejściowego do bezpiecznego poziomu.
 
-Po podłączeniu dwóch ogniw do wejścia przetwornicy oraz kabla USB-C do jej wyjścia, uzyskano stabilne napięcie 5V, co pozwoliło na uruchomienie Raspberry Pi. Problem pojawił się jednak przy próbie uruchomienia kamery. Okazało się, że natężenie prądowe dostarczane przez przetwornicę było zbyt niskie, aby zasilić zarówno system, jak i moduł kamery. Kamera nie była w stanie poprawnie się zainicjalizować.
+Po podłączeniu dwóch ogniw do wejścia przetwornicy oraz kabla USB-C do jej wyjścia uzyskano stabilne napięcie 5V, co pozwoliło na uruchomienie Raspberry Pi. Problem pojawił się jednak podczas próby inicjalizacji modułu kamery. Okazało się, że natężenie prądowe dostarczane przez przetwornicę było zbyt niskie, aby zasilić jednocześnie system operacyjny i moduł kamery, co uniemożliwiało jej poprawne działanie.
 
-Podjęto próbę zastosowania przetwornicy o wyższej wydajności prądowej, zdolnej teoretycznie dostarczyć do 3A. Niestety, rezultat był identyczny – natężenie nadal okazywało się niewystarczające, aby w pełni zasilić wszystkie komponenty systemu.
+W odpowiedzi na ten problem zastosowano przetwornicę o wyższej wydajności prądowej, zdolną dostarczyć do 3A. Niestety, rezultat okazał się podobny – natężenie nadal było niewystarczające, aby w pełni zasilić wszystkie komponenty systemu. Istnieje możliwość, że zastosowana przetwornica była wadliwa i nie dostarczała deklarowanego natężenia prądu, co mogło przyczynić się do problemów z zasilaniem.
 
-Ostatecznie, jako rozwiązanie problemu, zdecydowano się na zastosowanie powerbanku jako źródła zasilania dla Raspberry Pi. Powerbank oferujący napięcie 5V i natężenie 3A idealnie sprawdził się w tej roli, zapewniając stabilne zasilanie dla Raspberry Pi, modułu kamery oraz dwóch serwomechanizmów. Takie rozwiązanie pozwoliło na bezproblemową pracę całego systemu i wyeliminowało problemy związane z niedoborem natężenia prądu.
+Ostatecznie problem rozwiązano poprzez zastosowanie powerbanku jako źródła zasilania dla Raspberry Pi. Powerbank oferujący napięcie 5V i natężenie 3A zapewnił stabilne zasilanie zarówno dla Raspberry Pi, modułu kamery, jak i dwóch serwomechanizmów. Takie rozwiązanie pozwoliło na bezproblemową pracę całego systemu i wyeliminowało problemy związane z niedoborem natężenia prądu.
+
 
 \newpage
 \section{Problemy związane z mechaniką i sterowaniem}
 
-Aby robot mobilny mógł skutecznie spełniać swoje zadanie, istotne było zaimplementowanie modułu śledzącego obiekt. Początkowo zakładano, że kamera będzie statycznie umieszczona w jednym miejscu, a śledzenie czerwonej piłki będzie realizowane poprzez obrót całej platformy jeżdżącej. Pomysł ten okazał się nieefektywny i niepraktyczny, dlatego zdecydowano się na alternatywne rozwiązanie, polegające na poruszaniu samą kamerą. 
+Aby robot mobilny mógł skutecznie realizować swoje zadanie, kluczowe było zaimplementowanie modułu śledzącego obiekt. Początkowo zakładano statyczne umieszczenie kamery, a śledzenie czerwonej piłki miało być realizowane poprzez obrót całej platformy jeżdżącej. Rozwiązanie to okazało się niepraktyczne i mało efektywne, dlatego zdecydowano się na alternatywę polegającą na poruszaniu samą kamerą.
 
-Do realizacji tego zadania wykorzystano uchwyt na kamerę zawierający dwa serwomechanizmy: jeden odpowiedzialny za obrót kamery wokół osi pionowej (\textit{pan}), a drugi za obrót wokół osi poziomej (\textit{tilt}). Dzięki temu rozwiązaniu kamera mogła dynamicznie śledzić ruch obiektu, zwiększając swoje pole widzenia.
+Do realizacji tego zadania wykorzystano uchwyt na kamerę wyposażony w dwa serwomechanizmy: jeden odpowiedzialny za obrót kamery wokół osi pionowej (\textit{pan}), a drugi za obrót wokół osi poziomej (\textit{tilt}). Dzięki temu rozwiązaniu kamera mogła dynamicznie śledzić ruch obiektu, co znacząco zwiększyło jej pole widzenia.
 
 \paragraph{Obrót obrazu i sterowanie serwomechanizmami} 
-Z uwagi na mechaniczne zamocowanie kamery, obraz z kamery był obrócony o 180°. Wymagało to dodatkowego przekształcenia obrazu w programie poprzez funkcję \texttt{cv2.rotate(frame, cv2.ROTATE\_180)}. Kolejnym wyzwaniem było dostosowanie ruchu serwomechanizmów do nowej orientacji obrazu.
+Ze względu na mechaniczne zamocowanie kamery, obraz z kamery był obrócony o 180°. Wymagało to dodatkowego przekształcenia obrazu w programie za pomocą funkcji \texttt{cv2.rotate(frame, cv2.ROTATE\_180)}.
 
-Aby program mógł skutecznie śledzić obiekt, w centrum obrazu umieszczono kwadrat, który służył jako rozszerzone centrum obrazu. Jeżeli obiekt znajdował się w granicach tego kwadratu, kamera nie wykonywała zbędnych korekt, co zapobiegało niestabilności wynikającej z drgań lub zmiennego oświetlenia. Jeżeli jednak piłka przesuwała się poza centrum obrazu, obliczano przesunięcie względem środka według wzoru:
-\begin{align}
-    \Delta x = x_{\text{środek}} - x_{\text{piłka}}, \quad \Delta y = y_{\text{środek}} - y_{\text{piłka}},
-\end{align}
-gdzie $x_{\text{środek}}$, $y_{\text{środek}}$ to współrzędne środka obrazu, a $x_{\text{piłka}}, y_{\text{piłka}}$ to współrzędne środka wykrytego obiektu.
-
-Na podstawie tych wartości obliczano kąty wychylenia serwomechanizmów w sposób proporcjonalny:
-\begin{align}
-    \theta_{\text{pan}} = \theta_{\text{pan}} + k_x \cdot \Delta x, \quad 
-    \theta_{\text{tilt}} = \theta_{\text{tilt}} + k_y \cdot \Delta y,
-\end{align}
-gdzie $k_x$ i $k_y$ to współczynniki skalujące, które określają szybkość korekcji.
+Aby program mógł skutecznie śledzić obiekt, w centrum obrazu umieszczono kwadrat, który pełnił funkcję rozszerzonego centrum kadru. Jeśli obiekt znajdował się w granicach tego kwadratu, kamera nie wykonywała korekt, co zapobiegało drganiom oraz niestabilności wynikającym ze zmiennego oświetlenia. W przypadku, gdy obiekt przesuwał się poza centrum obrazu, obliczano przesunięcie względem środka kadru i na tej podstawie obliczano kąty wychylenia serwomechanizmów.
 
 \paragraph{Zależność ruchu kamery i silników DC}
-Zastosowanie serwomechanizmów umożliwiło uzależnienie ruchów silników DC od kątów wychylenia kamery:
+Zastosowanie serwomechanizmów pozwoliło uzależnić ruchy silników DC od kątów wychylenia kamery:
 \begin{itemize}
-    \item Robot pozostawał nieruchomy, gdy kąt nachylenia serwomechanizmu pochyłu (\textit{tilt}) osiągał granicę $-30^\circ$, co oznaczało, że piłka znajdowała się zbyt blisko.
-    \item Robot jechał do przodu, gdy serwomechanizm \textit{tilt} wskazywał na wprost ($0^\circ$).
-    \item Robot wykonywał skręt w prawo lub w lewo, gdy serwomechanizm \textit{pan} osiągał granicę $\pm 25^\circ$.
+    \item Robot pozostawał nieruchomy, gdy kąt pochylenia serwomechanizmu \textit{tilt} osiągał granicę \(-30^\circ\), co oznaczało, że wykryty obiekt znajdował się zbyt blisko.
+    \item Robot poruszał się do przodu, gdy serwomechanizm \textit{tilt} znajdował się w pozycji powyżej \(-30^\circ\), wskazując na wprost.
+    \item Robot skręcał w prawo lub w lewo, gdy serwomechanizm \textit{pan} przekraczał granice \(\pm 25^\circ\).
 \end{itemize}
 
 \paragraph{Mechanizm poszukiwania obiektu}
-W przypadku, gdy obiekt znajdował się poza polem widzenia kamery, zaimplementowano funkcję poszukiwawczą, w której serwomechanizmy wykonywały ruch eliptyczny w przestrzeni. Kąty obrotu serwomechanizmów były generowane na podstawie funkcji trygonometrycznych:
-\begin{align}
-    \theta_{\text{pan}}(t) &= A_{\text{pan}} \cdot \cos(\omega t), \\
-    \theta_{\text{tilt}}(t) &= A_{\text{tilt}} \cdot \sin(\omega t) + \theta_{\text{offset}},
-\end{align}
-gdzie:
-\begin{itemize}
-    \item $A_{\text{pan}}$, $A_{\text{tilt}}$ to amplitudy ruchu w płaszczyznach \textit{pan} i \textit{tilt},
-    \item $\omega$ to prędkość kątowa,
-    \item $\theta_{\text{offset}}$ to stałe przesunięcie kąta dla serwomechanizmu \textit{tilt}.
-\end{itemize}
-
-Dzięki tym mechanizmom robot mógł autonomicznie poszukiwać obiektu, minimalizując czas potrzebny na odzyskanie obiektu w polu widzenia.
+W sytuacji, gdy obiekt znajdował się poza polem widzenia kamery, zaimplementowano funkcję poszukiwania. W jej ramach serwomechanizmy wykonywały ruch eliptyczny, a kąty ich wychyleń były generowane na podstawie funkcji trygonometrycznych. Dzięki temu robot był w stanie skutecznie odnaleźć obiekt i kontynuować jego śledzenie.
 
 % TODO
 \chapter{Podsumowanie i wnioski}
@@ -1927,9 +1858,8 @@ Na podstawie przeprowadzonych badań można sformułować następujące wnioski:
 \section{Perspektywy dalszych badań}
 W przyszłości można rozważyć następujące kierunki rozwoju systemu:
 \begin{itemize}
-    \item Optymalizację modeli YOLO pod kątem działania na platformach o ograniczonych zasobach obliczeniowych, na przykład poprzez kompresję modelu lub przeniesienie go na TensorFlow Lite.
+    \item Optymalizację modeli YOLO pod kątem działania na platformach o ograniczonych zasobach obliczeniowych, na przykład poprzez wykorzystanie starszych wersji modeli. Bądź wykorzystanie innych technik detekcji jak na przykład TensorFlow Lite.
     \item Rozbudowanie zbioru danych treningowych o bardziej różnorodne scenariusze oświetleniowe i środowiskowe, co mogłoby zwiększyć uniwersalność algorytmów.
-    \item Integrację segmentacji semantycznej jako uzupełnienia obecnych metod detekcji w celu poprawy skuteczności systemu w bardziej złożonych środowiskach.
     \item Wdrożenie hybrydowego podejścia, które łączy algorytmy głębokiego uczenia z klasycznymi technikami przetwarzania obrazu, aby wykorzystać ich wzajemne zalety.
 \end{itemize}
 
@@ -1954,28 +1884,30 @@ Podsumowując, przeprowadzona analiza i testy potwierdziły, że odpowiedni dob�
 \chapter{Spis skrótów i symboli}
 
 \begin{itemize}
-\item[DNA] kwas deoksyrybonukleinowy (ang. \english{deoxyribonucleic acid})
-\item[MVC] model -- widok -- kontroler (ang. \english{model--view--controller}) 
-\item[$N$] liczebność zbioru danych
-\item[$\mu$] stopnień przyleżności do zbioru
-\item[$\mathbb{E}$] zbiór krawędzi grafu
-\item[$\mathcal{L}$] transformata Laplace'a 
+\item[YOLO] algorytm głębokiego uczenia \english{You Only Look Once}
+\item[HSV] przestrzeń barw \english{Hue, Saturation, Value}
+\item[FPS] liczba klatek na sekundę \english{Frames Per Second}
+\item[ONNX] otwarty format wymiany modeli uczenia maszynowego \english{Open Neural Network Exchange}
+\item[VNC] narzędzie do zdalnego dostępu \english{Virtual Network Computing}
+\item[SSH] protokół do zdalnego logowania \english{Secure Shell} 
+\item[\(x_{\text{środek}}, y_{\text{środek}}\)] współrzędne środka obrazu.
+\item[\(x_{\text{piłka}}, y_{\text{piłka}}\)] współrzędne środka obiektu.
+\item[\(\Delta x, \Delta y\)] różnica między środkiem obrazu a środkiem obiektu.
+\item[\(\theta_{\text{pan}}, \theta_{\text{tilt}}\)] kąty wychylenia serwomechanizmów (odpowiednio w płaszczyznach poziomej i pionowej).
+\item[\(k_x, k_y\)] współczynniki skalujące szybkość korekcji.
+\item[\(A_{\text{pan}}, A_{\text{tilt}}\)] amplitudy ruchu serwomechanizmów w poszczególnych płaszczyznach.
+\item[\(\omega\)] prędkość kątowa.
+\item[\(T\)] próg dla binaryzacji obrazu.
+\item[\(J\)] wskaźnik jakości (funkcja kosztu w propagacji wstecznej).
+\item[\(w_{ij}\)] waga sieci neuronowej między neuronami \(i\) i \(j\).
+\item[\(\eta\)] współczynnik uczenia \english{Learning Rate}.     
 \end{itemize}
 
 
 % TODO
-\chapter{Źródła}
-
-Jeżeli w pracy konieczne jest umieszczenie długich fragmentów kodu źródłowego, należy je przenieść w to miejsce.
-
-\begin{lstlisting}
-if (_nClusters < 1)
-	throw std::string ("unknown number of clusters");
-if (_nIterations < 1 and _epsilon < 0)
-	throw std::string ("You should set a maximal number of iteration or minimal difference -- epsilon.");
-if (_nIterations > 0 and _epsilon > 0)
-	throw std::string ("Both number of iterations and minimal epsilon set -- you should set either number of iterations or minimal epsilon.");
-\end{lstlisting}
+%\chapter{Źródła}
+%
+%Jeżeli w pracy konieczne jest umieszczenie długich fragmentów kodu źródłowego, należy je przenieść w to miejsce.
 
 
 % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % % 
@@ -2001,10 +1933,10 @@ if (_nIterations > 0 and _epsilon > 0)
 
 W systemie do pracy dołączono dodatkowe pliki zawierające:
 \begin{itemize}
-\item źródła programu,
-\item dane testowe,
-\item film pokazujący działanie opracowanego oprogramowania lub zaprojektowanego i~wykonanego urządzenia,
-\item itp.
+    \item Pliki źródłowe programów uruchamianych na komputerze osobistym w folderze \texttt{Programy\_Komputer}
+    \item Pliki źródłowe programów uruchamianych na Raspberry Pi w folderze \texttt{Programy\_Raspberry}
+    \item Spis wymaganych bibliotek na RaspberryPi w pliku \texttt{Biblioteki.txt} 
+    \item Film prezentujący działanie wizji robota mobilnego w pliku \texttt{Robot\_Wizja.mp4}
 \end{itemize}
 
 

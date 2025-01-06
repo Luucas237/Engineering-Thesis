@@ -517,13 +517,6 @@ INPUT .\Images\Roboflow\labeling1.png
 INPUT .\Images\Roboflow\labeling1.png
 INPUT .\Images\Roboflow\labeling1.png
 INPUT .\Images\Roboflow\labeling1.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
-INPUT .\Images\Roboflow\labeling2.png
 INPUT .\Images\Roboflow\labeling3.png
 INPUT .\Images\Roboflow\labeling3.png
 INPUT .\Images\Roboflow\labeling3.png
@@ -538,13 +531,6 @@ INPUT .\Images\Roboflow\poczatek uczenia.png
 INPUT .\Images\Roboflow\poczatek uczenia.png
 INPUT .\Images\Roboflow\poczatek uczenia.png
 INPUT .\Images\Roboflow\poczatek uczenia.png
-INPUT .\Images\Roboflow\wykres2.png
-INPUT .\Images\Roboflow\wykres2.png
-INPUT .\Images\Roboflow\wykres2.png
-INPUT .\Images\Roboflow\wykres2.png
-INPUT .\Images\Roboflow\wykres2.png
-INPUT .\Images\Roboflow\wykres2.png
-INPUT .\Images\Roboflow\wykres2.png
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
@@ -563,13 +549,13 @@ INPUT .\Images\Schemat elektryczny\circuit.png
 INPUT .\Images\Schemat elektryczny\circuit.png
 INPUT .\Images\Schemat elektryczny\circuit.png
 INPUT .\Images\Schemat elektryczny\circuit.png
-INPUT .\Images\Robot\Robot projekt.png
-INPUT .\Images\Robot\Robot projekt.png
-INPUT .\Images\Robot\Robot projekt.png
-INPUT .\Images\Robot\Robot projekt.png
-INPUT .\Images\Robot\Robot projekt.png
-INPUT .\Images\Robot\Robot projekt.png
-INPUT .\Images\Robot\Robot projekt.png
+INPUT .\Images\Robot\Robot kierunki.png
+INPUT .\Images\Robot\Robot kierunki.png
+INPUT .\Images\Robot\Robot kierunki.png
+INPUT .\Images\Robot\Robot kierunki.png
+INPUT .\Images\Robot\Robot kierunki.png
+INPUT .\Images\Robot\Robot kierunki.png
+INPUT .\Images\Robot\Robot kierunki.png
 INPUT .\Images\Robot\Robot piętra.png
 INPUT .\Images\Robot\Robot piętra.png
 INPUT .\Images\Robot\Robot piętra.png
@@ -577,20 +563,20 @@ INPUT .\Images\Robot\Robot piętra.png
 INPUT .\Images\Robot\Robot piętra.png
 INPUT .\Images\Robot\Robot piętra.png
 INPUT .\Images\Robot\Robot piętra.png
-INPUT .\Images\Robot\Robot dół.png
-INPUT .\Images\Robot\Robot dół.png
-INPUT .\Images\Robot\Robot dół.png
-INPUT .\Images\Robot\Robot dół.png
-INPUT .\Images\Robot\Robot dół.png
-INPUT .\Images\Robot\Robot dół.png
-INPUT .\Images\Robot\Robot dół.png
-INPUT .\Images\Robot\Robot góra.png
-INPUT .\Images\Robot\Robot góra.png
-INPUT .\Images\Robot\Robot góra.png
-INPUT .\Images\Robot\Robot góra.png
-INPUT .\Images\Robot\Robot góra.png
-INPUT .\Images\Robot\Robot góra.png
-INPUT .\Images\Robot\Robot góra.png
+INPUT .\Images\Robot\Robot dół oznaczenia.png
+INPUT .\Images\Robot\Robot dół oznaczenia.png
+INPUT .\Images\Robot\Robot dół oznaczenia.png
+INPUT .\Images\Robot\Robot dół oznaczenia.png
+INPUT .\Images\Robot\Robot dół oznaczenia.png
+INPUT .\Images\Robot\Robot dół oznaczenia.png
+INPUT .\Images\Robot\Robot dół oznaczenia.png
+INPUT .\Images\Robot\Robot góra oznaczenia.png
+INPUT .\Images\Robot\Robot góra oznaczenia.png
+INPUT .\Images\Robot\Robot góra oznaczenia.png
+INPUT .\Images\Robot\Robot góra oznaczenia.png
+INPUT .\Images\Robot\Robot góra oznaczenia.png
+INPUT .\Images\Robot\Robot góra oznaczenia.png
+INPUT .\Images\Robot\Robot góra oznaczenia.png
 INPUT .\Images\Robot\Robot_gotowy.png
 INPUT .\Images\Robot\Robot_gotowy.png
 INPUT .\Images\Robot\Robot_gotowy.png
@@ -805,5 +791,3 @@ INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy8.p
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmsy8.pfb
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtt12.pfb
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\lm\lmtt12.pfb
-INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb
-INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\type1\public\amsfonts\symbols\msbm10.pfb
