@@ -292,42 +292,49 @@
     \field{year}{2023}
   \endentry
 
-  \entry{bib:wang_yolov7}{article}{}
-    \name{author}{3}{}{%
-      {{hash=WCY}{%
-         family={Wang},
-         familyi={W\bibinitperiod},
-         given={Chien-Yao},
-         giveni={C\bibinithyphendelim Y\bibinitperiod},
+  \entry{bib:redmon_yolo}{article}{}
+    \name{author}{4}{}{%
+      {{hash=RJ}{%
+         family={Redmon},
+         familyi={R\bibinitperiod},
+         given={Joseph},
+         giveni={J\bibinitperiod},
       }}%
-      {{hash=BA}{%
-         family={Bochkovskiy},
-         familyi={B\bibinitperiod},
-         given={Alexey},
+      {{hash=DS}{%
+         family={Divvala},
+         familyi={D\bibinitperiod},
+         given={Santosh},
+         giveni={S\bibinitperiod},
+      }}%
+      {{hash=GR}{%
+         family={Girshick},
+         familyi={G\bibinitperiod},
+         given={Ross},
+         giveni={R\bibinitperiod},
+      }}%
+      {{hash=FA}{%
+         family={Farhadi},
+         familyi={F\bibinitperiod},
+         given={Ali},
          giveni={A\bibinitperiod},
       }}%
-      {{hash=LHYM}{%
-         family={Liao},
-         familyi={L\bibinitperiod},
-         given={Hong-Yuan\bibnamedelima Mark},
-         giveni={H\bibinithyphendelim Y\bibinitperiod\bibinitdelim
-  M\bibinitperiod},
-      }}%
     }
-    \strng{namehash}{WCYBALHYM1}
-    \strng{fullhash}{WCYBALHYM1}
+    \strng{namehash}{RJ+1}
+    \strng{fullhash}{RJDSGRFA1}
     \field{labelnamesource}{author}
     \field{labeltitlesource}{title}
-    \field{sortinit}{W}
-    \field{sortinithash}{W}
-    \field{note}{Available online: \url{https://arxiv.org/abs/2207.02696}}
-    \field{title}{YOLOv7: Trainable bag-of-freebies sets new state-of-the-art
-  for real-time object detectors}
+    \field{sortinit}{R}
+    \field{sortinithash}{R}
+    \field{note}{DOI: 10.1109/CVPR.2016.91}
+    \field{pages}{779\bibrangedash 788}
+    \field{title}{You Only Look Once: Unified, Real-Time Object Detection}
     \verb{url}
-    \verb https://arxiv.org/abs/2207.02696
+    \verb https://arxiv.org/abs/1506.02640
     \endverb
-    \field{journaltitle}{arXiv preprint arXiv:2207.02696}
-    \field{year}{2022}
+    \field{volume}{2016}
+    \field{journaltitle}{Proceedings of the IEEE Conference on Computer Vision
+  and Pattern Recognition (CVPR)}
+    \field{year}{2016}
   \endentry
 \enddatalist
 \endinput

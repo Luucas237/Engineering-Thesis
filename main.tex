@@ -531,37 +531,35 @@ Raspberry Pi, Vision system, Mobile Robot, YOLO, Binarization
 \chapter{Wstęp}
 \label{ch:wstep}
 
-Rozwój technologii komputerowej oraz metod sztucznej inteligencji w ostatnich dekadach znacząco zmienił podejście do projektowania i implementacji systemów wizyjnych. Szczególnie istotne w tym kontekście stały się algorytmy głębokiego uczenia, które umożliwiły precyzyjne rozpoznawanie i analizę obrazów w czasie rzeczywistym. W połączeniu z dostępnością wydajnych i ekonomicznych platform obliczeniowych, takich jak Raspberry Pi, rozwiązania te znajdują szerokie zastosowanie w robotyce mobilnej. 
+Rozwój technologii komputerowej oraz metod sztucznej inteligencji w ostatnich dekadach znacząco zmienił podejście do projektowania i implementacji systemów wizyjnych. Szczególnie istotne w tym kontekście stały się algorytmy głębokiego uczenia (ang. \textit{Deep Learning}), które umożliwiły precyzyjne rozpoznawanie i analizę obrazów w czasie rzeczywistym. W połączeniu z dostępnością wydajnych i ekonomicznych platform obliczeniowych, takich jak Raspberry Pi, rozwiązania te znajdują szerokie zastosowanie w robotyce mobilnej. 
 
-Niniejsza praca koncentruje się na opracowaniu systemu wizyjnego dla robota mobilnego z wykorzystaniem algorytmów YOLOv7, biblioteki PyTorch oraz OpenCV. System ma umożliwić detekcję i śledzenie obiektów w czasie rzeczywistym, co stanowi kluczowy element autonomicznego działania robota w dynamicznym środowisku. Dodatkowo, praca poddaje analizie porównawczej skuteczność algorytmów głębokiego uczenia (YOLOv7, YOLOv8) z podstawowymi metodami przetwarzania obrazów, takimi jak binaryzacja. 
+Niniejsza praca koncentruje się na opracowaniu systemu wizyjnego dla robota mobilnego z wykorzystaniem algorytmów YOLO (ang. \textit{You Only Look Once}) oraz biblioteki OpenCV. System ma umożliwić detekcję i śledzenie obiektu w czasie rzeczywistym, co stanowi kluczowy element autonomicznego działania robota w dynamicznym środowisku. Dodatkowo, praca poddaje analizie porównawczej skuteczność algorytmów głębokiego uczenia (YOLOv7, YOLOv8) z podstawowymi metodami przetwarzania obrazów, takimi jak binaryzacja. 
 
 Przedstawione zostanie wprowadzenie do przygotowania modelu YOLO, wytrenowania sieci oraz przygotowania środowiska wykonawczego na platformie Raspberry Pi. Ponadto, wykazane zostaną testy działania algorytmów w różnych warunkach środowiskowych i na różnych platformach sprzętowych, co umożliwi ocenę kompromisów między wydajnością a dokładnością w kontekście specyficznych ograniczeń sprzętowych.
 
 \newpage
 
 \section{Wprowadzenie w problem}
-Robotyka mobilna jest jedną z najszybciej rozwijających się dziedzin technologii, znajdującą zastosowanie zarówno w przemyśle, jak i w gospodarstwach domowych. Dzięki zastosowaniu systemów wizyjnych, roboty mobilne zyskują zdolność interakcji z otoczeniem, co znacząco zwiększa ich autonomię i zakres funkcjonalności. Systemy te umożliwiają identyfikację obiektów, analizę ich ruchu, a także podejmowanie decyzji w czasie rzeczywistym, co otwiera drogę do zastosowań w dynamicznych środowiskach, takich jak logistyka, rolnictwo czy ratownictwo.
+Robotyka mobilna jako jedna z najszybciej rozwijających się dziedzin technologii, znajduje zastosowanie zarówno w przemyśle, jak i w gospodarstwach domowych. Dzięki zastosowaniu systemów wizyjnych, roboty mobilne zyskują zdolność interakcji z otoczeniem, co znacząco zwiększa ich autonomię i zakres funkcjonalności. Systemy te umożliwiają identyfikację obiektów, analizę ich ruchu, a także podejmowanie decyzji w czasie rzeczywistym, co otwiera drogę do zastosowań w dynamicznych środowiskach, takich jak logistyka czy ratownictwo.
 
-W ostatnich latach dynamiczny rozwój algorytmów sztucznej inteligencji, takich jak głębokie uczenie (ang. \textit{Deep Learning}), oraz dostępność platform sprzętowych, takich jak ekonomiczne Raspberry Pi czy wydajne NVIDIA Jetson, umożliwiły implementację złożonych systemów wizyjnych. Algorytmy te pozwalają na wykrywanie, klasyfikację i śledzenie obiektów w czasie rzeczywistym, co czyni je kluczowymi elementami nowoczesnych systemów autonomicznych.
+Wymaga to jednak zastosowania algorytmów o wysokiej skuteczności, które są zdolne do pracy w czasie rzeczywistym, nawet na platformach o ograniczonych zasobach obliczeniowych.
 
-Jednym z najbardziej efektywnych algorytmów detekcji obiektów jest YOLO (ang. \textit{You Only Look Once}), który wyróżnia się wysoką szybkością działania i zdolnością do pracy na urządzeniach o ograniczonej mocy obliczeniowej. W niniejszej pracy szczególną uwagę poświęcono implementacji algorytmów YOLOv7 i YOLOv8 oraz ich porównaniu z klasycznymi metodami przetwarzania obrazu, takimi jak binaryzacja. Takie podejście pozwala na ocenę kompromisów między skutecznością, wydajnością i wymaganiami sprzętowymi.
+Wyzwaniem jest dostosowanie systemów wizyjnych do pracy w środowiskach charakteryzujących się zmiennymi warunkami oświetleniowymi, obecnością przeszkód czy koniecznością szybkiego przetwarzania danych. Integracja algorytmów detekcji obiektów, takich jak YOLO, z systemami sterowania i nawigacji robota, wymaga precyzyjnego projektowania zarówno na poziomie oprogramowania, jak i sprzętu.
 
-Realizacja systemu wizyjnego obejmuje nie tylko wdrożenie algorytmów, ale również ich integrację z modułem sterowania robota mobilnego. W pracy przedstawiono także przygotowanie środowiska wykonawczego na platformie Raspberry Pi, obejmujące konfigurację sprzętową oraz testowanie algorytmów w różnych warunkach środowiskowych i na różnych platformach sprzętowych. Wyniki tych badań pozwalają na identyfikację najbardziej efektywnych rozwiązań w kontekście ograniczeń wynikających z zastosowanego sprzętu.
+W pracy skoncentrowano się na dostarczeniu kompleksowego rozwiązania, które łączy zaawansowane algorytmy głębokiego uczenia z technikami optymalizacji sprzętowej. System został zaprojektowany z myślą o robotyce mobilnej, gdzie priorytetem jest zachowanie równowagi między wydajnością a dokładnością. Dodatkowo, szczególna uwaga została poświęcona porównaniu skuteczności klasycznych metod przetwarzania obrazu, takich jak binaryzacja, z nowoczesnymi podejściami wykorzystującymi głębokie sieci neuronowe.
 
-W niniejszej pracy zaprezentowano kompleksowe podejście do projektowania systemu wizyjnego dla robota mobilnego, obejmujące przygotowanie modelu YOLO, trening sieci neuronowej, konfigurację środowiska na platformie Raspberry Pi oraz analizę porównawczą wyników działania algorytmów w różnych warunkach.
 \newpage
 \section{Osadzenie problemu w dziedzinie}
 Identyfikacja i śledzenie obiektów w czasie rzeczywistym stanowią jedno z największych wyzwań w robotyce mobilnej. Dzięki zaawansowanym metodom przetwarzania obrazu roboty nie tylko „widzą” otoczenie, ale również potrafią je analizować i podejmować decyzje w oparciu o dane wizualne. Tego rodzaju zdolności są niezbędne w systemach autonomicznych, które muszą funkcjonować w zróżnicowanych, dynamicznych i często nieprzewidywalnych środowiskach.
 
-Kluczowym aspektem w rozwoju takich systemów jest opracowanie algorytmów wizyjnych, które zapewniają wysoką precyzję detekcji i klasyfikacji obiektów, jednocześnie spełniając wymagania czasowe niezbędne do działania w czasie rzeczywistym. Wyzwaniem jest dostosowanie tych algorytmów do pracy na platformach o ograniczonych zasobach obliczeniowych, takich jak Raspberry Pi.
-
-Zastosowania systemów wizyjnych wykraczają jednak poza ziemskie środowiska. Szczególnym przykładem są misje kosmiczne, w których autonomiczne roboty, takie jak łaziki marsjańskie, wykorzystują zaawansowane systemy wizyjne do eksploracji nieznanych terenów. Łaziki takie jak Perseverance czy Curiosity stosują algorytmy analizy obrazu do identyfikacji przeszkód, planowania trasy oraz analizy powierzchni Marsa. Wyzwania związane z pracą w ekstremalnych warunkach oraz przy ograniczonej dostępności zasobów obliczeniowych stanowią inspirację dla dalszego rozwoju technologii, które znajdują zastosowanie również na Ziemi.
+Kluczowym aspektem w rozwoju takich systemów jest opracowanie algorytmów wizyjnych, które zapewniają wysoką precyzję detekcji i klasyfikacji obiektów, jednocześnie spełniając wymagania czasowe niezbędne do działania w czasie rzeczywistym.
 
 Ponadto integracja systemu wizyjnego z modułami sterowania i nawigacji robota mobilnego wymaga opracowania odpowiednich rozwiązań programistycznych, które umożliwiają precyzyjne przekładanie informacji wizualnych na decyzje ruchowe robota. Takie podejście jest szczególnie istotne w zastosowaniach przemysłowych, gdzie systemy wizyjne mogą wspierać procesy takie jak nawigacja w magazynach, inspekcja obiektów czy wspomaganie operacji ratunkowych.
 
+Zastosowania systemów wizyjnych potrafią wykraczać poza ziemskie środowiska. Szczególnym przykładem są misje kosmiczne, w których autonomiczne roboty, takie jak łaziki marsjańskie, wykorzystują zaawansowane systemy wizyjne do eksploracji nieznanych terenów. Łaziki takie jak \texttt{Perseverance} czy \texttt{Curiosity} stosują algorytmy analizy obrazu do identyfikacji przeszkód, planowania trasy oraz analizy powierzchni Marsa. Wyzwania związane z pracą w ekstremalnych warunkach oraz przy ograniczonej dostępności zasobów obliczeniowych stanowią inspirację dla dalszego rozwoju technologii, które znajdują zastosowanie również na Ziemi.
 
 \section{Cel pracy}
-Celem pracy jest opracowanie systemu wizyjnego dla robota mobilnego, który umożliwi identyfikację różnego rodzaju obiektów, śledzenie ich ruchu oraz podążanie za nimi. W szczególności praca koncentruje się na:
+Celem pracy jest opracowanie systemu wizyjnego dla robota mobilnego, który umożliwi identyfikację ustalonego obiektu, śledzenie jego ruchu oraz podążanie za nim. W szczególności praca koncentruje się na:
 \begin{itemize}
     \item Implementacji algorytmów YOLOv7, YOLOv8 oraz binaryzacji na platformie Raspberry Pi 4B.
     \item Integracji systemu wizyjnego z układem sterowania robota mobilnego.
@@ -589,7 +587,7 @@ Praca została podzielona na następujące rozdziały:
     \item Rozdział trzeci – Przygotowanie danych i trening modeli: Opis przygotowania danych oraz procesu treningu modeli YOLO.
     \item Rozdział czwarty – Proces tworzenia robota mobilnego: Szczegóły konstrukcji robota oraz integracji systemów.
     \item Rozdział piąty – Analiza działania systemu wizyjnego: Wyniki testów i ich analiza.
-    \item Rozdział szósty – Problematyka i rozwiązania: Omówienie napotkanych wyzwań oraz zastosowanych rozwiązań.
+    \item Rozdział szósty – Napotkane problemy i ich rozwiązania: Omówienie napotkanych wyzwań oraz zastosowanych rozwiązań.
     \item Rozdział siódmy – Podsumowanie i wnioski: Podsumowanie wyników pracy oraz propozycje dalszych badań.
 \end{itemize}
 
@@ -614,7 +612,7 @@ W ramach niniejszej pracy autor:
 W niniejszym rozdziale przedstawiono analizę istniejących rozwiązań w dziedzinie systemów wizyjnych dla robotów mobilnych. Omówiono aktualny stan wiedzy oraz najnowsze osiągnięcia w dziedzinie detekcji i śledzenia obiektów, ze szczególnym uwzględnieniem algorytmów głębokiego uczenia.
 
 \section{Sformułowanie problemu}
-Współczesna robotyka mobilna stawia liczne wyzwania związane z autonomicznym działaniem robotów w dynamicznych i złożonych środowiskach. Jednym z kluczowych aspektów umożliwiających taką autonomię jest detekcja i śledzenie obiektów w czasie rzeczywistym, co pozwala robotowi na skuteczną interakcję z otoczeniem oraz podejmowanie decyzji na podstawie danych wizualnych. Wyzwania te stają się szczególnie istotne w warunkach zmiennego oświetlenia, ograniczonej mocy obliczeniowej oraz konieczności integracji zaawansowanych algorytmów wizji komputerowej z systemami sterowania.
+Aspektem umożliwiającym taką autonomię jest detekcja i śledzenie obiektów w czasie rzeczywistym, co pozwala robotowi na skuteczną interakcję z otoczeniem oraz podejmowanie decyzji na podstawie danych wizualnych. Wyzwania te stają się szczególnie istotne w zmiennych warunkach otoczenia oraz ograniczonej mocy obliczeniowej sprzętu.
 
 Systemy wizyjne odgrywają kluczową rolę w procesie autonomizacji robotów, zapewniając możliwość:
 \begin{itemize}
@@ -636,12 +634,11 @@ Podobne wyzwania zostały zidentyfikowane w misjach marsjańskich, gdzie autonom
 
 Implementacja takich rozwiązań w systemach kosmicznych wymagała optymalizacji algorytmów pod kątem ograniczonych zasobów obliczeniowych. Przykładem jest użycie procesora RAD6000 w łazikach Spirit i Opportunity, o częstotliwości zaledwie 20 MHz, co wymusiło zastosowanie uproszczonych, ale wydajnych algorytmów przetwarzania obrazu \cite{bib:matthies2007mars}. Te doświadczenia pokazały, że technologie opracowane dla eksploracji kosmosu mogą być z powodzeniem adaptowane do systemów wizyjnych dla robotów mobilnych na Ziemi.
 
-Dla robotów mobilnych działających w dynamicznych środowiskach ziemskich kluczowe jest opracowanie algorytmów, które mogą funkcjonować w czasie rzeczywistym przy jednoczesnym dostosowaniu do ograniczeń sprzętowych. Wspomniane badania \cite{bib:aoki2001realtime} \cite{bib:matthies2007mars} wskazują na interdyscyplinarny charakter rozwoju systemów wizyjnych, łączący zaawansowaną analizę obrazów z wymaganiami aplikacyjnymi w różnych środowiskach. Systemy te znajdują zastosowanie nie tylko w interakcji człowiek-robot, ale również w misjach eksploracyjnych, logistyce, rolnictwie oraz operacjach ratunkowych.
-
+Dla robotów mobilnych działających w dynamicznych środowiskach ziemskich kluczowe jest opracowanie algorytmów, które mogą funkcjonować w czasie rzeczywistym przy jednoczesnym dostosowaniu do ograniczeń sprzętowych. Wspomniane badania \cite{bib:aoki2001realtime} \cite{bib:matthies2007mars} wskazują na interdyscyplinarny charakter rozwoju systemów wizyjnych, łączący zaawansowaną analizę obrazów z wymaganiami aplikacyjnymi w różnych środowiskach. Systemy te znajdują zastosowanie nie tylko w interakcji człowiek-robot, ale również w misjach eksploracyjnych, logistyce oraz operacjach ratunkowych.
 
 
 \section{Przetwarzanie obrazu i algorytmy detekcji obiektów}
-Współczesne systemy wizyjne opierają się na zaawansowanych technikach przetwarzania obrazu i algorytmach detekcji obiektów, które umożliwiają analizę wizualną w czasie rzeczywistym. Metody te można podzielić na dwie główne kategorie: algorytmy głębokiego uczenia oraz klasyczne metody przetwarzania obrazu.
+Systemy wizyjne opierają się na technikach przetwarzania obrazu i algorytmach detekcji obiektów, które umożliwiają analizę wizualną w czasie rzeczywistym. Metody te można podzielić na dwie główne kategorie: algorytmy głębokiego uczenia oraz klasyczne metody przetwarzania obrazu.
 
 \subsection{Algorytmy głębokiego uczenia}
 Algorytmy głębokiego uczenia rewolucjonizują detekcję obiektów dzięki zdolności do automatycznego wydobywania istotnych cech z danych wizualnych. Kluczowe techniki obejmują:
@@ -665,7 +662,7 @@ Podczas gdy algorytmy głębokiego uczenia oferują wysoką precyzję i wszechst
 Sieci neuronowe to matematyczne modele inspirowane funkcjonowaniem biologicznych układów neuronalnych. Zostały zaprojektowane w celu rozwiązywania problemów takich jak klasyfikacja, predykcja czy modelowanie złożonych zależności. Podstawową jednostką w sieci neuronowej jest \textbf{neuron}, który przetwarza dane wejściowe i generuje odpowiedź w oparciu o zdefiniowane wagi i funkcję aktywacji \cite{bib:bielecki}.
 
 \subsection{Budowa sieci neuronowej}
-Neuron jest podstawową jednostką obliczeniową sieci. Posiada \(n\) wejść \(x_1, x_2, \ldots, x_n\), które są przekształcane zgodnie z wzorem:
+Neuron, jako podstawowa jednostką obliczeniową sieci, posiada \(n\) wejść \(x_1, x_2, \ldots, x_n\), które są przekształcane zgodnie z wzorem:
 \begin{align}
     s = \sum_{i=1}^n w_i x_i + b,
 \end{align}
@@ -743,10 +740,8 @@ Algorytm działa w czasie rzeczywistym, co oznacza, że przetwarza obraz w jedny
 
 Przewidywania są przedstawiane w formie wielowymiarowej macierzy (ang. \textit{tensor}) o wymiarach \( S \times S \times (B \cdot 5 + C) \), gdzie \( S \) to liczba komórek w siatce, \( B \) to liczba ramek ograniczających przewidywanych przez każdą komórkę, a \( C \) to liczba klas obiektów. Dzięki temu YOLO jest w stanie wykrywać wiele obiektów jednocześnie, niezależnie od ich rozmiaru i położenia na obrazie.
 
-Kluczową cechą YOLO jest jego zdolność do analizy całego obrazu naraz, co pozwala algorytmowi rozpoznawać kontekst sceny. Takie podejście zmniejsza liczbę fałszywych pozytywów i zwiększa dokładność w porównaniu do metod opierających się na przeszukiwaniu obrazu kawałek po kawałku.
+Kluczową cechą YOLO jest jego zdolność do analizy całego obrazu naraz, co pozwala algorytmowi rozpoznawać kontekst sceny. Takie podejście zmniejsza liczbę fałszywych pozytywów i zwiększa dokładność w porównaniu do metod opierających się na przeszukiwaniu obrazu fragment po fragmencie \cite{bib:redmon_yolo}.
 
-\subsection{Architektura sieci}
-YOLO wykorzystuje sieć konwolucyjną z warstwami \( 1 \times 1 \) i \( 3 \times 3 \), co umożliwia redukcję wymiarów oraz efektywną ekstrakcję cech. Wersja YOLOv7 wprowadza dodatkowe optymalizacje, takie jak moduły E-ELAN i dynamiczne przypisywanie etykiet \cite{bib:wang_yolov7}.
 
 \subsection{Zastosowania w robotyce mobilnej}
 Systemy wizyjne oparte na YOLO są wykorzystywane w projektach przemysłowych i naukowych. Przykłady zastosowań obejmują:
@@ -770,7 +765,6 @@ W procesie binaryzacji każdy piksel \( I(x, y) \) obrazu wejściowego jest por�
 \end{align}
 
 Istnieją różne techniki wyznaczania progu, np. metoda Otsu, która automatycznie dobiera \( T \), minimalizując wariancję wewnątrzklasową \cite{bib:huang2012improved}.
-\newpage
 \subsection{Zastosowania}
 Binaryzacja znajduje szerokie zastosowanie w różnych zadaniach przetwarzania obrazu, takich jak:
 \begin{itemize}
@@ -822,7 +816,7 @@ W artykule \cite{bib:parvadhavardhni2023blind} poświęconym konferencji ICAAIC 
 System analizuje obraz z kamery w czasie rzeczywistym, identyfikuje obiekty znajdujące się na drodze użytkownika i dostarcza odpowiednie informacje zwrotne. Użytkownik jest w ten sposób ostrzegany o przeszkodach, co umożliwia unikanie kolizji i bezpieczne poruszanie się.
 
 \textbf{Wnioski:}
-Przedstawiony system stanowi obiecujące narzędzie wspierające osoby niewidome w samodzielnym poruszaniu się, zwiększając ich bezpieczeństwo i komfort życia. Integracja technologii, takich jak Raspberry Pi oraz algorytmy głębokiego uczenia, umożliwia tworzenie efektywnych i dostępnych rozwiązań wspomagających nawigację.
+Przedstawiony system stanowi obiecujące narzędzie wspierające osoby niewidome w samodzielnym poruszaniu się, zwiększając ich bezpieczeństwo i komfort życia. 
 
 %\begin{Definition}\label{def:1}
 %Definicja to zdanie (lub układ zdań) odpowiadające na pytanie o strukturze „co to jest a?”. Definicja normalna jest zdaniem złożonym z 2 członów: definiowanego (łac. definiendum) i definiującego (łac. definiens), połączonych spójnikiem definicyjnym („jest to”, „to tyle, co” itp.). 
@@ -894,7 +888,7 @@ Rysunek \ref{fig:roboflow-main} przedstawia widok strony głównej projektu. Po 
 	\label{fig:roboflow-main}
 \end{figure}
 
-Proces etykietowania danych można przeprowadzić na dwa sposoby. Pierwszy z nich to automatyczne etykietowanie, które wykorzystuje algorytmy detekcji obiektów w celu przyspieszenia oznaczania danych. Drugi sposób to etykietowanie ręczne, które polega na samodzielnym zaznaczaniu obiektów na obrazie przez użytkownika. Chociaż proces ręczny jest bardziej czasochłonny, zapewnia większą kontrolę nad poprawnością oznaczeń, co jest szczególnie istotne w przypadku trudnych warunków, takich jak rozmyte obrazy, słabe oświetlenie lub obiekty częściowo zasłonięte.
+Proces etykietowania danych można przeprowadzić na dwa sposoby. Pierwszy z nich to automatyczne etykietowanie, które wykorzystuje algorytmy detekcji obiektów w celu przyspieszenia oznaczania danych. Drugi sposób to etykietowanie ręczne, które polega na samodzielnym zaznaczaniu obiektów na obrazie przez użytkownika. Chociaż proces ręczny jest bardziej czasochłonny, zapewnia większą kontrolę nad poprawnością oznaczeń, co jest szczególnie istotne w przypadku trudnych warunków, takimi jak rozmyte obrazy czy słabe oświetlenie..
 
 \newpage
 
@@ -1002,7 +996,7 @@ W niniejszym rozdziale przedstawiono proces tworzenia robota mobilnego, uwzględ
 Poniżej przedstawiono diagram blokowy ilustrujący działanie algorytmu detekcji obiektów w czasie rzeczywistym. Proces rozpoczyna się od akwizycji obrazu z kamery, który następnie trafia do modelu detekcji obiektów YOLOv7. Na podstawie wyników detekcji robot dostosowuje kąty serwomechanizmów pionowego i poziomego, aby utrzymać obiekt w centrum kadru. Jeśli obiekt przesunie się poza wyznaczone centrum, program oblicza różnicę w pikselach i przelicza ją na odpowiednie wartości kątowe, umożliwiając sterowanie serwomechanizmami w celu zapewnienia ciągłości śledzenia. Celem algorytmu jest nieustanne utrzymanie obiektu w centrum widoku kamery.
 Program na bieżąco monitoruje wartości kątowe serwomechanizmów, które są wykorzystywane do sterowania pracą silników DC odpowiedzialnych za ruch robota. Ruch w przód wykonywany jest jedynie w przypadku spełnienia następujących warunków: obiekt został wykryty, kąt serwomechanizmu poziomego mieści się w zakresie od -25\textdegree{} do 25\textdegree{}, a kąt serwomechanizmu pionowego przekracza -30\textdegree{}. W przeciwnym razie robot zatrzymuje się lub wykonuje skręt. Jeśli kąt poziomy osiągnie wartość graniczną (25\textdegree{} lub -25\textdegree{}), robot skręca odpowiednio w prawo lub w lewo.
 
-Program można zatrzymać wyłącznie przez interakcję użytkownika, co powoduje zatrzymanie wszystkich systemów i powrót robota do stanu początkowego. Stan początkowy definiuje sytuację, w której serwomechanizmy ustawione są w pozycji centralnej (0\textdegree{} dla obu osi), a silniki DC są wyłączone.
+Program można zatrzymać wyłącznie przez interakcję użytkownika, co powoduje zatrzymanie wszystkich systemów i powrót robota do stanu początkowego. Stan początkowy definiuje sytuację, w której serwomechanizmy ustawione są w pozycji centralnej (0\textdegree{} dla obu osi), a silniki DC są wyłączone. Dodatkowo jeśli program przestał wykrywać obiekt, przechodzi w stan poszukiwania obracając kamerą w taki sposób, że wykonuje ona ruchy eliptyczne w przestrzeni.
 
 \begin{figure}[h]
     \centering
@@ -1103,17 +1097,15 @@ Obraz \ref{fig:Robot góra} przedstawia górne piętro robota, na którym zamont
 Zdjęcie \ref{fig:Robot_gotowy} przedstawia gotową konstrukcję robota mobilnego wykonanego z tworzywa sztucznego PETG. 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.8\textwidth]{Images/Robot/Robot_gotowy.png}
+    \includegraphics[width=0.6\textwidth]{Images/Robot/Robot_gotowy.png}
     \caption{Gotowa konstrukcja robota mobilnego.}
     \label{fig:Robot_gotowy}
 \end{figure}
 
-\newpage
-
 \section{Dostosowanie RaspberryPi}
 Na Raspberry Pi zainstalowano system operacyjny Debian GNU/Linux 12 (Bookworm), który jest 64-bitową wersją opartą na jądrze Linux 6.6.51, zoptymalizowaną pod architekturę ARM (aarch64). Wybrana wersja systemu jest kompatybilna z bibliotekami istotnymi do poprawnego działania systemu wizyjnego. Projekt został zrealizowany w oparciu o wersję Python 3.11.2. Aby zoptymalizować pracę programu i zapewnić pełną kontrolę nad jego zależnościami, utworzono dedykowane wirtualne środowisko, w którym przechowywane są wszystkie wymagane biblioteki. Środowisko to zostało stworzone przy użyciu narzędzia \texttt{venv} za pomocą poniższego polecenia w terminalu: \begin{verbatim} python -m venv nazwa-env \end{verbatim} Po utworzeniu środowiska wirtualnego należy je aktywować, używając polecenia: \begin{verbatim} source nazwa-env/bin/activate \end{verbatim} Program jest uruchamiany wewnątrz tego środowiska, co pozwala na uniknięcie konfliktów między wersjami bibliotek oraz zapewnia powtarzalność działania systemu na różnych urządzeniach.
 
-
+\newpage
 \subsection{Spis wymaganych bibliotek}
 Poniżej przedstawiono listę bibliotek wymaganych do uruchomienia systemu wizyjnego oraz sterowania robotem mobilnym, z podziałem na ich funkcje:
 
@@ -1131,8 +1123,6 @@ Poniżej przedstawiono listę bibliotek wymaganych do uruchomienia systemu wizyj
         \item \textbf{numpy} – Operacje matematyczne i macierzowe, kluczowe dla analizy danych wizualnych.
         \item \textbf{Picamera2} – Obsługa kamery Raspberry Pi do akwizycji obrazu.
     \end{itemize}
-\newpage
-    
     \item \textbf{Sterowanie sprzętem:}
     \begin{itemize}
         \item \textbf{RPi.GPIO} – Sterowanie pinami GPIO na Raspberry Pi.
@@ -1558,7 +1548,7 @@ Jednakże, w sytuacji przedstawionej na \textbf{Rysunku}~\ref{fig:Wykrycie piłk
 
 W niniejszym podrozdziale dokonano porównania trzech algorytmów detekcji obiektów: YOLOv7, YOLOv8 oraz algorytmu binaryzacji. Analiza została przeprowadzona w oparciu o różne warunki oświetleniowe i otoczenie, a także na dwóch platformach sprzętowych: komputerze osobistym oraz Raspberry Pi. Celem było określenie kompromisu pomiędzy szybkością działania, wyrażoną w klatkach na sekundę (FPS), a skutecznością w wykrywaniu obiektów oraz eliminacji błędnych detekcji.
 
-W kontekście badania, platformy sprzętowe różniły się znacząco pod względem dostępnych zasobów obliczeniowych. Komputer osobisty, wyposażony w wydajny procesor i dedykowaną kartę graficzną, umożliwiał działanie algorytmów YOLO w czasie rzeczywistym z wysoką dokładnością. Raspberry Pi, jako platforma o ograniczonej mocy obliczeniowej, stanowiło wyzwanie dla zaawansowanych algorytmów detekcji.
+W kontekście badania, platformy sprzętowe różniły się znacząco pod względem dostępnych zasobów obliczeniowych. Komputer osobisty, wyposażony w wydajny procesor i dedykowaną kartę graficzną, umożliwiał działanie algorytmów YOLO w czasie rzeczywistym z wysoką dokładnością. Natomiast dla Raspberry Pi stanowiło to wyzwanie.
 
 Wyniki analizy uwzględniają różne scenariusze testowe, takie jak działanie algorytmów w warunkach dobrego i słabego oświetlenia, obecność przeszkód oraz różne konfiguracje sprzętowe. Pozwoliło to na kompleksowe porównanie skuteczności i efektywności rozważanych podejść, a także ocenę ich przydatności w systemach czasu rzeczywistego.
 
@@ -1619,7 +1609,7 @@ W trudniejszych warunkach, takich jak gorsze oświetlenie, YOLOv8 wciąż jest w
 \end{figure}
 \newpage
 
-Pomimo ogólnie wysokiej dokładności, YOLOv8 czasami wykazuje błędne detekcje. \textbf{Rysunek}~\ref{fig:yolov8_good_light_bad_object} przedstawia przykład, w którym w warunkach dobrego oświetlenia algorytm błędnie zidentyfikował czerwoną poduszkę jako obiekt piłkopodobny.
+Pomimo wysokiej dokładności, YOLOv8 czasami błędnie identyfikuje obiekty. \textbf{Rysunek}~\ref{fig:yolov8_good_light_bad_object} przedstawia przykład, w którym w warunkach dobrego oświetlenia algorytm błędnie zidentyfikował czerwoną poduszkę jako obiekt piłkopodobny.
 
 Z kolei \textbf{Rysunek}~\ref{fig:yolov8_good_light_good_object} pokazuje przypadek, w którym algorytm prawidłowo pominął obiekt w warunkach słabego oświetlenia. Może to być skutkiem zaniku barwy czerwonej w wyniku pogorszenia światła otoczenia.
 
@@ -1640,7 +1630,7 @@ Z kolei \textbf{Rysunek}~\ref{fig:yolov8_good_light_good_object} pokazuje przypa
 \newpage
 \subsection{Charakterystyka algorytmu binaryzacji}
 
-Algorytm binaryzacji oparty na prostej segmentacji obrazu w przestrzeni barw HSV, na Raspberry Pi osiąga poziom nawet 25-30 FPS. Dzięki swej prostocie algorytm jest szczególnie efektywny w warunkach dobrego oświetlenia, jak pokazano na \textbf{Rysunku}~\ref{fig:binary_confusion_goodlight}. W takich przypadkach binaryzacja umożliwia poprawne wykrycie obiektu, co potwierdza jej skuteczność w sprzyjających warunkach.
+Algorytm binaryzacji oparty na prostej segmentacji obrazu w przestrzeni barw HSV, na Raspberry Pi osiąga poziom nawet 25-30 FPS. Dzięki swej prostocie algorytm jest szczególnie efektywny w warunkach dobrego oświetlenia, jak pokazano na \textbf{Rysunku}~\ref{fig:binary_confusion_goodlight}.
 W warunkach słabego oświetlenia, przedstawionych na \textbf{Rysunku}~\ref{fig:binary_confusion_badlight}, algorytm nadal jest w stanie poprawnie zidentyfikować obiekt. 
 
 \begin{figure}[h]
@@ -1675,7 +1665,7 @@ Jednakże, w bardziej złożonych sytuacjach, binaryzacja ujawnia swoje ogranicz
     \label{fig:binary_confusion_goodlight_badobject}
 \end{figure}
 
-Pomimo swoich ograniczeń, algorytm binaryzacji wyróżnia się wysoką szybkością działania, co czyni go atrakcyjnym rozwiązaniem w systemach o ograniczonych zasobach obliczeniowych. Niemniej jednak, jego skuteczność zależy w dużej mierze od precyzyjnego doboru zakresów wartości HSV oraz warunków otoczenia.
+Algorytm binaryzacji wyróżnia się wysoką szybkością działania, co czyni go dobrym rozwiązaniem w systemach o ograniczonych zasobach obliczeniowych. Niemniej jednak, jego skuteczność zależy w dużej mierze od precyzyjnego doboru zakresów wartości HSV oraz warunków otoczenia.
 
 
 \newpage
@@ -1684,7 +1674,7 @@ Pomimo swoich ograniczeń, algorytm binaryzacji wyróżnia się wysoką szybkoś
 \paragraph{Działanie na komputerze osobistym}
 Jak przedstawiono w \textbf{Tabelach}~\ref{tab:bez_przeszkody} i~\ref{tab:z_przeszkoda}, algorytmy detekcji różniły się skutecznością w zależności od warunków oświetleniowych i obecności przeszkód. 
 
-Algorytm \textbf{YOLOv7} osiągnął dobrą równowagę między szybkością a dokładnością, niezależnie od warunków oświetleniowych i przeszkód, stabilnie działając z prędkością 16.09 FPS. \textbf{YOLOv8} wyróżniał się najwyższą dokładnością, jednak kosztem niższej szybkości, osiągając 10.71 FPS. W przypadku scen z przeszkodami miał trudności z ich ignorowaniem w dobrym oświetleniu, co wskazuje na większą czułość detektora. \textbf{Binaryzacja}, choć najszybsza z algorytmów (29.61 FPS), miała trudności z prawidłową klasyfikacją obiektów w złożonych scenach, co może prowadzić do fałszywych detekcji.
+Algorytm \textbf{YOLOv7} osiągnął dobrą równowagę między szybkością a dokładnością, niezależnie od warunków oświetleniowych i przeszkód, stabilnie działając z prędkością 16.09 FPS. \textbf{YOLOv8} wyróżniał się najwyższą dokładnością, jednak kosztem niższej szybkości, osiągając 10.71 FPS. W przypadku scen z przeszkodami miał trudności z ich ignorowaniem w dobrym oświetleniu. \textbf{Binaryzacja}, choć najszybsza z algorytmów (29.61 FPS), miała trudności z prawidłową klasyfikacją obiektów w złożonych scenach, co może prowadzić do fałszywych detekcji.
 
 \begin{table}[h!]
     \centering
@@ -1725,7 +1715,7 @@ Algorytm \textbf{YOLOv7} osiągnął dobrą równowagę między szybkością a d
 \paragraph{Działanie na Raspberry Pi}
 Jak przedstawiono w \textbf{Tabelach}~\ref{tab:bez_przeszkody_rpi} i~\ref{tab:z_przeszkoda_rpi}, działanie algorytmów na Raspberry Pi było ograniczone przez mniejsze zasoby obliczeniowe. 
 
-\textbf{YOLOv7} działał stabilnie z prędkością około 2.8 FPS, zachowując swoją skuteczność w ignorowaniu przeszkód oraz wykrywaniu obiektów w różnych warunkach oświetleniowych. \textbf{YOLOv8}, choć nadal dokładny, wykazał najniższą wydajność na Raspberry Pi, osiągając zaledwie 1.24 FPS. Algorytm \textbf{binaryzacji}, pomimo najwyższej szybkości działania 25.95 FPS, miał trudności w detekcji obiektów w słabym oświetleniu, co ujawnia jego ograniczenia w bardziej wymagających warunkach.
+\textbf{YOLOv7} działał stabilnie z prędkością około 2.8 FPS, zachowując swoją skuteczność w ignorowaniu przeszkód oraz wykrywaniu obiektów w różnych warunkach oświetleniowych. \textbf{YOLOv8}, choć nadal dokładny, wykazał najniższą wydajność na Raspberry Pi, osiągając zaledwie 1.24 FPS. Algorytm \textbf{binaryzacji}, pomimo najwyższej szybkości działania 25.95 FPS, dokonywał nieprawidłowej detekcji obiektów w słabym oświetleniu, co ujawnia jego ograniczenia w bardziej wymagających warunkach.
 
 \begin{table}[h!]
     \centering
@@ -1843,27 +1833,19 @@ W sytuacji, gdy obiekt znajdował się poza polem widzenia kamery, zaimplementow
 \chapter{Podsumowanie i wnioski}
 \label{ch:07}
 
-W ramach niniejszej pracy zrealizowano projekt systemu wizyjnego dla robota mobilnego, którego zadaniem było autonomiczne wykrywanie i śledzenie obiektów. W projekcie wykorzystano zarówno zaawansowane algorytmy głębokiego uczenia (YOLOv7 i YOLOv8), jak i klasyczne techniki przetwarzania obrazów, takie jak binaryzacja i analiza konturów. System został przeanalizowany pod kątem skuteczności i wydajności w różnych warunkach oświetleniowych oraz na dwóch platformach sprzętowych: komputerze osobistym i Raspberry Pi.
+W ramach niniejszej pracy zrealizowano projekt systemu wizyjnego dla robota mobilnego, którego zadaniem było autonomiczne wykrywanie i śledzenie obiektów. W projekcie wykorzystano zarówno zaawansowane algorytmy głębokiego uczenia (YOLOv7 i YOLOv8), jak i klasyczne techniki przetwarzania obrazów, takie jak binaryzacja. System został przeanalizowany pod kątem skuteczności i wydajności w różnych warunkach oświetleniowych oraz na dwóch platformach sprzętowych: komputerze osobistym i Raspberry Pi.
 
-Przeprowadzone testy wykazały, że każde z zastosowanych podejść posiada swoje specyficzne mocne i słabe strony. Modele YOLO zapewniły wysoką precyzję detekcji w złożonych warunkach, jednak ich działanie było ograniczone przez zasoby obliczeniowe modułu Raspberry Pi. Z kolei algorytm binaryzacji charakteryzował się znacznie wyższą szybkością, ale jego skuteczność w trudniejszych warunkach była ograniczona.
+Przeprowadzone testy wykazały, że każde z zastosowanych podejść posiada swoje mocne i słabe strony. Modele YOLO zapewniły wysoką precyzję detekcji w złożonych warunkach, jednak ich działanie było ograniczone przez zasoby obliczeniowe modułu Raspberry Pi. Z kolei algorytm binaryzacji charakteryzował się znacznie wyższą szybkością, ale jego skuteczność w trudniejszych warunkach była ograniczona.
 
 \section{Wnioski}
-Na podstawie przeprowadzonych badań można sformułować następujące wnioski:
-\begin{itemize}
-    \item Modele YOLOv7 i YOLOv8 są odpowiednie do zastosowań wymagających wysokiej precyzji detekcji, szczególnie w złożonych środowiskach. Ich głównym ograniczeniem jest wysokie zapotrzebowanie na zasoby sprzętowe.
-    \item Algorytm binaryzacji jest wydajnym rozwiązaniem w prostych scenariuszach, gdzie kluczowa jest szybkość działania, a zasoby obliczeniowe są ograniczone.
-    \item Raspberry Pi, pomimo swoich ograniczeń sprzętowych, może być skutecznie wykorzystywane jako platforma do detekcji obiektów w czasie rzeczywistym, szczególnie przy zastosowaniu zoptymalizowanych algorytmów.
-\end{itemize}
+Na podstawie przeprowadzonych badań można sformułować wnioski iż Modele YOLOv7 i YOLOv8 są odpowiednie do zastosowań wymagających wysokiej precyzji detekcji, szczególnie w złożonych środowiskach lecz ich głównym ograniczeniem jest wysokie zapotrzebowanie na zasoby sprzętowe. 
+Natomiast algorytm binaryzacji jest wydajnym rozwiązaniem w prostych scenariuszach, gdzie kluczowa jest szybkość działania, a zasoby obliczeniowe są ograniczone. 
+Podsumowując Raspberry Pi, pomimo swoich ograniczeń sprzętowych, może być skutecznie wykorzystywane jako platforma do detekcji obiektów w czasie rzeczywistym, szczególnie przy zastosowaniu zoptymalizowanych algorytmów.
 
 \section{Perspektywy dalszych badań}
-W przyszłości można rozważyć następujące kierunki rozwoju systemu:
-\begin{itemize}
-    \item Optymalizację modeli YOLO pod kątem działania na platformach o ograniczonych zasobach obliczeniowych, na przykład poprzez wykorzystanie starszych wersji modeli. Bądź wykorzystanie innych technik detekcji jak na przykład TensorFlow Lite.
-    \item Rozbudowanie zbioru danych treningowych o bardziej różnorodne scenariusze oświetleniowe i środowiskowe, co mogłoby zwiększyć uniwersalność algorytmów.
-    \item Wdrożenie hybrydowego podejścia, które łączy algorytmy głębokiego uczenia z klasycznymi technikami przetwarzania obrazu, aby wykorzystać ich wzajemne zalety.
-\end{itemize}
+W przyszłości można rozważyć nozwuj systemu polegający na wdrożeniu hybrydowego podejścia, które łączy algorytmy głębokiego uczenia z klasycznymi technikami przetwarzania obrazu, aby wykorzystać ich wzajemne zalety. Bądź optymalizację modeli YOLO pod kątem działania na platformach o ograniczonych zasobach obliczeniowych, na przykład poprzez wykorzystanie starszych wersji modeli albo wykorzystanie innych technik detekcji jak na przykład TensorFlow Lite. 
 
-Podsumowując, przeprowadzona analiza i testy potwierdziły, że odpowiedni dobór algorytmu detekcji obiektów zależy od dostępnych zasobów sprzętowych oraz wymagań konkretnej aplikacji.
+
 
 
 
