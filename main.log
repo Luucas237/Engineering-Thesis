@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.5.26)  7 JAN 2025 13:42
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (MiKTeX 24.1) (preloaded format=pdflatex 2024.5.26)  7 JAN 2025 21:59
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1178,16 +1178,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [2]
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 559.
- (C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Overfull \hbox (1.18376pt too wide) in paragraph at lines 559--560
-[]\T1/lmr/m/n/12 Zastosowania sys-te-m�w wi-zyj-nych po-tra-fi� wy-kra-cza� poza ziem-skie �ro-do-wi-ska. Szcze-
- []
-
-LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 564.
-(C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
+LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 565.
+ (C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex/latex/lm\ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 
@@ -1314,7 +1306,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [18]
-<Images/Roboflow/mainscreen.png, id=538, 1434.86063pt x 716.6775pt>
+<Images/Roboflow/mainscreen.png, id=543, 1434.86063pt x 716.6775pt>
 File: Images/Roboflow/mainscreen.png Graphic file (type png)
 <use Images/Roboflow/mainscreen.png>
 Package pdftex.def Info: Images/Roboflow/mainscreen.png  used on input line 886.
@@ -1328,12 +1320,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [19 <./Images/Roboflow/mainscreen.png>]
-<Images/Roboflow/labeling1.png, id=547, 1437.11906pt x 718.93594pt>
+<Images/Roboflow/labeling1.png, id=552, 1437.11906pt x 718.93594pt>
 File: Images/Roboflow/labeling1.png Graphic file (type png)
 <use Images/Roboflow/labeling1.png>
 Package pdftex.def Info: Images/Roboflow/labeling1.png  used on input line 900.
 (pdftex.def)             Requested size: 341.43307pt x 170.80391pt.
-<Images/Roboflow/labeling3.png, id=549, 1430.34375pt x 715.17188pt>
+<Images/Roboflow/labeling3.png, id=554, 1430.34375pt x 715.17188pt>
 File: Images/Roboflow/labeling3.png Graphic file (type png)
 <use Images/Roboflow/labeling3.png>
 Package pdftex.def Info: Images/Roboflow/labeling3.png  used on input line 910.
@@ -1347,7 +1339,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [20 <./Images/Roboflow/labeling1.png> <./Images/Roboflow/labeling3.png>]
-<Images/Roboflow/poczatek uczenia.png, id=561, 858.20625pt x 670.75594pt>
+<Images/Roboflow/poczatek uczenia.png, id=566, 858.20625pt x 670.75594pt>
 File: Images/Roboflow/poczatek uczenia.png Graphic file (type png)
 <use Images/Roboflow/poczatek uczenia.png>
 Package pdftex.def Info: Images/Roboflow/poczatek uczenia.png  used on input line 924.
@@ -1361,6 +1353,10 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [21 <./Images/Roboflow/poczatek uczenia.png>]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 938.
+ (C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex/latex/lm\t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
 Overfull \hbox (7.88112pt too wide) in paragraph at lines 964--964
 []\T1/lmtt/m/n/12 !wget https://github.com/WongKinYiu/yolov7/releases/download/v0.1/yolov7.pt[] 
  []
@@ -1393,7 +1389,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 ]
 Rozdzia\l  4.
 [25]
-<Images/Schemat blokowy/Engineering Thesis.png, id=587, 2260.445pt x 3396.69pt>
+<Images/Schemat blokowy/Engineering Thesis.png, id=593, 2260.445pt x 3396.69pt>
 File: Images/Schemat blokowy/Engineering Thesis.png Graphic file (type png)
 <use Images/Schemat blokowy/Engineering Thesis.png>
 Package pdftex.def Info: Images/Schemat blokowy/Engineering Thesis.png  used on input line 1003.
@@ -1427,7 +1423,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [28]
-<Images/Schemat elektryczny/circuit.png, id=602, 542.025pt x 923.45pt>
+<Images/Schemat elektryczny/circuit.png, id=608, 542.025pt x 923.45pt>
 File: Images/Schemat elektryczny/circuit.png Graphic file (type png)
 <use Images/Schemat elektryczny/circuit.png>
 Package pdftex.def Info: Images/Schemat elektryczny/circuit.png  used on input line 1038.
@@ -1449,12 +1445,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [30]
-<Images/Robot/Robot kierunki.png, id=624, 708.39656pt x 464.4853pt>
+<Images/Robot/Robot kierunki.png, id=630, 708.39656pt x 464.4853pt>
 File: Images/Robot/Robot kierunki.png Graphic file (type png)
 <use Images/Robot/Robot kierunki.png>
 Package pdftex.def Info: Images/Robot/Robot kierunki.png  used on input line 1056.
 (pdftex.def)             Requested size: 273.14923pt x 179.10027pt.
-<Images/Robot/Robot piętra.png, id=625, 794.2172pt x 606.01407pt>
+<Images/Robot/Robot piętra.png, id=631, 794.2172pt x 606.01407pt>
 File: Images/Robot/Robot piętra.png Graphic file (type png)
 <use Images/Robot/Robot piętra.png>
 Package pdftex.def Info: Images/Robot/Robot piętra.png  used on input line 1062.
@@ -1468,7 +1464,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [31 <./Images/Robot/Robot kierunki.png> <./Images/Robot/Robot piętra.png>]
-<Images/Robot/Robot dół oznaczenia.png, id=635, 761.84625pt x 440.39531pt>
+<Images/Robot/Robot dół oznaczenia.png, id=641, 761.84625pt x 440.39531pt>
 File: Images/Robot/Robot dół oznaczenia.png Graphic file (type png)
 <use Images/Robot/Robot dół oznaczenia.png>
 Package pdftex.def Info: Images/Robot/Robot dół oznaczenia.png  used on input line 1077.
@@ -1482,7 +1478,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [32 <./Images/Robot/Robot dół oznaczenia.png>]
-<Images/Robot/Robot góra oznaczenia.png, id=647, 671.50874pt x 398.23781pt>
+<Images/Robot/Robot góra oznaczenia.png, id=653, 671.50874pt x 398.23781pt>
 File: Images/Robot/Robot góra oznaczenia.png Graphic file (type png)
 <use Images/Robot/Robot góra oznaczenia.png>
 Package pdftex.def Info: Images/Robot/Robot góra oznaczenia.png  used on input line 1092.
@@ -1496,7 +1492,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [33 <./Images/Robot/Robot góra oznaczenia.png>]
-<Images/Robot/Robot_gotowy.png, id=660, 1738.99687pt x 1707.37875pt>
+<Images/Robot/Robot_gotowy.png, id=666, 1738.99687pt x 1707.37875pt>
 File: Images/Robot/Robot_gotowy.png Graphic file (type png)
 <use Images/Robot/Robot_gotowy.png>
 Package pdftex.def Info: Images/Robot/Robot_gotowy.png  used on input line 1100.
@@ -1602,12 +1598,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [43]
-<Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194147.png, id=778, 841.64438pt x 676.77844pt>
+<Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194147.png, id=784, 841.64438pt x 676.77844pt>
 File: Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194147.png Graphic file (type png)
 <use Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194147.png>
 Package pdftex.def Info: Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194147.png  used on input line 1369.
 (pdftex.def)             Requested size: 227.62206pt x 183.03209pt.
-<Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194208.png, id=779, 835.62187pt x 675.27281pt>
+<Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194208.png, id=785, 835.62187pt x 675.27281pt>
 File: Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194208.png Graphic file (type png)
 <use Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194208.png>
 Package pdftex.def Info: Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194208.png  used on input line 1376.
@@ -1621,7 +1617,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [44 <./Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194147.png> <./Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194208.png>]
-<Images/Porownanie/Yolo7 robot/Para pilek ciemno poprawnie wskazal czerwona.png, id=788, 651.18282pt x 360.59718pt>
+<Images/Porownanie/Yolo7 robot/Para pilek ciemno poprawnie wskazal czerwona.png, id=794, 651.18282pt x 360.59718pt>
 File: Images/Porownanie/Yolo7 robot/Para pilek ciemno poprawnie wskazal czerwona.png Graphic file (type png)
 <use Images/Porownanie/Yolo7 robot/Para pilek ciemno poprawnie wskazal czerwona.png>
 Package pdftex.def Info: Images/Porownanie/Yolo7 robot/Para pilek ciemno poprawnie wskazal czerwona.png  used on input line 1388.
@@ -1635,17 +1631,17 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [45 <./Images/Porownanie/Yolo7 robot/Para pilek ciemno poprawnie wskazal czerwona.png>]
-<Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194354.png, id=800, 798.73407pt x 607.51968pt>
+<Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194354.png, id=806, 798.73407pt x 607.51968pt>
 File: Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194354.png Graphic file (type png)
 <use Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194354.png>
 Package pdftex.def Info: Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194354.png  used on input line 1406.
 (pdftex.def)             Requested size: 227.62206pt x 173.12636pt.
-<Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194641.png, id=801, 840.89156pt x 636.12656pt>
+<Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194641.png, id=807, 840.89156pt x 636.12656pt>
 File: Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194641.png Graphic file (type png)
 <use Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194641.png>
 Package pdftex.def Info: Images/Porownanie/Yolo7 robot/Zrzut ekranu 2025-01-02 194641.png  used on input line 1413.
 (pdftex.def)             Requested size: 227.62206pt x 172.19325pt.
-<Images/Porownanie/Yolo7 robot/pilka i poduszka zgaszone swiatlo dalej wykrywa.png, id=802, 589.4522pt x 347.79938pt>
+<Images/Porownanie/Yolo7 robot/pilka i poduszka zgaszone swiatlo dalej wykrywa.png, id=808, 589.4522pt x 347.79938pt>
 File: Images/Porownanie/Yolo7 robot/pilka i poduszka zgaszone swiatlo dalej wykrywa.png Graphic file (type png)
 <use Images/Porownanie/Yolo7 robot/pilka i poduszka zgaszone swiatlo dalej wykrywa.png>
 Package pdftex.def Info: Images/Porownanie/Yolo7 robot/pilka i poduszka zgaszone swiatlo dalej wykrywa.png  used on input line 1421.
@@ -1686,12 +1682,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [49]
-<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193719.png, id=858, 1753.30031pt x 664.73344pt>
+<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193719.png, id=864, 1753.30031pt x 664.73344pt>
 File: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193719.png Graphic file (type png)
 <use Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193719.png>
 Package pdftex.def Info: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193719.png  used on input line 1486.
 (pdftex.def)             Requested size: 409.71692pt x 155.32994pt.
-<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193549.png, id=859, 1771.36781pt x 673.01437pt>
+<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193549.png, id=865, 1771.36781pt x 673.01437pt>
 File: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193549.png Graphic file (type png)
 <use Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193549.png>
 Package pdftex.def Info: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193549.png  used on input line 1492.
@@ -1705,7 +1701,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [50 <./Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193719.png> <./Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193549.png>]
-<Images/Porownanie/Binaryzacja/Para piłek moment zgaszenia swiatla.png, id=869, 605.26125pt x 497.60907pt>
+<Images/Porownanie/Binaryzacja/Para piłek moment zgaszenia swiatla.png, id=875, 605.26125pt x 497.60907pt>
 File: Images/Porownanie/Binaryzacja/Para piłek moment zgaszenia swiatla.png Graphic file (type png)
 <use Images/Porownanie/Binaryzacja/Para piłek moment zgaszenia swiatla.png>
 Package pdftex.def Info: Images/Porownanie/Binaryzacja/Para piłek moment zgaszenia swiatla.png  used on input line 1503.
@@ -1719,12 +1715,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [51 <./Images/Porownanie/Binaryzacja/Para piłek moment zgaszenia swiatla.png>]
-<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193840.png, id=880, 1756.31157pt x 672.26157pt>
+<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193840.png, id=886, 1756.31157pt x 672.26157pt>
 File: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193840.png Graphic file (type png)
 <use Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193840.png>
 Package pdftex.def Info: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193840.png  used on input line 1515.
 (pdftex.def)             Requested size: 409.71692pt x 156.82234pt.
-<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193858.png, id=881, 1763.83969pt x 661.72218pt>
+<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193858.png, id=887, 1763.83969pt x 661.72218pt>
 File: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193858.png Graphic file (type png)
 <use Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193858.png>
 Package pdftex.def Info: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193858.png  used on input line 1522.
@@ -1738,12 +1734,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [52 <./Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193840.png> <./Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193858.png>]
-<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193817.png, id=893, 1757.06438pt x 685.05937pt>
+<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193817.png, id=899, 1757.06438pt x 685.05937pt>
 File: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193817.png Graphic file (type png)
 <use Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193817.png>
 Package pdftex.def Info: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193817.png  used on input line 1535.
 (pdftex.def)             Requested size: 409.71692pt x 159.74504pt.
-<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193917.png, id=894, 1758.57pt x 673.01437pt>
+<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193917.png, id=900, 1758.57pt x 673.01437pt>
 File: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193917.png Graphic file (type png)
 <use Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193917.png>
 Package pdftex.def Info: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 193917.png  used on input line 1541.
@@ -1799,12 +1795,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [56]
-<Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181013.png, id=926, 848.4197pt x 636.12656pt>
+<Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181013.png, id=932, 848.4197pt x 636.12656pt>
 File: Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181013.png Graphic file (type png)
 <use Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181013.png>
 Package pdftex.def Info: Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181013.png  used on input line 1599.
 (pdftex.def)             Requested size: 273.14923pt x 204.79738pt.
-<Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181029.png, id=927, 846.16125pt x 639.13782pt>
+<Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181029.png, id=933, 846.16125pt x 639.13782pt>
 File: Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181029.png Graphic file (type png)
 <use Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181029.png>
 Package pdftex.def Info: Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181029.png  used on input line 1606.
@@ -1818,12 +1814,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [57 <./Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181013.png> <./Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-04 181029.png>]
-<Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194808.png, id=938, 822.82407pt x 643.6547pt>
+<Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194808.png, id=944, 822.82407pt x 643.6547pt>
 File: Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194808.png Graphic file (type png)
 <use Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194808.png>
 Package pdftex.def Info: Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194808.png  used on input line 1618.
 (pdftex.def)             Requested size: 273.14923pt x 213.66383pt.
-<Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194704.png, id=939, 838.63312pt x 633.11531pt>
+<Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194704.png, id=945, 838.63312pt x 633.11531pt>
 File: Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194704.png Graphic file (type png)
 <use Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194704.png>
 Package pdftex.def Info: Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194704.png  used on input line 1625.
@@ -1837,12 +1833,12 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
 [58 <./Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194808.png> <./Images/Porownanie/Yolo 8 laptop/Zrzut ekranu 2025-01-02 194704.png>]
-<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194021.png, id=950, 1762.33406pt x 670.75594pt>
+<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194021.png, id=956, 1762.33406pt x 670.75594pt>
 File: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194021.png Graphic file (type png)
 <use Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194021.png>
 Package pdftex.def Info: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194021.png  used on input line 1638.
 (pdftex.def)             Requested size: 364.19667pt x 138.61122pt.
-<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194004.png, id=951, 1768.35657pt x 674.52pt>
+<Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194004.png, id=957, 1768.35657pt x 674.52pt>
 File: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194004.png Graphic file (type png)
 <use Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194004.png>
 Package pdftex.def Info: Images/Porownanie/Binaryzacja/Zrzut ekranu 2025-01-02 194004.png  used on input line 1645.
@@ -1951,9 +1947,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[70
+[70] [71
 
-] [71] [72] [73
+] [72] [73
 
 ]
 
@@ -1963,14 +1959,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                You might also make \topmargin smaller to compensate:
 (fancyhdr)                \addtolength{\topmargin}{-2.49998pt}.
 
-[74
-
-]
-Overfull \hbox (37.70912pt too wide) in paragraph at lines 1919--1920
+[74]
+Overfull \hbox (37.70912pt too wide) in paragraph at lines 1923--1924
 []\T1/lmr/m/n/12 Pliki �r�-d�owe pro-gra-m�w uru-cha-mia-nych na Ra-sp-berry Pi w fol-de-rze \T1/lmtt/m/n/12 Programy_Raspberry 
  []
 
-[75]
+[75
+
+]
 
 Package fancyhdr Warning: \headheight is too small (12.0pt): 
 (fancyhdr)                Make it at least 14.49998pt, for example:
@@ -2010,17 +2006,17 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 45729 strings out of 474486
- 1014068 string characters out of 5743755
+ 45744 strings out of 474486
+ 1014778 string characters out of 5743755
  2023542 words of memory out of 5000000
- 66965 multiletter control sequences out of 15000+600000
+ 66977 multiletter control sequences out of 15000+600000
  630715 words of font info for 77 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  84i,16n,93p,1931b,3492s stack positions out of 10000i,1000n,20000p,200000b,200000s
 <C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbx12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmbxi10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmcsc10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmex10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi6.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmmi8.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr6.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmr8.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmri12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmss12.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmssbx10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy10.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy6.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmsy8.pfb><C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/type1/public/lm/lmtt12.pfb>
-Output written on main.pdf (87 pages, 22890252 bytes).
+Output written on main.pdf (87 pages, 22893218 bytes).
 PDF statistics:
- 1291 PDF objects out of 1440 (max. 8388607)
- 349 named destinations out of 1000 (max. 500000)
+ 1297 PDF objects out of 1440 (max. 8388607)
+ 352 named destinations out of 1000 (max. 500000)
  736 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -100,8 +100,16 @@
 \contentsline {chapter}{\numberline {7}Podsumowanie i wnioski}{67}{chapter.7}%
 \contentsline {section}{\numberline {7.1}Wnioski}{67}{section.7.1}%
 \contentsline {section}{\numberline {7.2}Perspektywy dalszych badań}{68}{section.7.2}%
-\contentsline {chapter}{Bibliografia}{69}{chapter*.76}%
+\contentsline {chapter}{Bibliografia}{70}{chapter*.76}%
 \contentsline {chapter}{Spis skrótów i symboli}{73}{appendix*.77}%
+\babel@toc {british}{}\relax 
+\babel@toc {polish}{}\relax 
+\babel@toc {british}{}\relax 
+\babel@toc {polish}{}\relax 
+\babel@toc {british}{}\relax 
+\babel@toc {polish}{}\relax 
+\babel@toc {british}{}\relax 
+\babel@toc {polish}{}\relax 
 \babel@toc {british}{}\relax 
 \babel@toc {polish}{}\relax 
 \babel@toc {british}{}\relax 

@@ -110,6 +110,37 @@
     \field{year}{2003}
   \endentry
 
+  \entry{bib:butdee2009automatic}{inproceedings}{}
+    \name{author}{2}{}{%
+      {{hash=BS}{%
+         family={Butdee},
+         familyi={B\bibinitperiod},
+         given={S},
+         giveni={S},
+      }}%
+      {{hash=SA}{%
+         family={Suebsomran},
+         familyi={S\bibinitperiod},
+         given={A},
+         giveni={A},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{BSSA1}
+    \strng{fullhash}{BSSA1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{B}
+    \field{sortinithash}{B}
+    \field{booktitle}{2009 IEEE International Conference on Industrial
+  Engineering and Engineering Management}
+    \field{pages}{694\bibrangedash 697}
+    \field{title}{Automatic guided vehicle control by vision system}
+    \field{year}{2009}
+  \endentry
+
   \entry{bib:huang2012improved}{inproceedings}{}
     \name{author}{3}{}{%
       {{hash=HM}{%
@@ -173,6 +204,49 @@
   oferty edukacyjnej na kierunku Automatyka i Robotyka”}
     \field{title}{Materiały dydaktyczne dla przedmiotu „Metody sztucznej
   inteligencji”}
+  \endentry
+
+  \entry{bib:liu2019autonomous}{inproceedings}{}
+    \name{author}{4}{}{%
+      {{hash=LJ}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Jing},
+         giveni={J\bibinitperiod},
+      }}%
+      {{hash=LL}{%
+         family={Li},
+         familyi={L\bibinitperiod},
+         given={Linhui},
+         giveni={L\bibinitperiod},
+      }}%
+      {{hash=LY}{%
+         family={Liu},
+         familyi={L\bibinitperiod},
+         given={Yijian},
+         giveni={Y\bibinitperiod},
+      }}%
+      {{hash=FM}{%
+         family={Faied},
+         familyi={F\bibinitperiod},
+         given={Mariam},
+         giveni={M\bibinitperiod},
+      }}%
+    }
+    \list{organization}{1}{%
+      {IEEE}%
+    }
+    \strng{namehash}{LJ+1}
+    \strng{fullhash}{LJLLLYFM1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{L}
+    \field{sortinithash}{L}
+    \field{booktitle}{2019 IEEE 9th Annual International Conference on CYBER
+  Technology in Automation, Control, and Intelligent Systems (CYBER)}
+    \field{pages}{1392\bibrangedash 1397}
+    \field{title}{Autonomous Scouting Robot Based on Pioneer P3-DX}
+    \field{year}{2019}
   \endentry
 
   \entry{bib:matthies2007mars}{article}{}
@@ -335,6 +409,57 @@
     \field{journaltitle}{Proceedings of the IEEE Conference on Computer Vision
   and Pattern Recognition (CVPR)}
     \field{year}{2016}
+  \endentry
+
+  \entry{bib:usha2017military}{article}{}
+    \name{author}{5}{}{%
+      {{hash=UMN}{%
+         family={Usha},
+         familyi={U\bibinitperiod},
+         given={Mrs\bibnamedelima NS},
+         giveni={M\bibinitperiod\bibinitdelim N\bibinitperiod},
+      }}%
+      {{hash=PS}{%
+         family={Priyadharshini},
+         familyi={P\bibinitperiod},
+         given={S},
+         giveni={S},
+      }}%
+      {{hash=SKR}{%
+         family={Shree},
+         familyi={S\bibinitperiod},
+         given={K\bibnamedelima Rohinee},
+         giveni={K\bibinitperiod\bibinitdelim R\bibinitperiod},
+      }}%
+      {{hash=DPS}{%
+         family={Devi},
+         familyi={D\bibinitperiod},
+         given={P\bibnamedelima Sabari},
+         giveni={P\bibinitperiod\bibinitdelim S\bibinitperiod},
+      }}%
+      {{hash=SG}{%
+         family={Sangeetha},
+         familyi={S\bibinitperiod},
+         given={G},
+         giveni={G},
+      }}%
+    }
+    \list{publisher}{1}{%
+      {AI Publications}%
+    }
+    \strng{namehash}{UMN+1}
+    \strng{fullhash}{UMNPSSKRDPSSG1}
+    \field{labelnamesource}{author}
+    \field{labeltitlesource}{title}
+    \field{sortinit}{U}
+    \field{sortinithash}{U}
+    \field{number}{2}
+    \field{pages}{237036}
+    \field{title}{Military reconnaissance robot}
+    \field{volume}{4}
+    \field{journaltitle}{International Journal of Advanced Engineering Research
+  and Science}
+    \field{year}{2017}
   \endentry
 \enddatalist
 \endinput

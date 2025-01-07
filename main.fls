@@ -489,10 +489,6 @@ OUTPUT main.toc
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmri12.tfm
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmr17.tfm
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmbx12.tfm
-INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
-INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt12.tfm
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
 INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\ts1lmr.fd
@@ -535,6 +531,10 @@ INPUT .\Images\Roboflow\poczatek uczenia.png
 INPUT .\Images\Roboflow\poczatek uczenia.png
 INPUT .\Images\Roboflow\poczatek uczenia.png
 INPUT .\Images\Roboflow\poczatek uczenia.png
+INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\tex\latex\lm\t1lmtt.fd
+INPUT C:\Users\obiwa\AppData\Local\Programs\MiKTeX\fonts\tfm\public\lm\ec-lmtt12.tfm
 INPUT .\Images\Schemat blokowy\Engineering Thesis.png
 INPUT .\Images\Schemat blokowy\Engineering Thesis.png
 INPUT .\Images\Schemat blokowy\Engineering Thesis.png

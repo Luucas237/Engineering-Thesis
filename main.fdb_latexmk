@@ -1,14 +1,14 @@
 # Fdb version 4
-["bibtex main"] 1736251269.00193 "main.aux" "main.bbl" "main" 1736253737.01518 0
-  "./biblio.bib" 1736250594 3462 90116b6df4c07e4f5231b2e9391484ff ""
-  "./main-blx.bib" 1736253735 343 08ea039808cc40771e895c77a88c27bf ""
+["bibtex main"] 1736283569.83073 "main.aux" "main.bbl" "main" 1736283582.55437 0
+  "./biblio.bib" 1736282620 5133 cad6f61fe68ba46e027f1896d75d6adb ""
+  "./main-blx.bib" 1736283580 343 08ea039808cc40771e895c77a88c27bf ""
   "C:/Users/obiwa/AppData/Local/Programs/MiKTeX/bibtex/bst/biblatex/biblatex.bst" 1679055682 65484 b7949c47a88ed6dca66ebc7a04577312 ""
-  "main.aux" 1736253735 34552 c93c8d006d301e710d9716f1f509f4ba "pdflatex"
+  "main.aux" 1736283580 35485 4609697ae7e7f7cdacaa56057782e193 "pdflatex"
   (generated)
   "main.bbl"
   "main.blg"
   (rewritten before read)
-["pdflatex"] 1736253726.07119 "c:/Users/obiwa/Desktop/Studia/Inzynierka/Engineering-Thesis/main.tex" "main.pdf" "main" 1736253737.0163 0
+["pdflatex"] 1736283570.57715 "c:/Users/obiwa/Desktop/Studia/Inzynierka/Engineering-Thesis/main.tex" "main.pdf" "main" 1736283582.55628 0
   "C:/Users/obiwa/AppData/Local/MiKTeX/fonts/map/pdftex/pdftex.map" 1731842849 80909 eab91d9745dd2edfd62a31d53cd5fe15 ""
   "C:/Users/obiwa/AppData/Local/MiKTeX/miktex/data/le/pdftex/pdflatex.fmt" 1716743061 24225046 e975dfdd1d47bc11e886d79ecd165021 ""
   "C:/Users/obiwa/AppData/Local/Programs/MiKTeX/fonts/enc/dvips/lm/lm-ec.enc" 1256929440 2375 baa924870cfb487815765f9094cf3728 ""
@@ -320,15 +320,15 @@
   "Images/Robot/Robot_gotowy.png" 1735645954 3479862 ff30a68c6b494290e40a4763b29e3183 ""
   "Images/Schemat blokowy/Engineering Thesis.png" 1736178635 211887 0880c39066fb34a00d3d7dacdc66c92a ""
   "Images/Schemat elektryczny/circuit.png" 1736023897 35394 db83a137bb1c76dbba56092c1fe1a4e3 ""
-  "c:/Users/obiwa/Desktop/Studia/Inzynierka/Engineering-Thesis/main.tex" 1736253725 122723 2362a90a88aeb29798487428fdb77799 ""
-  "main.aux" 1736253735 34552 c93c8d006d301e710d9716f1f509f4ba "pdflatex"
-  "main.bbl" 1736251269 10029 5fbf8a4ddf1d2602601c89a76ceb1a1b "bibtex main"
-  "main.lof" 1736253735 6718 3cb9d618bc84284035343627469e27db "pdflatex"
-  "main.lot" 1736253735 1557 2cf714df40cf8496cae1bdc7252ceb91 "pdflatex"
-  "main.out" 1736253735 14379 ee9a3ee3b398638666e78202e9237c61 "pdflatex"
-  "main.run.xml" 1736253735 2613 b0aada028a7f8702b3b5fdf798159577 "pdflatex"
-  "main.tex" 1736253725 122723 2362a90a88aeb29798487428fdb77799 ""
-  "main.toc" 1736253735 9065 adc6e2571c5e804dbdc8ce6833d21eb5 "pdflatex"
+  "c:/Users/obiwa/Desktop/Studia/Inzynierka/Engineering-Thesis/main.tex" 1736283557 123034 ba3aa2e1a2f5dee034be5ba0b3098183 ""
+  "main.aux" 1736283580 35485 4609697ae7e7f7cdacaa56057782e193 "pdflatex"
+  "main.bbl" 1736283570 13616 3a3b64531ec10980cd03d62e78075b63 "bibtex main"
+  "main.lof" 1736283580 6954 5aea3e614845ff2719a117d87e990abb "pdflatex"
+  "main.lot" 1736283580 1793 f3eb57f5383e40a70a40a8db1c47ec5d "pdflatex"
+  "main.out" 1736283580 14379 ee9a3ee3b398638666e78202e9237c61 "pdflatex"
+  "main.run.xml" 1736283580 2613 b0aada028a7f8702b3b5fdf798159577 "pdflatex"
+  "main.tex" 1736283557 123034 ba3aa2e1a2f5dee034be5ba0b3098183 ""
+  "main.toc" 1736283580 9301 d92c5313982d2f5880e661be8754703f "pdflatex"
   "politechnika_sl_logo_bw_pion_pl.pdf" 1705673081 22633 c6320640bafa38d406e62eed6fafdfbd ""
   (generated)
   "main-blx.bib"

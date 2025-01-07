@@ -302,7 +302,7 @@
 \newcommand{\LeftProgram}{Kierunek}
 \newcommand{\LeftSpecialisation}{Specjalność}
 \newcommand{\LeftSUPERVISOR}{PROWADZĄCY PRACĘ}
-\newcommand{\LeftDEPARTMENT}{KATEDRA}
+\newcommand{\LeftDEPARTMENT}{Katedra}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -550,13 +550,14 @@ W pracy skoncentrowano się na dostarczeniu kompleksowego rozwiązania, które �
 
 \newpage
 \section{Osadzenie problemu w dziedzinie}
-Identyfikacja i śledzenie obiektów w czasie rzeczywistym stanowią jedno z największych wyzwań w robotyce mobilnej. Dzięki zaawansowanym metodom przetwarzania obrazu roboty nie tylko „widzą” otoczenie, ale również potrafią je analizować i podejmować decyzje w oparciu o dane wizualne. Tego rodzaju zdolności są niezbędne w systemach autonomicznych, które muszą funkcjonować w zróżnicowanych, dynamicznych i często nieprzewidywalnych środowiskach.
 
-Kluczowym aspektem w rozwoju takich systemów jest opracowanie algorytmów wizyjnych, które zapewniają wysoką precyzję detekcji i klasyfikacji obiektów, jednocześnie spełniając wymagania czasowe niezbędne do działania w czasie rzeczywistym.
+Identyfikacja i śledzenie obiektów w czasie rzeczywistym to jedno z kluczowych wyzwań współczesnej robotyki. Roboty te potrafią analizować dynamicznie zmieniające się otoczenie oraz podejmować decyzje na podstawie przetwarzanych danych wizualnych.
 
-Ponadto integracja systemu wizyjnego z modułami sterowania i nawigacji robota mobilnego wymaga opracowania odpowiednich rozwiązań programistycznych, które umożliwiają precyzyjne przekładanie informacji wizualnych na decyzje ruchowe robota. Takie podejście jest szczególnie istotne w zastosowaniach przemysłowych, gdzie systemy wizyjne mogą wspierać procesy takie jak nawigacja w magazynach, inspekcja obiektów czy wspomaganie operacji ratunkowych.
+Systemy te znajdują zastosowanie w sterowaniu pojazdami AGV (ang. \textit{Automatic Guided Vehicle}), wykorzystując przetwarzanie obrazu do nawigacji w środowiskach przemysłowych. W pracy \cite{bib:butdee2009automatic} przedstawiono podejście oparte na kamerach CCD (ang. \textit{Charge Coupled Device}) i metodach detekcji krawędzi, takich jak operator Laplace’a, co pozwala AGV na podążanie za linią prowadzącą nawet w przypadku jej przerwania. Integracja systemu wizyjnego z enkoderami i programowalnym sterownikiem logicznym (ang. \textit{Programmable Logic Controller, PLC}) umożliwia precyzyjną kontrolę trajektorii pojazdu, zwiększając jego autonomię w środowiskach przemysłowych.
 
-Zastosowania systemów wizyjnych potrafią wykraczać poza ziemskie środowiska. Szczególnym przykładem są misje kosmiczne, w których autonomiczne roboty, takie jak łaziki marsjańskie, wykorzystują zaawansowane systemy wizyjne do eksploracji nieznanych terenów. Łaziki takie jak \texttt{Perseverance} czy \texttt{Curiosity} stosują algorytmy analizy obrazu do identyfikacji przeszkód, planowania trasy oraz analizy powierzchni Marsa. Wyzwania związane z pracą w ekstremalnych warunkach oraz przy ograniczonej dostępności zasobów obliczeniowych stanowią inspirację dla dalszego rozwoju technologii, które znajdują zastosowanie również na Ziemi.
+Ponadto systemy wizyjne są szeroko wykorzystywane w misjach ratunkowych, gdzie umożliwiają lokalizację osób w potrzebie oraz wspierają działania strażaków. Roboty zwiadowcze, wyposażone w sensory laserowe i kamery RGB-D, mogą analizować środowisko i dynamicznie reagować na jego zmiany, co wykazano w badaniach nad robotem mobilnym opartym na platformie Pioneer P3-DX \cite{bib:liu2019autonomous}.
+
+W aplikacjach militarnych równiez znajdują zastosowanie w wykrywaniu ludzi oraz ruchu w czasie rzeczywistym. W projekcie robota wojskowego opisano użycie kamer i algorytmów uczenia maszynowego do identyfikacji intruzów na podstawie analizy obrazu. Roboty te przesyłają dane, takie jak zdjęcia i lokalizacja GPS (ang. \textit{Global Positioning System}), do jednostek dowodzenia, co czyni je istotnym elementem operacji w środowiskach o wysokim ryzyku \cite{bib:usha2017military}.
 
 \section{Cel pracy}
 Celem pracy jest opracowanie systemu wizyjnego dla robota mobilnego, który umożliwi identyfikację ustalonego obiektu, śledzenie jego ruchu oraz podążanie za nim. W szczególności praca koncentruje się na:
@@ -566,8 +567,8 @@ Celem pracy jest opracowanie systemu wizyjnego dla robota mobilnego, który umo�
     \item Analizie wydajności systemu oraz ocenie jego funkcjonalności w warunkach rzeczywistych.
 \end{itemize}
 
-\newpage
 
+\newpage
 \section{Zakres pracy}
 
 Zakres pracy obejmuje:
@@ -592,7 +593,6 @@ Praca została podzielona na następujące rozdziały:
 \end{itemize}
 
 \newpage
-
 \section{Wkład własny autora}
 W ramach niniejszej pracy autor:
 \begin{itemize}
@@ -1872,6 +1872,10 @@ W przyszłości można rozważyć nozwuj systemu polegający na wdrożeniu hybry
 \item[ONNX] otwarty format wymiany modeli uczenia maszynowego \english{Open Neural Network Exchange}
 \item[VNC] narzędzie do zdalnego dostępu \english{Virtual Network Computing}
 \item[SSH] protokół do zdalnego logowania \english{Secure Shell} 
+\item[AGV] bezzałogowy pojazd jezdny \english{Autonomous Ground Vehicle}
+\item[PLC] sterownik programowalny \english{Programmable Logic Controller}
+\item[CCD] matryca światłoczuła \english{Charge-Coupled Device}
+\item[GPS] system nawigacji satelitarnej \english{Global Positioning System}
 \item[\(x_{\text{środek}}, y_{\text{środek}}\)] współrzędne środka obrazu.
 \item[\(x_{\text{piłka}}, y_{\text{piłka}}\)] współrzędne środka obiektu.
 \item[\(\Delta x, \Delta y\)] różnica między środkiem obrazu a środkiem obiektu.
